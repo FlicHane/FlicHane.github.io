@@ -1,14 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>创建静态网站时可能会遇到的问题</title>
-    <url>/2024/11/11/Many-question-in-developing-static-website/</url>
-    <content><![CDATA[<h1 id="新建文件"><a href="#新建文件" class="headerlink" title="新建文件"></a>新建文件</h1><p><span style="background:#ff4d4f">注意</span>：文件名必须是英文，要改在网站里的名字要在文件里改</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo new post shit</span><br></pre></td></tr></table></figure>
-
-]]></content>
-  </entry>
-  <entry>
     <title>如何使用Hexo和GitHub部署静态网站</title>
     <url>/2024/11/10/How-to-deploy-a-static-website-with-Hexo-and-GitHub/</url>
     <content><![CDATA[<p>我使用的模板是hexo上的keep</p>
@@ -28,7 +20,8 @@
 
 </li>
 </ul>
-<h5 id="如果hexo-init-blog-卡住"><a href="#如果hexo-init-blog-卡住" class="headerlink" title="如果hexo init blog 卡住"></a>如果hexo init blog 卡住</h5><p>​    原网址：<a class="link"   href="https://blog.csdn.net/f6619082/article/details/109193251" >https://blog.csdn.net/f6619082/article/details/109193251<i class="fas fa-external-link-alt"></i></a></p>
+<p><strong>如果hexo init blog 卡住</strong></p>
+<p>​    原网址：<a class="link"   href="https://blog.csdn.net/f6619082/article/details/109193251" >https://blog.csdn.net/f6619082/article/details/109193251<i class="fas fa-external-link-alt"></i></a></p>
 <p>​    替换成以下代码</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://gitee.com/weilining/hexo-starter.git blog</span><br><span class="line">   <span class="built_in">cd</span> blog</span><br><span class="line">   git submodule init</span><br><span class="line">   git submodule update</span><br><span class="line">   npm config <span class="built_in">set</span> registry http://registry.npm.taobao.org</span><br><span class="line">   npm i	</span><br></pre></td></tr></table></figure>
 
@@ -64,6 +57,14 @@
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo generate</span><br><span class="line">hexo deploy</span><br></pre></td></tr></table></figure>
 
 <p>就这些，全流程下来网站就部署在 GitHub Pages 上了。</p>
+]]></content>
+  </entry>
+  <entry>
+    <title>创建静态网站时可能会遇到的问题</title>
+    <url>/2024/11/11/Many-question-in-developing-static-website/</url>
+    <content><![CDATA[<h1 id="新建文件"><a href="#新建文件" class="headerlink" title="新建文件"></a>新建文件</h1><p><span style="background:#ff4d4f">注意</span>：文件名必须是英文，要改在网站里的名字要在文件里改</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo new post shit</span><br></pre></td></tr></table></figure>
+
 ]]></content>
   </entry>
 </search>
