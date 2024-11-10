@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>创建静态网站时可能会遇到的问题</title>
+    <url>/2024/11/11/Many-question-in-developing-static-website/</url>
+    <content><![CDATA[<h1 id="新建文件"><a href="#新建文件" class="headerlink" title="新建文件"></a>新建文件</h1><p><span style="background:#ff4d4f">注意</span>：文件名必须是英文，要改在网站里的名字要在文件里改</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo new post shit</span><br></pre></td></tr></table></figure>
+
+]]></content>
+  </entry>
+  <entry>
     <title>如何使用Hexo和GitHub部署静态网站</title>
     <url>/2024/11/10/How-to-deploy-a-static-website-with-Hexo-and-GitHub/</url>
     <content><![CDATA[<p>我使用的模板是hexo上的keep</p>
@@ -56,14 +64,6 @@
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo generate</span><br><span class="line">hexo deploy</span><br></pre></td></tr></table></figure>
 
 <p>就这些，全流程下来网站就部署在 GitHub Pages 上了。</p>
-]]></content>
-  </entry>
-  <entry>
-    <title>Many question in developing static website</title>
-    <url>/2024/11/11/Many-question-in-developing-static-website/</url>
-    <content><![CDATA[<h1 id="新建文件"><a href="#新建文件" class="headerlink" title="新建文件"></a>新建文件</h1><p><span style="background:#ff4d4f">注意</span>：文件名必须是英文，要改在网站里的名字要在文件里改</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo new post shit</span><br></pre></td></tr></table></figure>
-
 ]]></content>
   </entry>
 </search>
