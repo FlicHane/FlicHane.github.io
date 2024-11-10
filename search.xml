@@ -2,7 +2,7 @@
 <search>
   <entry>
     <title>如何使用Hexo和GitHub部署静态网站</title>
-    <url>/2024/11/10/shit/</url>
+    <url>/2024/11/10/How-to-deploy-a-static-website-with-Hexo-and-GitHub/</url>
     <content><![CDATA[<p>我使用的模板是hexo上的keep</p>
 <h3 id="1-安装-Node-js-和-Hexo"><a href="#1-安装-Node-js-和-Hexo" class="headerlink" title="1. 安装 Node.js 和 Hexo"></a>1. 安装 Node.js 和 Hexo</h3><ul>
 <li><p><strong>安装 Node.js</strong>：去 <a class="link"   href="https://nodejs.org/" >Node.js官网<i class="fas fa-external-link-alt"></i></a> 下载并安装 Node.js（装完会自动带上 npm）。</p>
@@ -20,6 +20,12 @@
 
 </li>
 </ul>
+<h5 id="如果hexo-init-blog-卡住"><a href="#如果hexo-init-blog-卡住" class="headerlink" title="如果hexo init blog 卡住"></a>如果hexo init blog 卡住</h5><p>​    原网址：<a class="link"   href="https://blog.csdn.net/f6619082/article/details/109193251" >https://blog.csdn.net/f6619082/article/details/109193251<i class="fas fa-external-link-alt"></i></a></p>
+<p>​    替换成以下代码</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://gitee.com/weilining/hexo-starter.git blog</span><br><span class="line">   <span class="built_in">cd</span> blog</span><br><span class="line">   git submodule init</span><br><span class="line">   git submodule update</span><br><span class="line">   npm config <span class="built_in">set</span> registry http://registry.npm.taobao.org</span><br><span class="line">   npm i	</span><br></pre></td></tr></table></figure>
+
+
+
 <h3 id="3-创建内容"><a href="#3-创建内容" class="headerlink" title="3. 创建内容"></a>3. 创建内容</h3><ul>
 <li>选择网站模板<br>可以到hexo官网找模板，点击模板链接到GitHub，里面会有网站模板应该如何部署的介绍<br>部署好模板之后就可以跟着介绍自定义自己的网站</li>
 </ul>
@@ -53,9 +59,11 @@
 ]]></content>
   </entry>
   <entry>
-    <title>test</title>
-    <url>/2024/11/10/test/</url>
-    <content><![CDATA[<p>h</p>
+    <title>Many question in developing static website</title>
+    <url>/2024/11/11/Many-question-in-developing-static-website/</url>
+    <content><![CDATA[<h1 id="新建文件"><a href="#新建文件" class="headerlink" title="新建文件"></a>新建文件</h1><p><span style="background:#ff4d4f">注意</span>：文件名必须是英文，要改在网站里的名字要在文件里改</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo new post shit</span><br></pre></td></tr></table></figure>
+
 ]]></content>
   </entry>
 </search>
