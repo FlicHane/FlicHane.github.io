@@ -1,8 +1,0 @@
-:root {
-    
-    --header-title-font-family: STHeiti; /*header头部，就是自己头像旁边的那些文字的字体*/
-    --first-screen-font-size: 40px;/*定制首屏的文字字体大小*/
-    --first-screen-font-color-light: #003366;/*定制首屏的文字颜色（白昼模式）*/
-    --first-screen-font-color-dark: #ff7675;/*定制首屏的文字颜色（暗黑模式）*/
-
-}
