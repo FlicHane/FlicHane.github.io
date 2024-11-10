@@ -1,12 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>test</title>
-    <url>/2024/11/10/test/</url>
-    <content><![CDATA[<p>h</p>
-]]></content>
-  </entry>
-  <entry>
     <title>如何使用Hexo和GitHub部署静态网站</title>
     <url>/2024/11/10/shit/</url>
     <content><![CDATA[<p>我使用的模板是hexo上的keep</p>
@@ -56,6 +50,12 @@
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo generate</span><br><span class="line">hexo deploy</span><br></pre></td></tr></table></figure>
 
 <p>就这些，全流程下来网站就部署在 GitHub Pages 上了。</p>
+]]></content>
+  </entry>
+  <entry>
+    <title>test</title>
+    <url>/2024/11/10/test/</url>
+    <content><![CDATA[<p>h</p>
 ]]></content>
   </entry>
 </search>
