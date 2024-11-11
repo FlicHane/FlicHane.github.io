@@ -80,8 +80,12 @@
     <url>/2024/11/11/%E4%B8%AD%E6%96%87%E6%96%87%E4%BB%B6%E5%90%8D%E6%B5%8B%E8%AF%95/</url>
     <content><![CDATA[<h1 id="test"><a href="#test" class="headerlink" title="test"></a>test</h1><p>哈哈哈成功了，留个纪念</p>
 ]]></content>
+      <categories>
+        <category>Test</category>
+      </categories>
       <tags>
-        <tag>websiteTest</tag>
+        <tag>中文文件名文件上传</tag>
+        <tag>hexo</tag>
       </tags>
   </entry>
 </search>
