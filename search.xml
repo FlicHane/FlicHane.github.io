@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>中文文件名测试</title>
+    <url>/2024/11/11/%E4%B8%AD%E6%96%87%E6%96%87%E4%BB%B6%E5%90%8D%E6%B5%8B%E8%AF%95/</url>
+    <content><![CDATA[<h1 id="test"><a href="#test" class="headerlink" title="test"></a>test</h1>]]></content>
+  </entry>
+  <entry>
     <title>创建静态网站时可能会遇到的问题</title>
     <url>/2024/11/11/Many-question-in-developing-static-website/</url>
     <content><![CDATA[<h1 id="新建文件"><a href="#新建文件" class="headerlink" title="新建文件"></a>新建文件</h1><p><span style="background:#ff4d4f">注意</span>：文件名必须是英文，要改在网站里的名字要在文件里改</p>
