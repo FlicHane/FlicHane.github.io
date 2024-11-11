@@ -1,26 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>创建静态网站时可能会遇到的问题</title>
-    <url>/2024/11/11/Many-question-in-developing-static-website/</url>
-    <content><![CDATA[<h1 id="新建文件"><a href="#新建文件" class="headerlink" title="新建文件"></a>新建文件</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo new [post] shit</span><br></pre></td></tr></table></figure>
-
-<p><span style="background:#ff4d4f">注意</span>：如果<em>文件名</em>为中文时，hexo g 指令无法正常生成网页文件，可以试试把电脑系统的编码模式设置为UTF-8</p>
-]]></content>
-      <tags>
-        <tag>question</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>中文文件名测试</title>
-    <url>/2024/11/11/%E4%B8%AD%E6%96%87%E6%96%87%E4%BB%B6%E5%90%8D%E6%B5%8B%E8%AF%95/</url>
-    <content><![CDATA[<h1 id="test"><a href="#test" class="headerlink" title="test"></a>test</h1><p>哈哈哈成功了，留个纪念</p>
-]]></content>
-      <tags>
-        <tag>websiteTest</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>如何使用Hexo和GitHub部署静态网站</title>
     <url>/2024/11/10/How-to-deploy-a-static-website-with-Hexo-and-GitHub/</url>
     <content><![CDATA[<p>我使用的模板是hexo上的keep</p>
@@ -82,6 +62,26 @@
 ]]></content>
       <tags>
         <tag>buildWebsite</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>中文文件名测试</title>
+    <url>/2024/11/11/%E4%B8%AD%E6%96%87%E6%96%87%E4%BB%B6%E5%90%8D%E6%B5%8B%E8%AF%95/</url>
+    <content><![CDATA[<h1 id="test"><a href="#test" class="headerlink" title="test"></a>test</h1><p>哈哈哈成功了，留个纪念</p>
+]]></content>
+      <tags>
+        <tag>websiteTest</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>创建静态网站时可能会遇到的问题</title>
+    <url>/2024/11/11/Many-question-in-developing-static-website/</url>
+    <content><![CDATA[<h1 id="新建文件"><a href="#新建文件" class="headerlink" title="新建文件"></a>新建文件</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo new [post] shit</span><br></pre></td></tr></table></figure>
+
+<p><span style="background:#ff4d4f">注意</span>：如果<em>文件名</em>为中文时，hexo g 指令无法正常生成网页文件，可以试试把电脑系统的编码模式设置为UTF-8</p>
+]]></content>
+      <tags>
+        <tag>question</tag>
       </tags>
   </entry>
 </search>
