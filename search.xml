@@ -65,17 +65,6 @@
       </tags>
   </entry>
   <entry>
-    <title>创建静态网站时可能会遇到的问题</title>
-    <url>/2024/11/11/Many-question-in-developing-static-website/</url>
-    <content><![CDATA[<h1 id="新建文件"><a href="#新建文件" class="headerlink" title="新建文件"></a>新建文件</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo new [post] shit</span><br></pre></td></tr></table></figure>
-
-<p><span style="background:#ff4d4f">注意</span>：如果<em>文件名</em>为中文时，hexo g 指令无法正常生成网页文件，可以试试把电脑系统的编码模式设置为UTF-8</p>
-]]></content>
-      <tags>
-        <tag>question</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>中文文件名测试</title>
     <url>/2024/11/11/%E4%B8%AD%E6%96%87%E6%96%87%E4%BB%B6%E5%90%8D%E6%B5%8B%E8%AF%95/</url>
     <content><![CDATA[<h1 id="test"><a href="#test" class="headerlink" title="test"></a>test</h1><p>哈哈哈成功了，留个纪念</p>
@@ -89,10 +78,22 @@
     <title>图片上传测试</title>
     <url>/2024/11/12/%E5%9B%BE%E7%89%87%E4%B8%8A%E4%BC%A0%E6%B5%8B%E8%AF%95/</url>
     <content><![CDATA[<p><a class="link"   href="https://github.com/FlicHane/picx-images-hosting/raw/master/%E5%A4%B4%E5%83%8F.7p3mgj28tl.webp" >https://github.com/FlicHane/picx-images-hosting/raw/master/头像.7p3mgj28tl.webp<i class="fas fa-external-link-alt"></i></a></p>
+<p>/images/avatar.jpg</p>
 ]]></content>
       <tags>
         <tag>hexo</tag>
         <tag>Test</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>创建静态网站时可能会遇到的问题</title>
+    <url>/2024/11/11/Many-question-in-developing-static-website/</url>
+    <content><![CDATA[<h1 id="新建文件"><a href="#新建文件" class="headerlink" title="新建文件"></a>新建文件</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo new [post] shit</span><br></pre></td></tr></table></figure>
+
+<p><span style="background:#ff4d4f">注意</span>：如果<em>文件名</em>为中文时，hexo g 指令无法正常生成网页文件，可以试试把电脑系统的编码模式设置为UTF-8</p>
+]]></content>
+      <tags>
+        <tag>question</tag>
       </tags>
   </entry>
 </search>
