@@ -142,6 +142,18 @@
       </tags>
   </entry>
   <entry>
+    <title>创建静态网站时可能会遇到的问题</title>
+    <url>/2024/11/11/Many-question-in-developing-static-website/</url>
+    <content><![CDATA[<h1 id="新建文件"><a href="#新建文件" class="headerlink" title="新建文件"></a>新建文件</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo new [post] shit</span><br></pre></td></tr></table></figure>
+
+<p><span style="background:#ff4d4f">注意</span>：如果<em>文件名</em>为中文时，hexo g 指令无法正常生成网页文件，可以试试把电脑系统的编码模式设置为UTF-8</p>
+<h1 id="title中不允许存在-字符"><a href="#title中不允许存在-字符" class="headerlink" title="title中不允许存在@字符"></a>title中不允许存在@字符</h1><p><img   src="https://flichane.github.io/picx-images-hosting/%E5%9B%BE%E7%89%87.6wqqytzg3d.webp"  alt="none"></p>
+]]></content>
+      <tags>
+        <tag>question</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>redis的用法</title>
     <url>/2024/11/17/redis%E7%9A%84%E7%94%A8%E6%B3%95/</url>
     <content><![CDATA[<p><img   src="https://flichane.github.io/picx-images-hosting/redis%E7%9A%84%E7%94%A8%E6%B3%95.pfd5ng6te.webp" ></p>
@@ -161,15 +173,123 @@
       </tags>
   </entry>
   <entry>
-    <title>创建静态网站时可能会遇到的问题</title>
-    <url>/2024/11/11/Many-question-in-developing-static-website/</url>
-    <content><![CDATA[<h1 id="新建文件"><a href="#新建文件" class="headerlink" title="新建文件"></a>新建文件</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo new [post] shit</span><br></pre></td></tr></table></figure>
-
-<p><span style="background:#ff4d4f">注意</span>：如果<em>文件名</em>为中文时，hexo g 指令无法正常生成网页文件，可以试试把电脑系统的编码模式设置为UTF-8</p>
-<h1 id="title中不允许存在-字符"><a href="#title中不允许存在-字符" class="headerlink" title="title中不允许存在@字符"></a>title中不允许存在@字符</h1><p><img   src="https://flichane.github.io/picx-images-hosting/%E5%9B%BE%E7%89%87.6wqqytzg3d.webp"  alt="none"></p>
+    <title>redis的数据类型</title>
+    <url>/2024/11/17/redis%E7%9A%84%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/</url>
+    <content><![CDATA[<p><img   src="https://flichane.github.io/picx-images-hosting/redis%E4%B8%AD%E7%9A%84%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B.4uayhrb3ks.png" ></p>
 ]]></content>
       <tags>
-        <tag>question</tag>
+        <tag>redis</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>各种概念之间的联系</title>
+    <url>/2024/11/17/%E5%90%84%E7%A7%8D%E6%A6%82%E5%BF%B5%E4%B9%8B%E9%97%B4%E7%9A%84%E8%81%94%E7%B3%BB/</url>
+    <content><![CDATA[<p>这些技术和工具大致可以分为 <strong>框架</strong>、<strong>工具</strong> 和 <strong>服务</strong>，它们在功能上有不同侧重，也可以相互配合使用。下面简单梳理它们的区别和联系。</p>
+<hr>
+<h3 id="1-Spring-Boot"><a href="#1-Spring-Boot" class="headerlink" title="1. Spring Boot"></a><strong>1. Spring Boot</strong></h3><ul>
+<li><strong>类型</strong>：框架。</li>
+<li><strong>用途</strong>：快速构建基于 Spring 的独立应用。</li>
+<li><strong>特点</strong>：简化配置，通过自动化配置减少开发复杂度。支持微服务架构，内置 Tomcat。</li>
+<li><strong>联系</strong>：<ul>
+<li><strong>Tomcat</strong>：Spring Boot 默认内嵌 Tomcat 作为应用容器。</li>
+<li><strong>MyBatis/MyBatis-Plus</strong>：可作为持久层框架，与 Spring Boot 无缝集成。</li>
+<li><strong>Redis</strong>：可通过 Spring Data Redis 轻松整合 Redis。</li>
+<li><strong>Maven</strong>：管理 Spring Boot 项目依赖和构建。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="2-Tomcat"><a href="#2-Tomcat" class="headerlink" title="2. Tomcat"></a><strong>2. Tomcat</strong></h3><ul>
+<li><strong>类型</strong>：Web 服务器/Servlet 容器。</li>
+<li><strong>用途</strong>：运行 Java Web 应用，提供 Servlet 和 JSP 支持。</li>
+<li><strong>特点</strong>：轻量级，运行 Java EE 的部分功能（主要是 Web 层）。</li>
+<li><strong>联系</strong>：<ul>
+<li><strong>Spring Boot</strong>：Tomcat 是 Spring Boot 默认的内置 Web 容器。</li>
+<li><strong>Servlet</strong>：Tomcat 运行的核心是 Servlet。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="3-Nginx"><a href="#3-Nginx" class="headerlink" title="3. Nginx"></a><strong>3. Nginx</strong></h3><ul>
+<li><strong>类型</strong>：反向代理服务器/Web 服务器。</li>
+<li><strong>用途</strong>：处理高并发请求，负载均衡，反向代理，静态资源服务。</li>
+<li><strong>特点</strong>：轻量、高效，适用于高并发场景。</li>
+<li><strong>联系</strong>：<ul>
+<li>通常将 <strong>Nginx</strong> 放在前端处理静态资源、请求分发，Spring Boot 后端处理业务逻辑。</li>
+<li>可以与 <strong>Tomcat</strong> 配合，Nginx 作为反向代理，Tomcat 处理 Java Web 请求。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="4-MyBatis"><a href="#4-MyBatis" class="headerlink" title="4. MyBatis"></a><strong>4. MyBatis</strong></h3><ul>
+<li><strong>类型</strong>：持久层框架。</li>
+<li><strong>用途</strong>：简化数据库操作，提供 SQL 映射和动态 SQL 支持。</li>
+<li><strong>特点</strong>：轻量灵活，注重 SQL 的可控性。</li>
+<li><strong>联系</strong>：<ul>
+<li>常与 <strong>Spring Boot</strong> 整合，用于操作数据库。</li>
+<li><strong>MyBatis</strong> 的 XML 映射文件和注解配置让开发者能直接书写 SQL，方便复杂查询。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="5-MyBatis-Plus"><a href="#5-MyBatis-Plus" class="headerlink" title="5. MyBatis-Plus"></a><strong>5. MyBatis-Plus</strong></h3><ul>
+<li><strong>类型</strong>：MyBatis 的增强版。</li>
+<li><strong>用途</strong>：简化 MyBatis 开发，提供更丰富的功能，如 CRUD 快速开发。</li>
+<li><strong>特点</strong>：开箱即用，内置大量工具方法（如分页、自动生成代码）。</li>
+<li><strong>联系</strong>：<ul>
+<li>基于 <strong>MyBatis</strong> 开发，与 Spring Boot 配合非常常见。</li>
+<li>在 MyBatis 基础上减少重复代码，提升开发效率。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="6-Redis"><a href="#6-Redis" class="headerlink" title="6. Redis"></a><strong>6. Redis</strong></h3><ul>
+<li><strong>类型</strong>：缓存数据库。</li>
+<li><strong>用途</strong>：存储数据（键值对），用于缓存、高速数据访问、分布式锁等。</li>
+<li><strong>特点</strong>：基于内存，读写速度快，支持丰富的数据类型（如字符串、哈希、列表等）。</li>
+<li><strong>联系</strong>：<ul>
+<li><strong>Spring Boot</strong> 提供对 Redis 的集成（通过 Spring Data Redis）。</li>
+<li>可以与 MyBatis/MyBatis-Plus 结合，缓存查询结果，提高性能。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="7-Maven"><a href="#7-Maven" class="headerlink" title="7. Maven"></a><strong>7. Maven</strong></h3><ul>
+<li><strong>类型</strong>：构建工具。</li>
+<li><strong>用途</strong>：管理项目依赖、构建和打包，简化项目配置和发布。</li>
+<li><strong>特点</strong>：基于 POM 文件的依赖管理，支持生命周期。</li>
+<li><strong>联系</strong>：<ul>
+<li><strong>Spring Boot</strong>：通过 Maven 管理依赖和构建项目。</li>
+<li>其他工具（如 MyBatis、MyBatis-Plus）大多通过 Maven 引入。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="8-Servlet"><a href="#8-Servlet" class="headerlink" title="8. Servlet"></a><strong>8. Servlet</strong></h3><ul>
+<li><strong>类型</strong>：Java EE 核心组件。</li>
+<li><strong>用途</strong>：处理 HTTP 请求和响应，是 Web 应用的核心基础。</li>
+<li><strong>特点</strong>：低级 API，直接处理请求和响应。</li>
+<li><strong>联系</strong>：<ul>
+<li><strong>Tomcat</strong>：Servlet 容器，运行 Servlet 应用。</li>
+<li><strong>Spring Boot</strong>：基于 Servlet 封装和扩展，提供更高级的功能。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="总结：它们的关系"><a href="#总结：它们的关系" class="headerlink" title="总结：它们的关系"></a><strong>总结：它们的关系</strong></h3><ul>
+<li><strong>分工明确</strong>：每个工具和技术都有其专注的领域。</li>
+<li><strong>相互配合</strong>：<ul>
+<li>Nginx（前端代理）→ Tomcat（后端容器）→ Spring Boot（逻辑层）。</li>
+<li>Spring Boot 整合 MyBatis 或 MyBatis-Plus 操作数据库。</li>
+<li>Redis 提供缓存支持，加速数据访问。</li>
+<li>Maven 负责统一管理项目依赖，打包和发布。</li>
+<li>Servlet 是底层支撑技术，Spring Boot 和 Tomcat 基于它构建。</li>
+</ul>
+</li>
+</ul>
+]]></content>
+      <tags>
+        <tag>概念</tag>
       </tags>
   </entry>
   <entry>
@@ -180,15 +300,6 @@
       <tags>
         <tag>hexo</tag>
         <tag>Test</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>redis的数据类型</title>
-    <url>/2024/11/17/redis%E7%9A%84%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/</url>
-    <content><![CDATA[<p><img   src="https://flichane.github.io/picx-images-hosting/redis%E4%B8%AD%E7%9A%84%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B.4uayhrb3ks.png" ></p>
-]]></content>
-      <tags>
-        <tag>redis</tag>
       </tags>
   </entry>
   <entry>
