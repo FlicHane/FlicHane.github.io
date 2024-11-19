@@ -1,6 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>WebSocket</title>
+    <url>/2024/11/19/00%20WebSocket/</url>
+    <content><![CDATA[<p>WebSocket 就是个双向通讯协议，只需建立一次链接，<strong>服务端和客户端就可以实时交互</strong>，不像 HTTP 一样只能客户端请求、服务端回应。</p>
+<h3 id="优势"><a href="#优势" class="headerlink" title="优势"></a><strong>优势</strong></h3><ol>
+<li><strong>实时性强</strong>：只要连接一建立，客户端和服务端可以互相推消息，不用来回请求。</li>
+<li><strong>效率高</strong>：省掉了 HTTP 的请求头，数据传输更轻量。</li>
+<li><strong>全双工</strong>：能同时发数据、收数据，比 HTTP 单工爽多了。</li>
+</ol>
+<h3 id="怎么用？"><a href="#怎么用？" class="headerlink" title="怎么用？"></a><strong>怎么用？</strong></h3><ol>
+<li><strong>握手阶段</strong>：客户端发个特殊的 HTTP 请求，服务端同意后升级为 WebSocket。</li>
+<li><strong>建立连接后</strong>：直接互发消息，像发短信一样简单。</li>
+</ol>
+<h3 id="Java-核心流程："><a href="#Java-核心流程：" class="headerlink" title="Java 核心流程："></a><strong>Java 核心流程：</strong></h3><ol>
+<li><p><strong>依赖</strong>：如果是 Spring Boot，用 <code>spring-boot-starter-websocket</code>。</p>
+</li>
+<li><p><strong>服务端实现</strong>：</p>
+</li>
+<li><p>基础实现：演示用，只能用于单个用户</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@ServerEndpoint(&quot;/ws&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">WebSocketServer</span> &#123;</span><br><span class="line">	<span class="meta">@OnOpen</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">onOpen</span><span class="params">(Session session)</span> &#123;</span><br><span class="line">		System.out.println(<span class="string">&quot;连接建立: &quot;</span> + session.getId());</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@OnMessage</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">onMessage</span><span class="params">(String message, Session session)</span> &#123;</span><br><span class="line">		System.out.println(<span class="string">&quot;收到消息: &quot;</span> + message);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@OnClose</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">onClose</span><span class="params">(Session session)</span> &#123;</span><br><span class="line">		System.out.println(<span class="string">&quot;连接关闭: &quot;</span> + session.getId());</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>高级实现：可用于多个用户</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**  </span></span><br><span class="line"><span class="comment"> * WebSocket服务  </span></span><br><span class="line"><span class="comment"> */</span>  </span><br><span class="line"><span class="meta">@Component</span>  </span><br><span class="line"><span class="meta">@ServerEndpoint(&quot;/ws/&#123;sid&#125;&quot;)</span>  </span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">WebSocketServer</span> &#123;  </span><br><span class="line">  </span><br><span class="line">    <span class="comment">//存放会话对象  </span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Map&lt;String, Session&gt; sessionMap = <span class="keyword">new</span> <span class="title class_">HashMap</span>();  </span><br><span class="line">  </span><br><span class="line">    <span class="comment">/**  </span></span><br><span class="line"><span class="comment">     * 连接建立成功调用的方法  </span></span><br><span class="line"><span class="comment">     */</span>  </span><br><span class="line">    <span class="meta">@OnOpen</span>  </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">onOpen</span><span class="params">(Session session, <span class="meta">@PathParam(&quot;sid&quot;)</span> String sid)</span> &#123;  </span><br><span class="line">        System.out.println(<span class="string">&quot;客户端：&quot;</span> + sid + <span class="string">&quot;建立连接&quot;</span>);  </span><br><span class="line">        sessionMap.put(sid, session);  </span><br><span class="line">    &#125;  </span><br><span class="line">  </span><br><span class="line">    <span class="comment">/**  </span></span><br><span class="line"><span class="comment">     * 收到客户端消息后调用的方法  </span></span><br><span class="line"><span class="comment">     *  </span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> message 客户端发送过来的消息  </span></span><br><span class="line"><span class="comment">     */</span>  </span><br><span class="line">    <span class="meta">@OnMessage</span>  </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">onMessage</span><span class="params">(String message, <span class="meta">@PathParam(&quot;sid&quot;)</span> String sid)</span> &#123;  </span><br><span class="line">        System.out.println(<span class="string">&quot;收到来自客户端：&quot;</span> + sid + <span class="string">&quot;的信息:&quot;</span> + message);  </span><br><span class="line">    &#125;  </span><br><span class="line">  </span><br><span class="line">    <span class="comment">/**  </span></span><br><span class="line"><span class="comment">     * 连接关闭调用的方法  </span></span><br><span class="line"><span class="comment">     *  </span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> sid  </span></span><br><span class="line"><span class="comment">     */</span>  </span><br><span class="line">    <span class="meta">@OnClose</span>  </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">onClose</span><span class="params">(<span class="meta">@PathParam(&quot;sid&quot;)</span> String sid)</span> &#123;  </span><br><span class="line">        System.out.println(<span class="string">&quot;连接断开:&quot;</span> + sid);  </span><br><span class="line">        sessionMap.remove(sid);  </span><br><span class="line">    &#125;  </span><br><span class="line">  </span><br><span class="line">    <span class="comment">/**  </span></span><br><span class="line"><span class="comment">     * 群发  </span></span><br><span class="line"><span class="comment">     *  </span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> message  </span></span><br><span class="line"><span class="comment">     */</span>  </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">sendToAllClient</span><span class="params">(String message)</span> &#123;  </span><br><span class="line">        Collection&lt;Session&gt; sessions = sessionMap.values();  </span><br><span class="line">        <span class="keyword">for</span> (Session session : sessions) &#123;  </span><br><span class="line">            <span class="keyword">try</span> &#123;  </span><br><span class="line">                <span class="comment">//服务器向客户端发送消息  </span></span><br><span class="line">                session.getBasicRemote().sendText(message);  </span><br><span class="line">            &#125; <span class="keyword">catch</span> (Exception e) &#123;  </span><br><span class="line">                e.printStackTrace();  </span><br><span class="line">            &#125;  </span><br><span class="line">        &#125;  </span><br><span class="line">    &#125;  </span><br><span class="line">  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>客户端实现</strong>：用浏览器或库，前端最简单的：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> ws = <span class="keyword">new</span> <span class="title class_">WebSocket</span>(<span class="string">&quot;ws://localhost:8080/ws&quot;</span>);</span><br><span class="line">ws.<span class="property">onopen</span> = <span class="function">() =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;连接成功&quot;</span>);</span><br><span class="line">ws.<span class="property">onmessage</span> = <span class="function">(<span class="params">msg</span>) =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;收到消息: &quot;</span>, msg.<span class="property">data</span>);</span><br><span class="line">ws.<span class="title function_">send</span>(<span class="string">&quot;Hello WebSocket!&quot;</span>);</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+]]></content>
+  </entry>
+  <entry>
     <title>fastJSON的安全性问题及其解决方案</title>
     <url>/2024/11/19/12%20fastJSON%E7%9A%84%E5%AE%89%E5%85%A8%E6%80%A7%E9%97%AE%E9%A2%98%E5%8F%8A%E5%85%B6%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/</url>
     <content><![CDATA[<h3 id="1-使用更新版的-FastJSON"><a href="#1-使用更新版的-FastJSON" class="headerlink" title="1. 使用更新版的 FastJSON"></a><strong>1. 使用更新版的 FastJSON</strong></h3><ol>
@@ -78,57 +107,6 @@
       </tags>
   </entry>
   <entry>
-    <title>WebSocket</title>
-    <url>/2024/11/19/00%20WebSocket/</url>
-    <content><![CDATA[<p>WebSocket 就是个双向通讯协议，只需建立一次链接，<strong>服务端和客户端就可以实时交互</strong>，不像 HTTP 一样只能客户端请求、服务端回应。</p>
-<h3 id="优势"><a href="#优势" class="headerlink" title="优势"></a><strong>优势</strong></h3><ol>
-<li><strong>实时性强</strong>：只要连接一建立，客户端和服务端可以互相推消息，不用来回请求。</li>
-<li><strong>效率高</strong>：省掉了 HTTP 的请求头，数据传输更轻量。</li>
-<li><strong>全双工</strong>：能同时发数据、收数据，比 HTTP 单工爽多了。</li>
-</ol>
-<h3 id="怎么用？"><a href="#怎么用？" class="headerlink" title="怎么用？"></a><strong>怎么用？</strong></h3><ol>
-<li><strong>握手阶段</strong>：客户端发个特殊的 HTTP 请求，服务端同意后升级为 WebSocket。</li>
-<li><strong>建立连接后</strong>：直接互发消息，像发短信一样简单。</li>
-</ol>
-<h3 id="Java-核心流程："><a href="#Java-核心流程：" class="headerlink" title="Java 核心流程："></a><strong>Java 核心流程：</strong></h3><ol>
-<li><p><strong>依赖</strong>：如果是 Spring Boot，用 <code>spring-boot-starter-websocket</code>。</p>
-</li>
-<li><p><strong>服务端实现</strong>：</p>
-</li>
-<li><p>基础实现：演示用，只能用于单个用户</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@ServerEndpoint(&quot;/ws&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">WebSocketServer</span> &#123;</span><br><span class="line">	<span class="meta">@OnOpen</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">onOpen</span><span class="params">(Session session)</span> &#123;</span><br><span class="line">		System.out.println(<span class="string">&quot;连接建立: &quot;</span> + session.getId());</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@OnMessage</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">onMessage</span><span class="params">(String message, Session session)</span> &#123;</span><br><span class="line">		System.out.println(<span class="string">&quot;收到消息: &quot;</span> + message);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@OnClose</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">onClose</span><span class="params">(Session session)</span> &#123;</span><br><span class="line">		System.out.println(<span class="string">&quot;连接关闭: &quot;</span> + session.getId());</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-<li><p>高级实现：可用于多个用户</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**  </span></span><br><span class="line"><span class="comment"> * WebSocket服务  </span></span><br><span class="line"><span class="comment"> */</span>  </span><br><span class="line"><span class="meta">@Component</span>  </span><br><span class="line"><span class="meta">@ServerEndpoint(&quot;/ws/&#123;sid&#125;&quot;)</span>  </span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">WebSocketServer</span> &#123;  </span><br><span class="line">  </span><br><span class="line">    <span class="comment">//存放会话对象  </span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Map&lt;String, Session&gt; sessionMap = <span class="keyword">new</span> <span class="title class_">HashMap</span>();  </span><br><span class="line">  </span><br><span class="line">    <span class="comment">/**  </span></span><br><span class="line"><span class="comment">     * 连接建立成功调用的方法  </span></span><br><span class="line"><span class="comment">     */</span>  </span><br><span class="line">    <span class="meta">@OnOpen</span>  </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">onOpen</span><span class="params">(Session session, <span class="meta">@PathParam(&quot;sid&quot;)</span> String sid)</span> &#123;  </span><br><span class="line">        System.out.println(<span class="string">&quot;客户端：&quot;</span> + sid + <span class="string">&quot;建立连接&quot;</span>);  </span><br><span class="line">        sessionMap.put(sid, session);  </span><br><span class="line">    &#125;  </span><br><span class="line">  </span><br><span class="line">    <span class="comment">/**  </span></span><br><span class="line"><span class="comment">     * 收到客户端消息后调用的方法  </span></span><br><span class="line"><span class="comment">     *  </span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> message 客户端发送过来的消息  </span></span><br><span class="line"><span class="comment">     */</span>  </span><br><span class="line">    <span class="meta">@OnMessage</span>  </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">onMessage</span><span class="params">(String message, <span class="meta">@PathParam(&quot;sid&quot;)</span> String sid)</span> &#123;  </span><br><span class="line">        System.out.println(<span class="string">&quot;收到来自客户端：&quot;</span> + sid + <span class="string">&quot;的信息:&quot;</span> + message);  </span><br><span class="line">    &#125;  </span><br><span class="line">  </span><br><span class="line">    <span class="comment">/**  </span></span><br><span class="line"><span class="comment">     * 连接关闭调用的方法  </span></span><br><span class="line"><span class="comment">     *  </span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> sid  </span></span><br><span class="line"><span class="comment">     */</span>  </span><br><span class="line">    <span class="meta">@OnClose</span>  </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">onClose</span><span class="params">(<span class="meta">@PathParam(&quot;sid&quot;)</span> String sid)</span> &#123;  </span><br><span class="line">        System.out.println(<span class="string">&quot;连接断开:&quot;</span> + sid);  </span><br><span class="line">        sessionMap.remove(sid);  </span><br><span class="line">    &#125;  </span><br><span class="line">  </span><br><span class="line">    <span class="comment">/**  </span></span><br><span class="line"><span class="comment">     * 群发  </span></span><br><span class="line"><span class="comment">     *  </span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> message  </span></span><br><span class="line"><span class="comment">     */</span>  </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">sendToAllClient</span><span class="params">(String message)</span> &#123;  </span><br><span class="line">        Collection&lt;Session&gt; sessions = sessionMap.values();  </span><br><span class="line">        <span class="keyword">for</span> (Session session : sessions) &#123;  </span><br><span class="line">            <span class="keyword">try</span> &#123;  </span><br><span class="line">                <span class="comment">//服务器向客户端发送消息  </span></span><br><span class="line">                session.getBasicRemote().sendText(message);  </span><br><span class="line">            &#125; <span class="keyword">catch</span> (Exception e) &#123;  </span><br><span class="line">                e.printStackTrace();  </span><br><span class="line">            &#125;  </span><br><span class="line">        &#125;  </span><br><span class="line">    &#125;  </span><br><span class="line">  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p><strong>客户端实现</strong>：用浏览器或库，前端最简单的：</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> ws = <span class="keyword">new</span> <span class="title class_">WebSocket</span>(<span class="string">&quot;ws://localhost:8080/ws&quot;</span>);</span><br><span class="line">ws.<span class="property">onopen</span> = <span class="function">() =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;连接成功&quot;</span>);</span><br><span class="line">ws.<span class="property">onmessage</span> = <span class="function">(<span class="params">msg</span>) =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;收到消息: &quot;</span>, msg.<span class="property">data</span>);</span><br><span class="line">ws.<span class="title function_">send</span>(<span class="string">&quot;Hello WebSocket!&quot;</span>);</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-]]></content>
-  </entry>
-  <entry>
-    <title>Druid数据库连接池</title>
-    <url>/2024/11/19/13%20Druid%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%9E%E6%8E%A5%E6%B1%A0/</url>
-    <content><![CDATA[<p><strong>Druid</strong> 是阿里巴巴出品的数据库连接池，兼具监控和 SQL 优化功能，专为 Java 应用设计，性能和功能都很强悍。</p>
-<hr>
-<h3 id="核心特点："><a href="#核心特点：" class="headerlink" title="核心特点："></a><strong>核心特点：</strong></h3><ol>
-<li><strong>性能优秀</strong>：连接池管理高效，性能媲美甚至超过 HikariCP。</li>
-<li><strong>多功能</strong>：除了连接池，还支持 SQL 监控、慢查询分析、SQL 防火墙等。</li>
-<li><strong>兼容性强</strong>：支持常见数据库（MySQL、Oracle、PostgreSQL 等）。</li>
-<li><strong>易用性好</strong>：通过 Web 界面实时查看 SQL 执行情况。</li>
-</ol>
-<hr>
-<h3 id="基本用法："><a href="#基本用法：" class="headerlink" title="基本用法："></a><strong>基本用法：</strong></h3><h4 id="1-添加依赖"><a href="#1-添加依赖" class="headerlink" title="1. 添加依赖"></a><strong>1. 添加依赖</strong></h4><p>Maven 项目加依赖，选择SpringBoot项目后会默认引入：</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span>  </span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.alibaba<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span>  </span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>druid-spring-boot-starter<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span>  </span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="2-配置连接池"><a href="#2-配置连接池" class="headerlink" title="2. 配置连接池"></a><strong>2. 配置连接池</strong></h4><p>在 <code>application.properties</code> 中添加配置：</p>
-<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">spring:</span></span><br><span class="line">	<span class="attr">datasource:</span>  </span><br><span class="line">	  <span class="attr">druid:</span>  </span><br><span class="line">	    <span class="attr">driver-class-name:</span> <span class="string">com.mysql.cj.jdbc.Driver</span></span><br><span class="line">	    <span class="attr">url:</span> <span class="string">jdbc:mysql://$&#123;sky.datasource.host&#125;:$&#123;sky.datasource.port&#125;/$&#123;sky.datasource.database&#125;</span></span><br><span class="line">	    <span class="attr">username:</span> <span class="string">...</span></span><br><span class="line">	    <span class="attr">password:</span> <span class="string">...</span></span><br></pre></td></tr></table></figure>
-
-
-
-]]></content>
-  </entry>
-  <entry>
     <title>如何使用properties和properties-dev</title>
     <url>/2024/11/19/20%20%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8properties%E5%92%8Cproperties-dev/</url>
     <content><![CDATA[<ol>
@@ -176,76 +154,25 @@
 ]]></content>
   </entry>
   <entry>
-    <title>环境配置分离</title>
-    <url>/2024/11/19/22%20%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E5%88%86%E7%A6%BB/</url>
-    <content><![CDATA[<p>这种方法叫做 <strong>“配置文件分离”</strong> 或 <strong>“环境配置分离”**，在 Spring Boot 中通常通过 **<code>profiles</code></strong> 来管理。<br>具体来说，就是通过 <code>spring.profiles.active</code> 来激活不同的配置文件，以适应不同的运行环境。</p>
-<h3 id="这种做法的名字："><a href="#这种做法的名字：" class="headerlink" title="这种做法的名字："></a><strong>这种做法的名字</strong>：</h3><ul>
-<li><strong>Profile-based Configuration</strong>（基于配置文件的环境管理）</li>
-<li><strong>Environment-specific Configuration</strong>（环境特定配置）</li>
-</ul>
-<p>通过这种方式，可以在开发、测试和生产等不同环境下使用不同的配置文件，确保每个环境有独立的设置，而不会混淆。</p>
-<h3 id="工作原理："><a href="#工作原理：" class="headerlink" title="工作原理："></a><strong>工作原理</strong>：</h3><ol>
-<li><strong>基础配置</strong>：在 <code>application.properties</code> 中定义基础配置，适用于所有环境。</li>
-<li><strong>环境特定配置</strong>：比如 <code>application-dev.properties</code>（<font color="#ff0000">开发环境</font>）和 <code>application-prod.properties</code>（<font color="#ff0000">生产环境</font>），专门为不同环境设置不同的参数。</li>
-<li><strong>激活不同环境</strong>：通过设置 <code>spring.profiles.active</code> 来激活不同环境的配置。</li>
-</ol>
-<p>这样能让项目的配置更加清晰、灵活，避免一个配置文件冗长且复杂，特别适合有多个环境需求的项目。</p>
-]]></content>
-  </entry>
-  <entry>
-    <title>JDBC URL配置</title>
-    <url>/2024/11/19/23%20JDBC%20URL%20%E9%85%8D%E7%BD%AE/</url>
-    <content><![CDATA[<h1 id="这是啥？"><a href="#这是啥？" class="headerlink" title="这是啥？"></a>这是啥？</h1><figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">datasource:</span></span><br><span class="line">	<span class="attr">durid:</span></span><br><span class="line">		<span class="attr">url:</span> <span class="string">jdbc:mysql://$&#123;sky.datasource.host&#125;:$&#123;sky.datasource.port&#125;/$&#123;sky.datasource.database&#125;</span></span><br><span class="line">		<span class="string">?serverTimezone=Asia/Shanghai</span></span><br><span class="line">		<span class="string">&amp;useUnicode=true</span></span><br><span class="line">		<span class="string">&amp;characterEncoding=utf-8</span></span><br><span class="line">		<span class="string">&amp;zeroDateTimeBehavior=convertToNull</span></span><br><span class="line">		<span class="string">&amp;useSSL=false&amp;allowPublicKeyRetrieval=true</span></span><br></pre></td></tr></table></figure>
-<p>在url:后的?后的部分就是<font color="#ff0000">JDBC URL 配置</font>，它指定了如何通过 JDBC 连接到数据库，并包含了所有连接参数。如果是在 Spring Boot 项目中，它通常被称为 <font color="#ff0000">DataSource 配置</font></p>
-<h1 id="具体配置项说明："><a href="#具体配置项说明：" class="headerlink" title="具体配置项说明："></a>具体配置项说明：</h1><pre><code>serverTimezone=Asia/Shanghai
-由 JDBC 驱动 提供，用于设置数据库连接的时区。若不指定时区，可能会导致时间数据出错。
-
-useUnicode=true 和 characterEncoding=utf-8
-由 JDBC 驱动 提供，用于设置字符编码，以便支持存储和读取 Unicode 字符（特别是中文）。
-
-zeroDateTimeBehavior=convertToNull
-由 JDBC 驱动 提供，处理数据库中的 0000-00-00 00:00:00（无效时间）值，将其转化为 null，避免出现错误。
-
-useSSL=false
-由 JDBC 驱动 提供，控制是否启用 SSL 加密连接。通常在开发环境中可以关闭。
-
-allowPublicKeyRetrieval=true
-由 JDBC 驱动 提供，允许从 MySQL 服务器获取公钥，通常与 SSL 或 RSA 密钥交换相关。
-</code></pre>
-<h1 id="这些配置选项由谁提供"><a href="#这些配置选项由谁提供" class="headerlink" title="这些配置选项由谁提供"></a>这些配置选项由谁提供</h1><p>这些配置选项通常由 <strong>数据库驱动</strong> 和 <strong>连接池</strong> 提供，具体来说：</p>
-<h3 id="1-数据库驱动提供的配置选项"><a href="#1-数据库驱动提供的配置选项" class="headerlink" title="1. 数据库驱动提供的配置选项"></a><strong>1. 数据库驱动提供的配置选项</strong></h3><p>在连接 MySQL 时，常见的 JDBC 驱动（如 <code>MySQL Connector/J</code>）提供了很多配置选项来优化连接性能、解决时区问题、控制字符集等。你提到的这些选项，如 <code>serverTimezone</code>, <code>useUnicode</code>, <code>characterEncoding</code> 等，都是 JDBC 驱动（例如 MySQL 官方的 JDBC 驱动）提供的配置参数。</p>
-<h3 id="2-Spring-配置"><a href="#2-Spring-配置" class="headerlink" title="2. Spring 配置"></a><strong>2. Spring 配置</strong></h3><p>这些配置项通常由 <strong>Spring Boot</strong> 配置文件提供。在 <code>application.yml</code> 或 <code>application.properties</code> 文件中，Spring Boot 提供了对 <code>spring.datasource.*</code> 配置项的支持。这些配置项的值（如数据库主机、端口、数据库名等）通常通过 Spring Boot 的环境变量注入来提供。</p>
-<h3 id="3-连接池"><a href="#3-连接池" class="headerlink" title="3. 连接池"></a><strong>3. 连接池</strong></h3><p>如果你使用了连接池（如 <strong>HikariCP</strong> 或 <strong>Druid</strong>），它们可能会通过一些额外的配置选项（比如数据库连接池的最大连接数、连接超时等）影响数据库的连接行为。</p>
-]]></content>
-  </entry>
-  <entry>
-    <title>MyBatis中的Mapper配置</title>
-    <url>/2024/11/19/37%20MyBatis%E4%B8%AD%E7%9A%84Mapper%E9%85%8D%E7%BD%AE/</url>
-    <content><![CDATA[<p>这些设置能让 MyBatis 更高效地加载配置文件和映射类，减少手动配置工作量。</p>
-<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">mybatis:</span>  </span><br><span class="line">  <span class="comment">#mapper配置文件  </span></span><br><span class="line">  <span class="attr">mapper-locations:</span> <span class="string">classpath:mapper/*.xml</span>  </span><br><span class="line">  <span class="attr">type-aliases-package:</span> <span class="string">com.sky.entity</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="1-mapper-locations"><a href="#1-mapper-locations" class="headerlink" title="1. mapper-locations"></a><strong>1. <code>mapper-locations</code></strong></h3><figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">mapper-locations:</span> <span class="string">classpath:mapper/*.xml</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li><p><strong><code>classpath:</code></strong> 表示文件路径是相对于应用的 <code>resources</code> 目录。</p>
-</li>
-<li><p><strong><code>mapper/*.xml</code></strong> 表示所有 <code>mapper</code> 文件夹中的 <code>.xml</code> 文件会被自动加载。</p>
-<h4 id="作用："><a href="#作用：" class="headerlink" title="作用："></a><strong>作用</strong>：</h4></li>
-<li><p><span style="background:#ff4d4f">告诉 MyBatis 在指定路径下寻找 SQL 映射文件</span>（Mapper XML），以便动态解析 SQL 并绑定到对应的 Java 方法。</p>
-</li>
-</ul>
+    <title>Druid数据库连接池</title>
+    <url>/2024/11/19/13%20Druid%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%9E%E6%8E%A5%E6%B1%A0/</url>
+    <content><![CDATA[<p><strong>Druid</strong> 是阿里巴巴出品的数据库连接池，兼具监控和 SQL 优化功能，专为 Java 应用设计，性能和功能都很强悍。</p>
 <hr>
-<h3 id="2-type-aliases-package"><a href="#2-type-aliases-package" class="headerlink" title="2. type-aliases-package"></a><strong>2. <code>type-aliases-package</code></strong></h3><figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">type-aliases-package:</span> <span class="string">com.sky.entity</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>com.sky.entity</code> 是你的实体类所在的包路径。</li>
-<li>实体类是用于映射数据库表的 Java 对象。<h4 id="作用：-1"><a href="#作用：-1" class="headerlink" title="作用："></a><strong>作用</strong>：</h4></li>
-<li><span style="background:#ff4d4f">简化 Mapper 文件中指定 <code>resultType</code> 或 <code>parameterType</code> 时的类路径。</span></li>
-<li>避免在 XML 中重复写全路径，提高可读性。<h4 id="示例："><a href="#示例：" class="headerlink" title="示例："></a><strong>示例</strong>：</h4>假设你有一个实体类 <code>User</code>：<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.sky.entity;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">User</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span> userId;</span><br><span class="line">    <span class="keyword">private</span> String userName;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="核心特点："><a href="#核心特点：" class="headerlink" title="核心特点："></a><strong>核心特点：</strong></h3><ol>
+<li><strong>性能优秀</strong>：连接池管理高效，性能媲美甚至超过 HikariCP。</li>
+<li><strong>多功能</strong>：除了连接池，还支持 SQL 监控、慢查询分析、SQL 防火墙等。</li>
+<li><strong>兼容性强</strong>：支持常见数据库（MySQL、Oracle、PostgreSQL 等）。</li>
+<li><strong>易用性好</strong>：通过 Web 界面实时查看 SQL 执行情况。</li>
+</ol>
+<hr>
+<h3 id="基本用法："><a href="#基本用法：" class="headerlink" title="基本用法："></a><strong>基本用法：</strong></h3><h4 id="1-添加依赖"><a href="#1-添加依赖" class="headerlink" title="1. 添加依赖"></a><strong>1. 添加依赖</strong></h4><p>Maven 项目加依赖，选择SpringBoot项目后会默认引入：</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span>  </span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.alibaba<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span>  </span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>druid-spring-boot-starter<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span>  </span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-</li>
-</ul>
-<p>在 XML 中使用：</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">mapper</span> <span class="attr">namespace</span>=<span class="string">&quot;com.sky.mapper.UserMapper&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">&quot;selectUser&quot;</span> <span class="attr">resultType</span>=<span class="string">&quot;User&quot;</span>&gt;</span></span><br><span class="line">        SELECT * FROM users WHERE user_id = #&#123;userId&#125;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">mapper</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>在resultType处就只写User，而不是com.sky.enity.User</p>
+<h4 id="2-配置连接池"><a href="#2-配置连接池" class="headerlink" title="2. 配置连接池"></a><strong>2. 配置连接池</strong></h4><p>在 <code>application.properties</code> 中添加配置：</p>
+<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">spring:</span></span><br><span class="line">	<span class="attr">datasource:</span>  </span><br><span class="line">	  <span class="attr">druid:</span>  </span><br><span class="line">	    <span class="attr">driver-class-name:</span> <span class="string">com.mysql.cj.jdbc.Driver</span></span><br><span class="line">	    <span class="attr">url:</span> <span class="string">jdbc:mysql://$&#123;sky.datasource.host&#125;:$&#123;sky.datasource.port&#125;/$&#123;sky.datasource.database&#125;</span></span><br><span class="line">	    <span class="attr">username:</span> <span class="string">...</span></span><br><span class="line">	    <span class="attr">password:</span> <span class="string">...</span></span><br></pre></td></tr></table></figure>
+
+
+
 ]]></content>
   </entry>
   <entry>
@@ -267,8 +194,25 @@ allowPublicKeyRetrieval=true
 ]]></content>
   </entry>
   <entry>
+    <title>环境配置分离</title>
+    <url>/2024/11/19/22%20%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E5%88%86%E7%A6%BB/</url>
+    <content><![CDATA[<p>这种方法叫做 <strong>“配置文件分离”</strong> 或 <strong>“环境配置分离”**，在 Spring Boot 中通常通过 **<code>profiles</code></strong> 来管理。<br>具体来说，就是通过 <code>spring.profiles.active</code> 来激活不同的配置文件，以适应不同的运行环境。</p>
+<h3 id="这种做法的名字："><a href="#这种做法的名字：" class="headerlink" title="这种做法的名字："></a><strong>这种做法的名字</strong>：</h3><ul>
+<li><strong>Profile-based Configuration</strong>（基于配置文件的环境管理）</li>
+<li><strong>Environment-specific Configuration</strong>（环境特定配置）</li>
+</ul>
+<p>通过这种方式，可以在开发、测试和生产等不同环境下使用不同的配置文件，确保每个环境有独立的设置，而不会混淆。</p>
+<h3 id="工作原理："><a href="#工作原理：" class="headerlink" title="工作原理："></a><strong>工作原理</strong>：</h3><ol>
+<li><strong>基础配置</strong>：在 <code>application.properties</code> 中定义基础配置，适用于所有环境。</li>
+<li><strong>环境特定配置</strong>：比如 <code>application-dev.properties</code>（<font color="#ff0000">开发环境</font>）和 <code>application-prod.properties</code>（<font color="#ff0000">生产环境</font>），专门为不同环境设置不同的参数。</li>
+<li><strong>激活不同环境</strong>：通过设置 <code>spring.profiles.active</code> 来激活不同环境的配置。</li>
+</ol>
+<p>这样能让项目的配置更加清晰、灵活，避免一个配置文件冗长且复杂，特别适合有多个环境需求的项目。</p>
+]]></content>
+  </entry>
+  <entry>
     <title>Spring Boot 的日志级别设置</title>
-    <url>/2024/11/11/39%20Spring%20Boot%20%E7%9A%84%E6%97%A5%E5%BF%97%E7%BA%A7%E5%88%AB%E8%AE%BE%E7%BD%AE/</url>
+    <url>/2024/11/20/39%20Spring%20Boot%20%E7%9A%84%E6%97%A5%E5%BF%97%E7%BA%A7%E5%88%AB%E8%AE%BE%E7%BD%AE/</url>
     <content><![CDATA[<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">logging:</span>  </span><br><span class="line">  <span class="attr">level:</span></span><br><span class="line">	  <span class="attr">com:</span></span><br><span class="line">        <span class="attr">sky:</span>        </span><br><span class="line">	        <span class="attr">mapper:</span> <span class="string">debug</span>  </span><br><span class="line">	        <span class="attr">service:</span> <span class="string">info</span>  </span><br><span class="line">	        <span class="attr">controller:</span> <span class="string">info</span></span><br></pre></td></tr></table></figure>
 
 <p>这段配置是 <strong>Spring Boot 的日志级别设置</strong>，用于控制应用程序中不同包（<code>com.sky.mapper</code>、<code>com.sky.service</code> 和 <code>com.sky.controller</code>）的日志输出级别。<br>通过这种配置，你可以更细粒度地管理日志的输出内容。</p>
@@ -336,13 +280,46 @@ allowPublicKeyRetrieval=true
       </tags>
   </entry>
   <entry>
-    <title></title>
-    <url>/2024/11/20/40%20LogBack/</url>
-    <content><![CDATA[<p>Logback 是一个功能强大、灵活且高效的 <strong>日志框架</strong>，是 <strong>Log4j</strong> 的后继者，由 Log4j 的作者 Ceki Gülcü 开发。<br>它是 <strong>SLF4J（Simple Logging Facade for Java）</strong> 的默认实现，广泛用于 Java 应用程序中进行日志记录。</p>
+    <title>MyBatis中的Mapper配置</title>
+    <url>/2024/11/19/37%20MyBatis%E4%B8%AD%E7%9A%84Mapper%E9%85%8D%E7%BD%AE/</url>
+    <content><![CDATA[<p>这些设置能让 MyBatis 更高效地加载配置文件和映射类，减少手动配置工作量。</p>
+<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">mybatis:</span>  </span><br><span class="line">  <span class="comment">#mapper配置文件  </span></span><br><span class="line">  <span class="attr">mapper-locations:</span> <span class="string">classpath:mapper/*.xml</span>  </span><br><span class="line">  <span class="attr">type-aliases-package:</span> <span class="string">com.sky.entity</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="1-mapper-locations"><a href="#1-mapper-locations" class="headerlink" title="1. mapper-locations"></a><strong>1. <code>mapper-locations</code></strong></h3><figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">mapper-locations:</span> <span class="string">classpath:mapper/*.xml</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><p><strong><code>classpath:</code></strong> 表示文件路径是相对于应用的 <code>resources</code> 目录。</p>
+</li>
+<li><p><strong><code>mapper/*.xml</code></strong> 表示所有 <code>mapper</code> 文件夹中的 <code>.xml</code> 文件会被自动加载。</p>
+<h4 id="作用："><a href="#作用：" class="headerlink" title="作用："></a><strong>作用</strong>：</h4></li>
+<li><p><span style="background:#ff4d4f">告诉 MyBatis 在指定路径下寻找 SQL 映射文件</span>（Mapper XML），以便动态解析 SQL 并绑定到对应的 Java 方法。</p>
+</li>
+</ul>
+<hr>
+<h3 id="2-type-aliases-package"><a href="#2-type-aliases-package" class="headerlink" title="2. type-aliases-package"></a><strong>2. <code>type-aliases-package</code></strong></h3><figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">type-aliases-package:</span> <span class="string">com.sky.entity</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>com.sky.entity</code> 是你的实体类所在的包路径。</li>
+<li>实体类是用于映射数据库表的 Java 对象。<h4 id="作用：-1"><a href="#作用：-1" class="headerlink" title="作用："></a><strong>作用</strong>：</h4></li>
+<li><span style="background:#ff4d4f">简化 Mapper 文件中指定 <code>resultType</code> 或 <code>parameterType</code> 时的类路径。</span></li>
+<li>避免在 XML 中重复写全路径，提高可读性。<h4 id="示例："><a href="#示例：" class="headerlink" title="示例："></a><strong>示例</strong>：</h4>假设你有一个实体类 <code>User</code>：<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.sky.entity;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">User</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span> userId;</span><br><span class="line">    <span class="keyword">private</span> String userName;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>在 XML 中使用：</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">mapper</span> <span class="attr">namespace</span>=<span class="string">&quot;com.sky.mapper.UserMapper&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">&quot;selectUser&quot;</span> <span class="attr">resultType</span>=<span class="string">&quot;User&quot;</span>&gt;</span></span><br><span class="line">        SELECT * FROM users WHERE user_id = #&#123;userId&#125;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">mapper</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>在resultType处就只写User，而不是com.sky.enity.User</p>
 ]]></content>
   </entry>
   <entry>
-    <title></title>
+    <title>Logback</title>
+    <url>/2024/11/20/40%20LogBack/</url>
+    <content><![CDATA[<p>Logback 是一个功能强大、灵活且高效的 <strong>日志框架</strong>，是 <strong>Log4j</strong> 的后继者，由 Log4j 的作者 Ceki Gülcü 开发。<br>它是 <strong>SLF4J（Simple Logging Facade for Java）</strong> 的默认实现，广泛用于 Java 应用程序中进行日志记录。</p>
+]]></content>
+      <tags>
+        <tag>日志</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>PageHelper基础用法</title>
     <url>/2024/11/20/41%20PageHelper%E5%9F%BA%E7%A1%80%E7%94%A8%E6%B3%95/</url>
     <content><![CDATA[<p>PageHelper 是 MyBatis 的一个分页插件，用起来很简单，核心步骤如下：  </p>
 <ol>
@@ -367,6 +344,50 @@ allowPublicKeyRetrieval=true
 </li>
 </ol>
 ]]></content>
+      <tags>
+        <tag>PageHelper</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>JDBC URL配置</title>
+    <url>/2024/11/19/23%20JDBC%20URL%20%E9%85%8D%E7%BD%AE/</url>
+    <content><![CDATA[<h1 id="这是啥？"><a href="#这是啥？" class="headerlink" title="这是啥？"></a>这是啥？</h1><figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">datasource:</span></span><br><span class="line">	<span class="attr">durid:</span></span><br><span class="line">		<span class="attr">url:</span> <span class="string">jdbc:mysql://$&#123;sky.datasource.host&#125;:$&#123;sky.datasource.port&#125;/$&#123;sky.datasource.database&#125;</span></span><br><span class="line">		<span class="string">?serverTimezone=Asia/Shanghai</span></span><br><span class="line">		<span class="string">&amp;useUnicode=true</span></span><br><span class="line">		<span class="string">&amp;characterEncoding=utf-8</span></span><br><span class="line">		<span class="string">&amp;zeroDateTimeBehavior=convertToNull</span></span><br><span class="line">		<span class="string">&amp;useSSL=false&amp;allowPublicKeyRetrieval=true</span></span><br></pre></td></tr></table></figure>
+<p>在url:后的?后的部分就是<font color="#ff0000">JDBC URL 配置</font>，它指定了如何通过 JDBC 连接到数据库，并包含了所有连接参数。如果是在 Spring Boot 项目中，它通常被称为 <font color="#ff0000">DataSource 配置</font></p>
+<h1 id="具体配置项说明："><a href="#具体配置项说明：" class="headerlink" title="具体配置项说明："></a>具体配置项说明：</h1><pre><code>serverTimezone=Asia/Shanghai
+由 JDBC 驱动 提供，用于设置数据库连接的时区。若不指定时区，可能会导致时间数据出错。
+
+useUnicode=true 和 characterEncoding=utf-8
+由 JDBC 驱动 提供，用于设置字符编码，以便支持存储和读取 Unicode 字符（特别是中文）。
+
+zeroDateTimeBehavior=convertToNull
+由 JDBC 驱动 提供，处理数据库中的 0000-00-00 00:00:00（无效时间）值，将其转化为 null，避免出现错误。
+
+useSSL=false
+由 JDBC 驱动 提供，控制是否启用 SSL 加密连接。通常在开发环境中可以关闭。
+
+allowPublicKeyRetrieval=true
+由 JDBC 驱动 提供，允许从 MySQL 服务器获取公钥，通常与 SSL 或 RSA 密钥交换相关。
+</code></pre>
+<h1 id="这些配置选项由谁提供"><a href="#这些配置选项由谁提供" class="headerlink" title="这些配置选项由谁提供"></a>这些配置选项由谁提供</h1><p>这些配置选项通常由 <strong>数据库驱动</strong> 和 <strong>连接池</strong> 提供，具体来说：</p>
+<h3 id="1-数据库驱动提供的配置选项"><a href="#1-数据库驱动提供的配置选项" class="headerlink" title="1. 数据库驱动提供的配置选项"></a><strong>1. 数据库驱动提供的配置选项</strong></h3><p>在连接 MySQL 时，常见的 JDBC 驱动（如 <code>MySQL Connector/J</code>）提供了很多配置选项来优化连接性能、解决时区问题、控制字符集等。你提到的这些选项，如 <code>serverTimezone</code>, <code>useUnicode</code>, <code>characterEncoding</code> 等，都是 JDBC 驱动（例如 MySQL 官方的 JDBC 驱动）提供的配置参数。</p>
+<h3 id="2-Spring-配置"><a href="#2-Spring-配置" class="headerlink" title="2. Spring 配置"></a><strong>2. Spring 配置</strong></h3><p>这些配置项通常由 <strong>Spring Boot</strong> 配置文件提供。在 <code>application.yml</code> 或 <code>application.properties</code> 文件中，Spring Boot 提供了对 <code>spring.datasource.*</code> 配置项的支持。这些配置项的值（如数据库主机、端口、数据库名等）通常通过 Spring Boot 的环境变量注入来提供。</p>
+<h3 id="3-连接池"><a href="#3-连接池" class="headerlink" title="3. 连接池"></a><strong>3. 连接池</strong></h3><p>如果你使用了连接池（如 <strong>HikariCP</strong> 或 <strong>Druid</strong>），它们可能会通过一些额外的配置选项（比如数据库连接池的最大连接数、连接超时等）影响数据库的连接行为。</p>
+]]></content>
+  </entry>
+  <entry>
+    <title>PageHelper包装类详解</title>
+    <url>/2024/11/20/42%20PageHelper%E5%8C%85%E8%A3%85%E7%B1%BB%E8%AF%A6%E8%A7%A3/</url>
+    <content><![CDATA[<ol>
+<li>List：<br>一个普通的集合</li>
+<li>Page：<br>在List基础上增加了分页信息<br>getTotal() / getPages() / getPageNum() / getPageSize() / getResult()</li>
+</ol>
+<p>  <strong><code>Page</code> 是 <code>ArrayList</code> 的子类</strong>，继承了 <code>List</code> 的所有方法。<br>3. PageInfo：<br>  在Page或List的基础上再次进行封装<br>  信息更全面<br>4. PageResult：<br>  自定义封装类，可以选择要封装什么数据<br>  new PageResult(page.getTotal(),page.getResult()…);<br>  比如这一句就只封装了 数据总量 和 查询到的结果</p>
+<p><font color="#ff0000">page.getResult()会返回查询到的结果</font><br><font color="#ff0000">Page 是 ArrayList 的子类</font></p>
+<p>我可以获取一个List集合，再用Page对他进行封装，再用PageInfo或PageResult对page进行封装</p>
+]]></content>
+      <tags>
+        <tag>PageHelper</tag>
+      </tags>
   </entry>
   <entry>
     <title>Bean Configuration注解详解</title>
@@ -425,19 +446,6 @@ allowPublicKeyRetrieval=true
       <tags>
         <tag>java注解</tag>
       </tags>
-  </entry>
-  <entry>
-    <title></title>
-    <url>/2024/11/20/42%20PageHelper%E5%8C%85%E8%A3%85%E7%B1%BB%E8%AF%A6%E8%A7%A3/</url>
-    <content><![CDATA[<ol>
-<li>List：<br> 一个普通的集合</li>
-<li>Page：<br> 在List基础上增加了分页信息<br> getTotal() / getPages() / getPageNum() / getPageSize() / getResult()<br> <strong><code>Page</code> 是 <code>ArrayList</code> 的子类</strong>，继承了 <code>List</code> 的所有方法。</li>
-<li>PageInfo：<br> 在Page或List的基础上再次进行封装<br> 信息更全面</li>
-<li>PageResult：<br> 自定义封装类，可以选择要封装什么数据<br> new PageResult(page.getTotal(),page.getResult()…);<br> 比如这一句就只封装了 数据总量 和 查询到的结果</li>
-</ol>
-<p><font color="#ff0000">page.getResult()会返回查询到的结果</font><br><font color="#ff0000">Page 是 ArrayList 的子类</font></p>
-<p>我可以获取一个List集合，再用Page对他进行封装，再用PageInfo或PageResult对page进行封装</p>
-]]></content>
   </entry>
   <entry>
     <title>Apache POI</title>
@@ -523,15 +531,6 @@ allowPublicKeyRetrieval=true
       </tags>
   </entry>
   <entry>
-    <title>redis的数据类型</title>
-    <url>/2024/11/17/redis%E7%9A%84%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/</url>
-    <content><![CDATA[<p><img   src="https://flichane.github.io/picx-images-hosting/redis%E4%B8%AD%E7%9A%84%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B.4uayhrb3ks.png" ></p>
-]]></content>
-      <tags>
-        <tag>redis</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>创建静态网站时可能会遇到的问题</title>
     <url>/2024/11/11/Many-question-in-developing-static-website/</url>
     <content><![CDATA[<h1 id="新建文件"><a href="#新建文件" class="headerlink" title="新建文件"></a>新建文件</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo new [post] shit</span><br></pre></td></tr></table></figure>
@@ -575,22 +574,21 @@ allowPublicKeyRetrieval=true
       </tags>
   </entry>
   <entry>
-    <title>redis的用法</title>
-    <url>/2024/11/17/redis%E7%9A%84%E7%94%A8%E6%B3%95/</url>
-    <content><![CDATA[<p><img   src="https://flichane.github.io/picx-images-hosting/redis%E7%9A%84%E7%94%A8%E6%B3%95.pfd5ng6te.webp" ></p>
+    <title>redis的数据类型</title>
+    <url>/2024/11/17/redis%E7%9A%84%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/</url>
+    <content><![CDATA[<p><img   src="https://flichane.github.io/picx-images-hosting/redis%E4%B8%AD%E7%9A%84%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B.4uayhrb3ks.png" ></p>
 ]]></content>
       <tags>
         <tag>redis</tag>
       </tags>
   </entry>
   <entry>
-    <title>中文文件名测试</title>
-    <url>/2024/11/11/%E4%B8%AD%E6%96%87%E6%96%87%E4%BB%B6%E5%90%8D%E6%B5%8B%E8%AF%95/</url>
-    <content><![CDATA[<h1 id="test"><a href="#test" class="headerlink" title="test"></a>test</h1><p>哈哈哈成功了，留个纪念</p>
+    <title>redis的用法</title>
+    <url>/2024/11/17/redis%E7%9A%84%E7%94%A8%E6%B3%95/</url>
+    <content><![CDATA[<p><img   src="https://flichane.github.io/picx-images-hosting/redis%E7%9A%84%E7%94%A8%E6%B3%95.pfd5ng6te.webp" ></p>
 ]]></content>
       <tags>
-        <tag>hexo</tag>
-        <tag>Test</tag>
+        <tag>redis</tag>
       </tags>
   </entry>
   <entry>
@@ -705,6 +703,26 @@ allowPublicKeyRetrieval=true
       </tags>
   </entry>
   <entry>
+    <title>图片上传测试</title>
+    <url>/2024/11/12/%E5%9B%BE%E7%89%87%E4%B8%8A%E4%BC%A0%E6%B5%8B%E8%AF%95/</url>
+    <content><![CDATA[<img     src="https://github.com/FlicHane/picx-images-hosting/raw/master/头像.7p3mgj28tl.webp"   alt="头像"  >
+]]></content>
+      <tags>
+        <tag>hexo</tag>
+        <tag>Test</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>中文文件名测试</title>
+    <url>/2024/11/11/%E4%B8%AD%E6%96%87%E6%96%87%E4%BB%B6%E5%90%8D%E6%B5%8B%E8%AF%95/</url>
+    <content><![CDATA[<h1 id="test"><a href="#test" class="headerlink" title="test"></a>test</h1><p>哈哈哈成功了，留个纪念</p>
+]]></content>
+      <tags>
+        <tag>hexo</tag>
+        <tag>Test</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>序列化</title>
     <url>/2024/11/17/%E5%BA%8F%E5%88%97%E5%8C%96/</url>
     <content><![CDATA[<h1 id="what-it-is"><a href="#what-it-is" class="headerlink" title="what it is"></a><span style="background:#ff4d4f">what it is</span></h1><p><strong>序列化</strong>就是把对象转换成一串字节（二进制数据：“0010101”），这样对象可以存到文件里、数据库里，或者通过网络传输。<br>等需要用的时候，再把字节流转回对象，这叫<strong>反序列化</strong>。</p>
@@ -718,16 +736,6 @@ allowPublicKeyRetrieval=true
 ]]></content>
       <tags>
         <tag>概念</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>图片上传测试</title>
-    <url>/2024/11/12/%E5%9B%BE%E7%89%87%E4%B8%8A%E4%BC%A0%E6%B5%8B%E8%AF%95/</url>
-    <content><![CDATA[<img     src="https://github.com/FlicHane/picx-images-hosting/raw/master/头像.7p3mgj28tl.webp"   alt="头像"  >
-]]></content>
-      <tags>
-        <tag>hexo</tag>
-        <tag>Test</tag>
       </tags>
   </entry>
 </search>
