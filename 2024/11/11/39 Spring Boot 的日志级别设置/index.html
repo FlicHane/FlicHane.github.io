@@ -9,7 +9,7 @@
     
     <title>
         
-            dev-test-prod |
+            Spring Boot 的日志级别设置 |
         
         Flic&#39;s Blog
     </title>
@@ -271,7 +271,7 @@
             <div class="post-content-bottom border-box">
                 
                     <div class="post-title">
-                        dev-test-prod
+                        Spring Boot 的日志级别设置
                     </div>
                 
 
@@ -299,28 +299,37 @@
         
             <span class="meta-info-item post-create-date">
                 <i class="icon fa-solid fa-calendar-plus"></i>&nbsp;
-                <span class="datetime">2024-11-19 12:39:13</span>
+                <span class="datetime">2024-11-11 19:39:13</span>
             </span>
 
             <span class="meta-info-item post-update-date">
                 <i class="icon fa-solid fa-file-pen"></i>&nbsp;
-                <span class="datetime" data-updated="Tue Nov 19 2024 12:40:27 GMT+0800">2024-11-19 12:40:27</span>
+                <span class="datetime" data-updated="Wed Nov 20 2024 00:11:33 GMT+0800">2024-11-20 00:11:33</span>
             </span>
         
 
         
 
+        
+            <span class="post-tag meta-info-item border-box">
+                <ul class="post-tag-ul">
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/SpringBoot/">SpringBoot</a></li>
+                        
+                    
+                </ul>
+            </span>
         
 
         
         
             <span class="meta-info-item post-wordcount">
-                <i class="icon fas fa-file-word"></i>&nbsp;<span>213 字</span>
+                <i class="icon fas fa-file-word"></i>&nbsp;<span>570 字</span>
             </span>
         
         
             <span class="meta-info-item post-min2read">
-                <i class="icon fas fa-clock"></i>&nbsp;<span>1 分钟</span>
+                <i class="icon fas fa-clock"></i>&nbsp;<span>2 分钟</span>
             </span>
         
         
@@ -342,39 +351,67 @@
                     
 
                     
-                         <p><strong><code>dev</code></strong> 是 <strong>development</strong> 的缩写，意思是<strong>开发环境</strong>。在软件开发中，项目通常会有多个环境配置，<code>dev</code> 专门用来跑开发中的代码，方便调试和测试。</p>
+                         <figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">logging:</span>  </span><br><span class="line">  <span class="attr">level:</span></span><br><span class="line">	  <span class="attr">com:</span></span><br><span class="line">        <span class="attr">sky:</span>        </span><br><span class="line">	        <span class="attr">mapper:</span> <span class="string">debug</span>  </span><br><span class="line">	        <span class="attr">service:</span> <span class="string">info</span>  </span><br><span class="line">	        <span class="attr">controller:</span> <span class="string">info</span></span><br></pre></td></tr></table></figure>
+
+<p>这段配置是 <strong>Spring Boot 的日志级别设置</strong>，用于控制应用程序中不同包（<code>com.sky.mapper</code>、<code>com.sky.service</code> 和 <code>com.sky.controller</code>）的日志输出级别。<br>通过这种配置，你可以更细粒度地管理日志的输出内容。</p>
 <hr>
-<h3 id="常见环境分类："><a href="#常见环境分类：" class="headerlink" title="常见环境分类："></a><strong>常见环境分类：</strong></h3><ol>
-<li><p><strong><code>dev</code>（开发环境）</strong>：</p>
+<h3 id="配置项含义："><a href="#配置项含义：" class="headerlink" title="配置项含义："></a><strong>配置项含义：</strong></h3><h4 id="1-logging-level"><a href="#1-logging-level" class="headerlink" title="1. logging.level"></a><strong>1. <code>logging.level</code></strong></h4><ul>
+<li>用于定义不同包或类的日志级别。</li>
+<li>你可以针对某个包、类甚至全局日志级别进行配置。</li>
+</ul>
+<hr>
+<h3 id="日志级别（按详细程度排序）："><a href="#日志级别（按详细程度排序）：" class="headerlink" title="日志级别（按详细程度排序）："></a><strong>日志级别（按详细程度排序）：</strong></h3><ul>
+<li><code>OFF</code>：关闭日志。</li>
+<li><code>FATAL</code>：只输出严重错误。</li>
+<li><code>ERROR</code>：输出错误信息。</li>
+<li><code>WARN</code>：输出警告信息。</li>
+<li><code>INFO</code>：输出普通运行信息。</li>
+<li><code>DEBUG</code>：输出调试信息（用于开发和测试）。</li>
+<li><code>TRACE</code>：输出更详细的调试信息。</li>
+<li><code>ALL</code>：输出所有级别的日志。</li>
+</ul>
+<hr>
+<h3 id="逐级解读配置内容："><a href="#逐级解读配置内容：" class="headerlink" title="逐级解读配置内容："></a><strong>逐级解读配置内容：</strong></h3><ol>
+<li><p><strong><code>com.sky.mapper: debug</code></strong></p>
 <ul>
-<li>给程序员写代码用的。</li>
-<li>数据库、服务都用测试版本，不怕数据乱搞。</li>
-<li>配置一般是：<ul>
-<li><strong>低安全性</strong>：简单密码、调试模式开。</li>
-<li><strong>日志多</strong>：输出详细信息（debug 级别）。</li>
+<li><code>com.sky.mapper</code> 包下的日志输出级别为 <strong>DEBUG</strong>。</li>
+<li>DEBUG 级别用于输出调试信息，例如 SQL 语句执行细节、变量值等，适合调试 MyBatis 的 Mapper 类。</li>
 </ul>
 </li>
-</ul>
-</li>
-<li><p><strong><code>test</code>（测试环境）</strong>：</p>
+<li><p><strong><code>com.sky.service: info</code></strong></p>
 <ul>
-<li>测试人员用来验证功能。</li>
-<li>更接近上线环境，但数据还是假的。</li>
-<li>配置：和生产环境类似，但数据库是测试库。</li>
+<li><code>com.sky.service</code> 包下的日志输出级别为 <strong>INFO</strong>。</li>
+<li>INFO 级别用于输出一般运行状态的信息，例如服务启动、正常的业务操作流程等。</li>
 </ul>
 </li>
-<li><p><strong><code>prod</code>（生产环境）</strong>：</p>
+<li><p><strong><code>com.sky.controller: info</code></strong></p>
 <ul>
-<li>正式发布给用户的环境。</li>
-<li>数据、服务都是真实的。</li>
-<li>配置：<ul>
-<li><strong>高安全性</strong>：密码复杂、调试模式关。</li>
-<li><strong>日志简洁</strong>：只保留必要信息。</li>
-</ul>
-</li>
+<li><code>com.sky.controller</code> 包下的日志输出级别为 <strong>INFO</strong>。</li>
+<li>INFO 级别适合用于记录 HTTP 请求信息和响应结果，帮助跟踪用户操作。</li>
 </ul>
 </li>
 </ol>
+<hr>
+<h3 id="效果："><a href="#效果：" class="headerlink" title="效果："></a><strong>效果：</strong></h3><p>假设项目中存在以下包和类：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">com.sky.mapper.UserMapper</span><br><span class="line">com.sky.service.UserService</span><br><span class="line">com.sky.controller.UserController</span><br></pre></td></tr></table></figure>
+
+<p><strong>日志输出行为：</strong></p>
+<ul>
+<li>当 <code>UserMapper</code> 类运行时，它会输出 <strong>DEBUG</strong> 及更高级别的日志（DEBUG、INFO、WARN、ERROR）。</li>
+<li><code>UserService</code> 和 <code>UserController</code> 类会输出 <strong>INFO</strong> 及更高级别的日志（INFO、WARN、ERROR），不会输出 DEBUG 级别的日志。</li>
+</ul>
+<hr>
+<h3 id="配置示例扩展："><a href="#配置示例扩展：" class="headerlink" title="配置示例扩展："></a><strong>配置示例扩展：</strong></h3><h4 id="配置全局日志级别："><a href="#配置全局日志级别：" class="headerlink" title="配置全局日志级别："></a>配置<font color="#ff0000">全局</font>日志级别：</h4><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">logging:</span></span><br><span class="line">  <span class="attr">level:</span></span><br><span class="line">    <span class="attr">root:</span> <span class="string">warn</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>这会将默认的日志级别设置为 <strong>WARN</strong>，影响所有未单独配置的包或类。</li>
+</ul>
+<h4 id="配置具体类的日志级别："><a href="#配置具体类的日志级别：" class="headerlink" title="配置具体类的日志级别："></a>配置<font color="#ff0000">具体类</font>的日志级别：</h4><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">logging:</span></span><br><span class="line">  <span class="attr">level:</span></span><br><span class="line">    <span class="attr">com.sky.mapper.UserMapper:</span> <span class="string">trace</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>针对 <code>UserMapper</code> 类，输出更详细的 TRACE 日志。</li>
+</ul>
+<hr>
+<h3 id="总结："><a href="#总结：" class="headerlink" title="总结："></a><strong>总结：</strong></h3><p>这段配置是 Spring Boot <strong>日志框架（SLF4J + Logback 默认）</strong> 的常用写法，通过指定包或类的日志级别，控制不同模块的日志输出，方便调试和问题排查。</p>
+<p>链接：[[40 LogBack|LogBack]]</p>
 
                     
                 </div>
@@ -383,6 +420,14 @@
 
                 <div class="post-bottom-tags-and-share border-box">
                     <div>
+                        
+                            <ul class="post-tags-box border-box">
+                                
+                                    <li class="tag-item border-box">
+                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/SpringBoot/">SpringBoot</a>
+                                    </li>
+                                
+                            </ul>
                         
                     </div>
                     <div>
@@ -398,14 +443,14 @@
                             <div class="prev-post">
                                 <a class="prev"
                                    rel="prev"
-                                   href="/2024/11/19/20%20%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8properties%E5%92%8Cproperties-dev/"
-                                   title="如何使用properties和properties-dev"
+                                   href="/2024/11/12/%E5%9B%BE%E7%89%87%E4%B8%8A%E4%BC%A0%E6%B5%8B%E8%AF%95/"
+                                   title="图片上传测试"
                                 >
                                     <span class="left arrow-icon flex-center">
                                         <i class="fas fa-chevron-left"></i>
                                     </span>
                                     <span class="title flex-center">
-                                        <span class="post-nav-title-item text-ellipsis">如何使用properties和properties-dev</span>
+                                        <span class="post-nav-title-item text-ellipsis">图片上传测试</span>
                                         <span class="post-nav-item">上一篇</span>
                                     </span>
                                 </a>
@@ -415,11 +460,11 @@
                             <div class="next-post">
                                 <a class="next"
                                    rel="next"
-                                   href="/2024/11/19/22%20%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E5%88%86%E7%A6%BB/"
-                                   title="环境配置分离"
+                                   href="/2024/11/11/%E4%B8%AD%E6%96%87%E6%96%87%E4%BB%B6%E5%90%8D%E6%B5%8B%E8%AF%95/"
+                                   title="中文文件名测试"
                                 >
                                     <span class="title flex-center">
-                                        <span class="post-nav-title-item text-ellipsis">环境配置分离</span>
+                                        <span class="post-nav-title-item text-ellipsis">中文文件名测试</span>
                                         <span class="post-nav-item">下一篇</span>
                                     </span>
                                     <span class="right arrow-icon flex-center">
@@ -447,7 +492,7 @@
             <div class="pc-post-toc right-toc">
                 <div class="post-toc-wrap border-box">
     <div class="post-toc border-box">
-        <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%B8%E8%A7%81%E7%8E%AF%E5%A2%83%E5%88%86%E7%B1%BB%EF%BC%9A"><span class="nav-text">常见环境分类：</span></a></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E9%A1%B9%E5%90%AB%E4%B9%89%EF%BC%9A"><span class="nav-text">配置项含义：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-logging-level"><span class="nav-text">1. logging.level</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%97%A5%E5%BF%97%E7%BA%A7%E5%88%AB%EF%BC%88%E6%8C%89%E8%AF%A6%E7%BB%86%E7%A8%8B%E5%BA%A6%E6%8E%92%E5%BA%8F%EF%BC%89%EF%BC%9A"><span class="nav-text">日志级别（按详细程度排序）：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%90%E7%BA%A7%E8%A7%A3%E8%AF%BB%E9%85%8D%E7%BD%AE%E5%86%85%E5%AE%B9%EF%BC%9A"><span class="nav-text">逐级解读配置内容：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%88%E6%9E%9C%EF%BC%9A"><span class="nav-text">效果：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E7%A4%BA%E4%BE%8B%E6%89%A9%E5%B1%95%EF%BC%9A"><span class="nav-text">配置示例扩展：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E5%85%A8%E5%B1%80%E6%97%A5%E5%BF%97%E7%BA%A7%E5%88%AB%EF%BC%9A"><span class="nav-text">配置全局日志级别：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E5%85%B7%E4%BD%93%E7%B1%BB%E7%9A%84%E6%97%A5%E5%BF%97%E7%BA%A7%E5%88%AB%EF%BC%9A"><span class="nav-text">配置具体类的日志级别：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%BB%E7%BB%93%EF%BC%9A"><span class="nav-text">总结：</span></a></li></ol>
     </div>
 </div>
 
@@ -625,7 +670,7 @@
             <div class="tablet-post-toc">
                 <div class="post-toc-wrap border-box">
     <div class="post-toc border-box">
-        <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%B8%E8%A7%81%E7%8E%AF%E5%A2%83%E5%88%86%E7%B1%BB%EF%BC%9A"><span class="nav-text">常见环境分类：</span></a></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E9%A1%B9%E5%90%AB%E4%B9%89%EF%BC%9A"><span class="nav-text">配置项含义：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-logging-level"><span class="nav-text">1. logging.level</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%97%A5%E5%BF%97%E7%BA%A7%E5%88%AB%EF%BC%88%E6%8C%89%E8%AF%A6%E7%BB%86%E7%A8%8B%E5%BA%A6%E6%8E%92%E5%BA%8F%EF%BC%89%EF%BC%9A"><span class="nav-text">日志级别（按详细程度排序）：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%90%E7%BA%A7%E8%A7%A3%E8%AF%BB%E9%85%8D%E7%BD%AE%E5%86%85%E5%AE%B9%EF%BC%9A"><span class="nav-text">逐级解读配置内容：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%88%E6%9E%9C%EF%BC%9A"><span class="nav-text">效果：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E7%A4%BA%E4%BE%8B%E6%89%A9%E5%B1%95%EF%BC%9A"><span class="nav-text">配置示例扩展：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E5%85%A8%E5%B1%80%E6%97%A5%E5%BF%97%E7%BA%A7%E5%88%AB%EF%BC%9A"><span class="nav-text">配置全局日志级别：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E5%85%B7%E4%BD%93%E7%B1%BB%E7%9A%84%E6%97%A5%E5%BF%97%E7%BA%A7%E5%88%AB%EF%BC%9A"><span class="nav-text">配置具体类的日志级别：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%BB%E7%BB%93%EF%BC%9A"><span class="nav-text">总结：</span></a></li></ol>
     </div>
 </div>
 

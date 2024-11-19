@@ -9,7 +9,7 @@
     
     <title>
         
-            dev-test-prod |
+            MyBatis中的Mapper配置 |
         
         Flic&#39;s Blog
     </title>
@@ -271,7 +271,7 @@
             <div class="post-content-bottom border-box">
                 
                     <div class="post-title">
-                        dev-test-prod
+                        MyBatis中的Mapper配置
                     </div>
                 
 
@@ -299,12 +299,12 @@
         
             <span class="meta-info-item post-create-date">
                 <i class="icon fa-solid fa-calendar-plus"></i>&nbsp;
-                <span class="datetime">2024-11-19 12:39:13</span>
+                <span class="datetime">2024-11-19 21:20:54</span>
             </span>
 
             <span class="meta-info-item post-update-date">
                 <i class="icon fa-solid fa-file-pen"></i>&nbsp;
-                <span class="datetime" data-updated="Tue Nov 19 2024 12:40:27 GMT+0800">2024-11-19 12:40:27</span>
+                <span class="datetime" data-updated="Tue Nov 19 2024 13:05:02 GMT+0800">2024-11-19 13:05:02</span>
             </span>
         
 
@@ -315,7 +315,7 @@
         
         
             <span class="meta-info-item post-wordcount">
-                <i class="icon fas fa-file-word"></i>&nbsp;<span>213 字</span>
+                <i class="icon fas fa-file-word"></i>&nbsp;<span>284 字</span>
             </span>
         
         
@@ -342,39 +342,31 @@
                     
 
                     
-                         <p><strong><code>dev</code></strong> 是 <strong>development</strong> 的缩写，意思是<strong>开发环境</strong>。在软件开发中，项目通常会有多个环境配置，<code>dev</code> 专门用来跑开发中的代码，方便调试和测试。</p>
+                         <p>这些设置能让 MyBatis 更高效地加载配置文件和映射类，减少手动配置工作量。</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">mybatis:</span>  </span><br><span class="line">  <span class="comment">#mapper配置文件  </span></span><br><span class="line">  <span class="attr">mapper-locations:</span> <span class="string">classpath:mapper/*.xml</span>  </span><br><span class="line">  <span class="attr">type-aliases-package:</span> <span class="string">com.sky.entity</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="1-mapper-locations"><a href="#1-mapper-locations" class="headerlink" title="1. mapper-locations"></a><strong>1. <code>mapper-locations</code></strong></h3><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">mapper-locations:</span> <span class="string">classpath:mapper/*.xml</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><p><strong><code>classpath:</code></strong> 表示文件路径是相对于应用的 <code>resources</code> 目录。</p>
+</li>
+<li><p><strong><code>mapper/*.xml</code></strong> 表示所有 <code>mapper</code> 文件夹中的 <code>.xml</code> 文件会被自动加载。</p>
+<h4 id="作用："><a href="#作用：" class="headerlink" title="作用："></a><strong>作用</strong>：</h4></li>
+<li><p><span style="background:#ff4d4f">告诉 MyBatis 在指定路径下寻找 SQL 映射文件</span>（Mapper XML），以便动态解析 SQL 并绑定到对应的 Java 方法。</p>
+</li>
+</ul>
 <hr>
-<h3 id="常见环境分类："><a href="#常见环境分类：" class="headerlink" title="常见环境分类："></a><strong>常见环境分类：</strong></h3><ol>
-<li><p><strong><code>dev</code>（开发环境）</strong>：</p>
+<h3 id="2-type-aliases-package"><a href="#2-type-aliases-package" class="headerlink" title="2. type-aliases-package"></a><strong>2. <code>type-aliases-package</code></strong></h3><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">type-aliases-package:</span> <span class="string">com.sky.entity</span></span><br></pre></td></tr></table></figure>
 <ul>
-<li>给程序员写代码用的。</li>
-<li>数据库、服务都用测试版本，不怕数据乱搞。</li>
-<li>配置一般是：<ul>
-<li><strong>低安全性</strong>：简单密码、调试模式开。</li>
-<li><strong>日志多</strong>：输出详细信息（debug 级别）。</li>
-</ul>
+<li><code>com.sky.entity</code> 是你的实体类所在的包路径。</li>
+<li>实体类是用于映射数据库表的 Java 对象。<h4 id="作用：-1"><a href="#作用：-1" class="headerlink" title="作用："></a><strong>作用</strong>：</h4></li>
+<li><span style="background:#ff4d4f">简化 Mapper 文件中指定 <code>resultType</code> 或 <code>parameterType</code> 时的类路径。</span></li>
+<li>避免在 XML 中重复写全路径，提高可读性。<h4 id="示例："><a href="#示例：" class="headerlink" title="示例："></a><strong>示例</strong>：</h4>假设你有一个实体类 <code>User</code>：<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.sky.entity;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">User</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span> userId;</span><br><span class="line">    <span class="keyword">private</span> String userName;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 </li>
 </ul>
-</li>
-<li><p><strong><code>test</code>（测试环境）</strong>：</p>
-<ul>
-<li>测试人员用来验证功能。</li>
-<li>更接近上线环境，但数据还是假的。</li>
-<li>配置：和生产环境类似，但数据库是测试库。</li>
-</ul>
-</li>
-<li><p><strong><code>prod</code>（生产环境）</strong>：</p>
-<ul>
-<li>正式发布给用户的环境。</li>
-<li>数据、服务都是真实的。</li>
-<li>配置：<ul>
-<li><strong>高安全性</strong>：密码复杂、调试模式关。</li>
-<li><strong>日志简洁</strong>：只保留必要信息。</li>
-</ul>
-</li>
-</ul>
-</li>
-</ol>
+<p>在 XML 中使用：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">mapper</span> <span class="attr">namespace</span>=<span class="string">&quot;com.sky.mapper.UserMapper&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">&quot;selectUser&quot;</span> <span class="attr">resultType</span>=<span class="string">&quot;User&quot;</span>&gt;</span></span><br><span class="line">        SELECT * FROM users WHERE user_id = #&#123;userId&#125;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">mapper</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>在resultType处就只写User，而不是com.sky.enity.User</p>
 
                     
                 </div>
@@ -398,14 +390,14 @@
                             <div class="prev-post">
                                 <a class="prev"
                                    rel="prev"
-                                   href="/2024/11/19/20%20%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8properties%E5%92%8Cproperties-dev/"
-                                   title="如何使用properties和properties-dev"
+                                   href="/2024/11/20/40%20LogBack/"
+                                   title=""
                                 >
                                     <span class="left arrow-icon flex-center">
                                         <i class="fas fa-chevron-left"></i>
                                     </span>
                                     <span class="title flex-center">
-                                        <span class="post-nav-title-item text-ellipsis">如何使用properties和properties-dev</span>
+                                        <span class="post-nav-title-item text-ellipsis"></span>
                                         <span class="post-nav-item">上一篇</span>
                                     </span>
                                 </a>
@@ -415,11 +407,11 @@
                             <div class="next-post">
                                 <a class="next"
                                    rel="next"
-                                   href="/2024/11/19/22%20%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E5%88%86%E7%A6%BB/"
-                                   title="环境配置分离"
+                                   href="/2024/11/19/12%20fastJSON%E7%9A%84%E5%AE%89%E5%85%A8%E6%80%A7%E9%97%AE%E9%A2%98%E5%8F%8A%E5%85%B6%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/"
+                                   title="fastJSON的安全性问题及其解决方案"
                                 >
                                     <span class="title flex-center">
-                                        <span class="post-nav-title-item text-ellipsis">环境配置分离</span>
+                                        <span class="post-nav-title-item text-ellipsis">fastJSON的安全性问题及其解决方案</span>
                                         <span class="post-nav-item">下一篇</span>
                                     </span>
                                     <span class="right arrow-icon flex-center">
@@ -447,7 +439,7 @@
             <div class="pc-post-toc right-toc">
                 <div class="post-toc-wrap border-box">
     <div class="post-toc border-box">
-        <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%B8%E8%A7%81%E7%8E%AF%E5%A2%83%E5%88%86%E7%B1%BB%EF%BC%9A"><span class="nav-text">常见环境分类：</span></a></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-mapper-locations"><span class="nav-text">1. mapper-locations</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%9C%E7%94%A8%EF%BC%9A"><span class="nav-text">作用：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-type-aliases-package"><span class="nav-text">2. type-aliases-package</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%9C%E7%94%A8%EF%BC%9A-1"><span class="nav-text">作用：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%A4%BA%E4%BE%8B%EF%BC%9A"><span class="nav-text">示例：</span></a></li></ol></li></ol>
     </div>
 </div>
 
@@ -625,7 +617,7 @@
             <div class="tablet-post-toc">
                 <div class="post-toc-wrap border-box">
     <div class="post-toc border-box">
-        <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%B8%E8%A7%81%E7%8E%AF%E5%A2%83%E5%88%86%E7%B1%BB%EF%BC%9A"><span class="nav-text">常见环境分类：</span></a></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-mapper-locations"><span class="nav-text">1. mapper-locations</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%9C%E7%94%A8%EF%BC%9A"><span class="nav-text">作用：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-type-aliases-package"><span class="nav-text">2. type-aliases-package</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%9C%E7%94%A8%EF%BC%9A-1"><span class="nav-text">作用：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%A4%BA%E4%BE%8B%EF%BC%9A"><span class="nav-text">示例：</span></a></li></ol></li></ol>
     </div>
 </div>
 

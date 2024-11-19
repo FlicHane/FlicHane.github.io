@@ -9,8 +9,6 @@
     
     <title>
         
-            dev-test-prod |
-        
         Flic&#39;s Blog
     </title>
     
@@ -271,7 +269,7 @@
             <div class="post-content-bottom border-box">
                 
                     <div class="post-title">
-                        dev-test-prod
+                        
                     </div>
                 
 
@@ -299,12 +297,12 @@
         
             <span class="meta-info-item post-create-date">
                 <i class="icon fa-solid fa-calendar-plus"></i>&nbsp;
-                <span class="datetime">2024-11-19 12:39:13</span>
+                <span class="datetime">2024-11-20 00:09:33</span>
             </span>
 
             <span class="meta-info-item post-update-date">
                 <i class="icon fa-solid fa-file-pen"></i>&nbsp;
-                <span class="datetime" data-updated="Tue Nov 19 2024 12:40:27 GMT+0800">2024-11-19 12:40:27</span>
+                <span class="datetime" data-updated="Tue Nov 19 2024 22:30:19 GMT+0800">2024-11-19 22:30:19</span>
             </span>
         
 
@@ -315,7 +313,7 @@
         
         
             <span class="meta-info-item post-wordcount">
-                <i class="icon fas fa-file-word"></i>&nbsp;<span>213 字</span>
+                <i class="icon fas fa-file-word"></i>&nbsp;<span>373 字</span>
             </span>
         
         
@@ -342,37 +340,26 @@
                     
 
                     
-                         <p><strong><code>dev</code></strong> 是 <strong>development</strong> 的缩写，意思是<strong>开发环境</strong>。在软件开发中，项目通常会有多个环境配置，<code>dev</code> 专门用来跑开发中的代码，方便调试和测试。</p>
-<hr>
-<h3 id="常见环境分类："><a href="#常见环境分类：" class="headerlink" title="常见环境分类："></a><strong>常见环境分类：</strong></h3><ol>
-<li><p><strong><code>dev</code>（开发环境）</strong>：</p>
+                         <p>PageHelper 是 MyBatis 的一个分页插件，用起来很简单，核心步骤如下：  </p>
+<ol>
+<li><p><strong>引入依赖</strong><br>在 <code>pom.xml</code> 中添加 PageHelper 的依赖：  </p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.github.pagehelper<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>pagehelper<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>5.3.2<span class="tag">&lt;/<span class="name">version</span>&gt;</span> <span class="comment">&lt;!-- 根据需要调整版本 --&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>配置插件</strong><br><span style="background:#ff4d4f">（新版的 PageHelper（比如 5.x）会自动注册，不需要手动配置插件）</span></p>
+</li>
+</ol>
+<p><strong>如果你有特殊需求，比如非 MySQL 数据库或者自定义行为</strong>，才需要手动配置。简单用的话，省这步没问题。<br>在 MyBatis 配置文件中，注册 PageHelper 插件。对于 Spring Boot 项目，可以直接在配置类中添加：  </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Bean</span></span><br><span class="line"><span class="keyword">public</span> PageInterceptor <span class="title function_">pageInterceptor</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">PageInterceptor</span> <span class="variable">interceptor</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">PageInterceptor</span>();</span><br><span class="line">    <span class="type">Properties</span> <span class="variable">properties</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Properties</span>();</span><br><span class="line">    properties.setProperty(<span class="string">&quot;helperDialect&quot;</span>, <span class="string">&quot;mysql&quot;</span>); <span class="comment">// 数据库类型</span></span><br><span class="line">    properties.setProperty(<span class="string">&quot;reasonable&quot;</span>, <span class="string">&quot;true&quot;</span>);</span><br><span class="line">    properties.setProperty(<span class="string">&quot;supportMethodsArguments&quot;</span>, <span class="string">&quot;true&quot;</span>);</span><br><span class="line">    properties.setProperty(<span class="string">&quot;pageSizeZero&quot;</span>, <span class="string">&quot;true&quot;</span>);</span><br><span class="line">    interceptor.setProperties(properties);</span><br><span class="line">    <span class="keyword">return</span> interceptor;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li><strong>使用 PageHelper.startPage() 方法</strong><br>这里可以根据实际情况灵活调整<br>在查询数据库之前调用 <code>PageHelper.startPage()</code>：  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">PageHelper.startPage(pageNum, pageSize);</span><br><span class="line">List&lt;User&gt; userList = userMapper.selectAll(); <span class="comment">// 查询语句，就按照除去分页查询的样子写</span></span><br><span class="line">PageInfo&lt;User&gt; pageInfo = <span class="keyword">new</span> <span class="title class_">PageInfo</span>&lt;&gt;(userList); <span class="comment">// 封装结果</span></span><br></pre></td></tr></table></figure></li>
+</ol>
 <ul>
-<li>给程序员写代码用的。</li>
-<li>数据库、服务都用测试版本，不怕数据乱搞。</li>
-<li>配置一般是：<ul>
-<li><strong>低安全性</strong>：简单密码、调试模式开。</li>
-<li><strong>日志多</strong>：输出详细信息（debug 级别）。</li>
+<li>查询语句<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">&quot;selectAll&quot;</span> <span class="attr">resultType</span>=<span class="string">&quot;com.example.User&quot;</span>&gt;</span></span><br><span class="line">    SELECT * FROM users</span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
 </ul>
-</li>
-</ul>
-</li>
-<li><p><strong><code>test</code>（测试环境）</strong>：</p>
-<ul>
-<li>测试人员用来验证功能。</li>
-<li>更接近上线环境，但数据还是假的。</li>
-<li>配置：和生产环境类似，但数据库是测试库。</li>
-</ul>
-</li>
-<li><p><strong><code>prod</code>（生产环境）</strong>：</p>
-<ul>
-<li>正式发布给用户的环境。</li>
-<li>数据、服务都是真实的。</li>
-<li>配置：<ul>
-<li><strong>高安全性</strong>：密码复杂、调试模式关。</li>
-<li><strong>日志简洁</strong>：只保留必要信息。</li>
-</ul>
-</li>
-</ul>
+<ol>
+<li><strong>返回分页结果</strong><br><code>PageInfo</code> 包含分页的详细信息，如总页数、总记录数等：  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">System.out.println(<span class="string">&quot;总页数: &quot;</span> + pageInfo.getPages());</span><br><span class="line">System.out.println(<span class="string">&quot;总记录数: &quot;</span> + pageInfo.getTotal());</span><br></pre></td></tr></table></figure>
+
 </li>
 </ol>
 
@@ -398,14 +385,14 @@
                             <div class="prev-post">
                                 <a class="prev"
                                    rel="prev"
-                                   href="/2024/11/19/20%20%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8properties%E5%92%8Cproperties-dev/"
-                                   title="如何使用properties和properties-dev"
+                                   href="/2024/11/20/42%20PageHelper%E5%8C%85%E8%A3%85%E7%B1%BB%E8%AF%A6%E8%A7%A3/"
+                                   title=""
                                 >
                                     <span class="left arrow-icon flex-center">
                                         <i class="fas fa-chevron-left"></i>
                                     </span>
                                     <span class="title flex-center">
-                                        <span class="post-nav-title-item text-ellipsis">如何使用properties和properties-dev</span>
+                                        <span class="post-nav-title-item text-ellipsis"></span>
                                         <span class="post-nav-item">上一篇</span>
                                     </span>
                                 </a>
@@ -415,11 +402,11 @@
                             <div class="next-post">
                                 <a class="next"
                                    rel="next"
-                                   href="/2024/11/19/22%20%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E5%88%86%E7%A6%BB/"
-                                   title="环境配置分离"
+                                   href="/2024/11/20/40%20LogBack/"
+                                   title=""
                                 >
                                     <span class="title flex-center">
-                                        <span class="post-nav-title-item text-ellipsis">环境配置分离</span>
+                                        <span class="post-nav-title-item text-ellipsis"></span>
                                         <span class="post-nav-item">下一篇</span>
                                     </span>
                                     <span class="right arrow-icon flex-center">
@@ -447,7 +434,7 @@
             <div class="pc-post-toc right-toc">
                 <div class="post-toc-wrap border-box">
     <div class="post-toc border-box">
-        <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%B8%E8%A7%81%E7%8E%AF%E5%A2%83%E5%88%86%E7%B1%BB%EF%BC%9A"><span class="nav-text">常见环境分类：</span></a></li></ol>
+        
     </div>
 </div>
 
@@ -625,7 +612,7 @@
             <div class="tablet-post-toc">
                 <div class="post-toc-wrap border-box">
     <div class="post-toc border-box">
-        <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%B8%E8%A7%81%E7%8E%AF%E5%A2%83%E5%88%86%E7%B1%BB%EF%BC%9A"><span class="nav-text">常见环境分类：</span></a></li></ol>
+        
     </div>
 </div>
 
