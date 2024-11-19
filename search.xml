@@ -318,4 +318,36 @@
         <tag>概念</tag>
       </tags>
   </entry>
+  <entry>
+    <title>lombok</title>
+    <url>/2024/11/17/lombok/</url>
+    <content><![CDATA[<p>它通过注解帮你自动生成 getter、setter、toString、构造器之类的常用代码，省得你手动敲半天。</p>
+<h1 id="常用注解："><a href="#常用注解：" class="headerlink" title="常用注解："></a>常用注解：</h1><ul>
+<li><code>@Getter</code> / <code>@Setter</code>：生成 getter 和 setter 方法。</li>
+<li><code>@ToString</code>：生成 <code>toString</code> 方法。</li>
+<li><code>@NoArgsConstructor</code> / <code>@AllArgsConstructor</code>：生成无参和全参构造器。</li>
+<li><code>@Builder</code>：比如说User user = User.<font color="#ff0000">builder()</font>.id(75).name(“shit”).build;</li>
+<li><code>@Data</code>：包含 <code>@Getter</code>、<code>@Setter</code>、<code>@ToString</code>、<code>@EqualsAndHashCode</code>、<code>@RequiredArgsConstructor</code>。</li>
+<li><code>@Slf4j</code>：省去声明日志 <code>Logger</code> 对象的步骤。</li>
+</ul>
+<h1 id="用法："><a href="#用法：" class="headerlink" title="用法："></a>用法：</h1><ol>
+<li>在项目的 <code>pom.xml</code> 里加上 Lombok 依赖（Maven 项目）：<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.projectlombok<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>lombok<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.18.30<span class="tag">&lt;/<span class="name">version</span>&gt;</span> <span class="comment">&lt;!-- 根据需要换版本 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">scope</span>&gt;</span>provided<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+<li>IDEA 里装个 Lombok 插件，记得打开 <strong>Enable Annotation Processing</strong>（设置 -&gt; Build, Execution, Deployment -&gt; Compiler -&gt; Annotation Processors）。</li>
+</ol>
+<h1 id="RequiredArgsConstructor"><a href="#RequiredArgsConstructor" class="headerlink" title="@RequiredArgsConstructor"></a>@RequiredArgsConstructor</h1><p>这个似乎不常用<br><code>@RequiredArgsConstructor</code> 是用来自动生成<strong>包含 <code>final</code> 修饰符字段</strong>和**<code>@NonNull</code> 注解字段<strong>的</strong>构造方法**。  </p>
+<p><strong>具体意思：</strong>  </p>
+<ul>
+<li>只对 <strong><code>final</code> 和 <code>@NonNull</code> 字段</strong>生成构造参数。  </li>
+<li>非 <code>final</code> 和无 <code>@NonNull</code> 的字段直接无视，不会加入构造器。  </li>
+</ul>
+<p> <strong>举个栗子：</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> lombok.RequiredArgsConstructor;</span><br><span class="line"></span><br><span class="line"><span class="meta">@RequiredArgsConstructor</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Demo</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> String name; <span class="comment">// 构造方法会有这个</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="type">int</span> age;     <span class="comment">// 构造方法会有这个</span></span><br><span class="line">    <span class="keyword">private</span> String nickname;   <span class="comment">// 构造方法没有这个</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>编译后自动生成：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Demo</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> String name;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="type">int</span> age;</span><br><span class="line">    <span class="keyword">private</span> String nickname;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Demo</span><span class="params">(String name, <span class="type">int</span> age)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.name = name;</span><br><span class="line">        <span class="built_in">this</span>.age = age;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+      <tags>
+        <tag>hexo</tag>
+        <tag>Test</tag>
+      </tags>
+  </entry>
 </search>
