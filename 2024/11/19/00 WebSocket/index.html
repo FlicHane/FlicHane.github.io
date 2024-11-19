@@ -9,7 +9,7 @@
     
     <title>
         
-            lombok |
+            WebSocket |
         
         Flic&#39;s Blog
     </title>
@@ -271,7 +271,7 @@
             <div class="post-content-bottom border-box">
                 
                     <div class="post-title">
-                        lombok
+                        WebSocket
                     </div>
                 
 
@@ -299,37 +299,28 @@
         
             <span class="meta-info-item post-create-date">
                 <i class="icon fa-solid fa-calendar-plus"></i>&nbsp;
-                <span class="datetime">2024-11-17 12:39:13</span>
+                <span class="datetime">2024-11-19 12:39:13</span>
             </span>
 
             <span class="meta-info-item post-update-date">
                 <i class="icon fa-solid fa-file-pen"></i>&nbsp;
-                <span class="datetime" data-updated="Tue Nov 19 2024 12:36:10 GMT+0800">2024-11-19 12:36:10</span>
+                <span class="datetime" data-updated="Tue Nov 19 2024 12:41:21 GMT+0800">2024-11-19 12:41:21</span>
             </span>
         
 
         
 
-        
-            <span class="post-tag meta-info-item border-box">
-                <ul class="post-tag-ul">
-                    
-                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/Java%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E5%BA%93/">Java开发工具库</a></li>
-                        
-                    
-                </ul>
-            </span>
         
 
         
         
             <span class="meta-info-item post-wordcount">
-                <i class="icon fas fa-file-word"></i>&nbsp;<span>341 字</span>
+                <i class="icon fas fa-file-word"></i>&nbsp;<span>560 字</span>
             </span>
         
         
             <span class="meta-info-item post-min2read">
-                <i class="icon fas fa-clock"></i>&nbsp;<span>1 分钟</span>
+                <i class="icon fas fa-clock"></i>&nbsp;<span>2 分钟</span>
             </span>
         
         
@@ -351,30 +342,31 @@
                     
 
                     
-                         <p>它通过注解帮你自动生成 getter、setter、toString、构造器之类的常用代码，省得你手动敲半天。</p>
-<h1 id="常用注解："><a href="#常用注解：" class="headerlink" title="常用注解："></a>常用注解：</h1><ul>
-<li><code>@Getter</code> / <code>@Setter</code>：生成 getter 和 setter 方法。</li>
-<li><code>@ToString</code>：生成 <code>toString</code> 方法。</li>
-<li><code>@NoArgsConstructor</code> / <code>@AllArgsConstructor</code>：生成无参和全参构造器。</li>
-<li><code>@Builder</code>：比如说User user = User.<font color="#ff0000">builder()</font>.id(75).name(“shit”).build;</li>
-<li><code>@Data</code>：包含 <code>@Getter</code>、<code>@Setter</code>、<code>@ToString</code>、<code>@EqualsAndHashCode</code>、<code>@RequiredArgsConstructor</code>。</li>
-<li><code>@Slf4j</code>：省去声明日志 <code>Logger</code> 对象的步骤。</li>
-</ul>
-<h1 id="用法："><a href="#用法：" class="headerlink" title="用法："></a>用法：</h1><ol>
-<li>在项目的 <code>pom.xml</code> 里加上 Lombok 依赖（Maven 项目）：<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.projectlombok<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>lombok<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.18.30<span class="tag">&lt;/<span class="name">version</span>&gt;</span> <span class="comment">&lt;!-- 根据需要换版本 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">scope</span>&gt;</span>provided<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
-<li>IDEA 里装个 Lombok 插件，记得打开 <strong>Enable Annotation Processing</strong>（设置 -&gt; Build, Execution, Deployment -&gt; Compiler -&gt; Annotation Processors）。</li>
+                         <p>WebSocket 就是个双向通讯协议，只需建立一次链接，<strong>服务端和客户端就可以实时交互</strong>，不像 HTTP 一样只能客户端请求、服务端回应。</p>
+<h3 id="优势"><a href="#优势" class="headerlink" title="优势"></a><strong>优势</strong></h3><ol>
+<li><strong>实时性强</strong>：只要连接一建立，客户端和服务端可以互相推消息，不用来回请求。</li>
+<li><strong>效率高</strong>：省掉了 HTTP 的请求头，数据传输更轻量。</li>
+<li><strong>全双工</strong>：能同时发数据、收数据，比 HTTP 单工爽多了。</li>
 </ol>
-<h1 id="RequiredArgsConstructor"><a href="#RequiredArgsConstructor" class="headerlink" title="@RequiredArgsConstructor"></a>@RequiredArgsConstructor</h1><p>这个似乎不常用<br><code>@RequiredArgsConstructor</code> 是用来自动生成<strong>包含 <code>final</code> 修饰符字段</strong>和**<code>@NonNull</code> 注解字段<strong>的</strong>构造方法**。  </p>
-<p><strong>具体意思：</strong>  </p>
-<ul>
-<li>只对 <strong><code>final</code> 和 <code>@NonNull</code> 字段</strong>生成构造参数。  </li>
-<li>非 <code>final</code> 和无 <code>@NonNull</code> 的字段直接无视，不会加入构造器。  </li>
-</ul>
-<p> <strong>举个栗子：</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> lombok.RequiredArgsConstructor;</span><br><span class="line"></span><br><span class="line"><span class="meta">@RequiredArgsConstructor</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Demo</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> String name; <span class="comment">// 构造方法会有这个</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="type">int</span> age;     <span class="comment">// 构造方法会有这个</span></span><br><span class="line">    <span class="keyword">private</span> String nickname;   <span class="comment">// 构造方法没有这个</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="怎么用？"><a href="#怎么用？" class="headerlink" title="怎么用？"></a><strong>怎么用？</strong></h3><ol>
+<li><strong>握手阶段</strong>：客户端发个特殊的 HTTP 请求，服务端同意后升级为 WebSocket。</li>
+<li><strong>建立连接后</strong>：直接互发消息，像发短信一样简单。</li>
+</ol>
+<h3 id="Java-核心流程："><a href="#Java-核心流程：" class="headerlink" title="Java 核心流程："></a><strong>Java 核心流程：</strong></h3><ol>
+<li><p><strong>依赖</strong>：如果是 Spring Boot，用 <code>spring-boot-starter-websocket</code>。</p>
+</li>
+<li><p><strong>服务端实现</strong>：</p>
+</li>
+<li><p>基础实现：演示用，只能用于单个用户</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@ServerEndpoint(&quot;/ws&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">WebSocketServer</span> &#123;</span><br><span class="line">	<span class="meta">@OnOpen</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">onOpen</span><span class="params">(Session session)</span> &#123;</span><br><span class="line">		System.out.println(<span class="string">&quot;连接建立: &quot;</span> + session.getId());</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@OnMessage</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">onMessage</span><span class="params">(String message, Session session)</span> &#123;</span><br><span class="line">		System.out.println(<span class="string">&quot;收到消息: &quot;</span> + message);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@OnClose</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">onClose</span><span class="params">(Session session)</span> &#123;</span><br><span class="line">		System.out.println(<span class="string">&quot;连接关闭: &quot;</span> + session.getId());</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>高级实现：可用于多个用户</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**  </span></span><br><span class="line"><span class="comment"> * WebSocket服务  </span></span><br><span class="line"><span class="comment"> */</span>  </span><br><span class="line"><span class="meta">@Component</span>  </span><br><span class="line"><span class="meta">@ServerEndpoint(&quot;/ws/&#123;sid&#125;&quot;)</span>  </span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">WebSocketServer</span> &#123;  </span><br><span class="line">  </span><br><span class="line">    <span class="comment">//存放会话对象  </span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Map&lt;String, Session&gt; sessionMap = <span class="keyword">new</span> <span class="title class_">HashMap</span>();  </span><br><span class="line">  </span><br><span class="line">    <span class="comment">/**  </span></span><br><span class="line"><span class="comment">     * 连接建立成功调用的方法  </span></span><br><span class="line"><span class="comment">     */</span>  </span><br><span class="line">    <span class="meta">@OnOpen</span>  </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">onOpen</span><span class="params">(Session session, <span class="meta">@PathParam(&quot;sid&quot;)</span> String sid)</span> &#123;  </span><br><span class="line">        System.out.println(<span class="string">&quot;客户端：&quot;</span> + sid + <span class="string">&quot;建立连接&quot;</span>);  </span><br><span class="line">        sessionMap.put(sid, session);  </span><br><span class="line">    &#125;  </span><br><span class="line">  </span><br><span class="line">    <span class="comment">/**  </span></span><br><span class="line"><span class="comment">     * 收到客户端消息后调用的方法  </span></span><br><span class="line"><span class="comment">     *  </span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> message 客户端发送过来的消息  </span></span><br><span class="line"><span class="comment">     */</span>  </span><br><span class="line">    <span class="meta">@OnMessage</span>  </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">onMessage</span><span class="params">(String message, <span class="meta">@PathParam(&quot;sid&quot;)</span> String sid)</span> &#123;  </span><br><span class="line">        System.out.println(<span class="string">&quot;收到来自客户端：&quot;</span> + sid + <span class="string">&quot;的信息:&quot;</span> + message);  </span><br><span class="line">    &#125;  </span><br><span class="line">  </span><br><span class="line">    <span class="comment">/**  </span></span><br><span class="line"><span class="comment">     * 连接关闭调用的方法  </span></span><br><span class="line"><span class="comment">     *  </span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> sid  </span></span><br><span class="line"><span class="comment">     */</span>  </span><br><span class="line">    <span class="meta">@OnClose</span>  </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">onClose</span><span class="params">(<span class="meta">@PathParam(&quot;sid&quot;)</span> String sid)</span> &#123;  </span><br><span class="line">        System.out.println(<span class="string">&quot;连接断开:&quot;</span> + sid);  </span><br><span class="line">        sessionMap.remove(sid);  </span><br><span class="line">    &#125;  </span><br><span class="line">  </span><br><span class="line">    <span class="comment">/**  </span></span><br><span class="line"><span class="comment">     * 群发  </span></span><br><span class="line"><span class="comment">     *  </span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> message  </span></span><br><span class="line"><span class="comment">     */</span>  </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">sendToAllClient</span><span class="params">(String message)</span> &#123;  </span><br><span class="line">        Collection&lt;Session&gt; sessions = sessionMap.values();  </span><br><span class="line">        <span class="keyword">for</span> (Session session : sessions) &#123;  </span><br><span class="line">            <span class="keyword">try</span> &#123;  </span><br><span class="line">                <span class="comment">//服务器向客户端发送消息  </span></span><br><span class="line">                session.getBasicRemote().sendText(message);  </span><br><span class="line">            &#125; <span class="keyword">catch</span> (Exception e) &#123;  </span><br><span class="line">                e.printStackTrace();  </span><br><span class="line">            &#125;  </span><br><span class="line">        &#125;  </span><br><span class="line">    &#125;  </span><br><span class="line">  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>客户端实现</strong>：用浏览器或库，前端最简单的：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> ws = <span class="keyword">new</span> <span class="title class_">WebSocket</span>(<span class="string">&quot;ws://localhost:8080/ws&quot;</span>);</span><br><span class="line">ws.<span class="property">onopen</span> = <span class="function">() =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;连接成功&quot;</span>);</span><br><span class="line">ws.<span class="property">onmessage</span> = <span class="function">(<span class="params">msg</span>) =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;收到消息: &quot;</span>, msg.<span class="property">data</span>);</span><br><span class="line">ws.<span class="title function_">send</span>(<span class="string">&quot;Hello WebSocket!&quot;</span>);</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
 
-<p>编译后自动生成：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Demo</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> String name;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="type">int</span> age;</span><br><span class="line">    <span class="keyword">private</span> String nickname;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Demo</span><span class="params">(String name, <span class="type">int</span> age)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.name = name;</span><br><span class="line">        <span class="built_in">this</span>.age = age;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
                     
                 </div>
 
@@ -382,14 +374,6 @@
 
                 <div class="post-bottom-tags-and-share border-box">
                     <div>
-                        
-                            <ul class="post-tags-box border-box">
-                                
-                                    <li class="tag-item border-box">
-                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/Java%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E5%BA%93/">Java开发工具库</a>
-                                    </li>
-                                
-                            </ul>
                         
                     </div>
                     <div>
@@ -402,31 +386,15 @@
                 
                     <div class="post-nav border-box">
                         
-                            <div class="prev-post">
-                                <a class="prev"
-                                   rel="prev"
-                                   href="/2024/11/17/Apache-POI/"
-                                   title="Apache POI"
-                                >
-                                    <span class="left arrow-icon flex-center">
-                                        <i class="fas fa-chevron-left"></i>
-                                    </span>
-                                    <span class="title flex-center">
-                                        <span class="post-nav-title-item text-ellipsis">Apache POI</span>
-                                        <span class="post-nav-item">上一篇</span>
-                                    </span>
-                                </a>
-                            </div>
-                        
                         
                             <div class="next-post">
                                 <a class="next"
                                    rel="next"
-                                   href="/2024/11/12/@Bean%20@Configuration%E8%AF%A6%E8%A7%A3/"
-                                   title="Bean Configuration注解详解"
+                                   href="/2024/11/19/12%20fastJSON%E7%9A%84%E5%AE%89%E5%85%A8%E6%80%A7%E9%97%AE%E9%A2%98%E5%8F%8A%E5%85%B6%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/"
+                                   title="fastJSON的安全性问题及其解决方案"
                                 >
                                     <span class="title flex-center">
-                                        <span class="post-nav-title-item text-ellipsis">Bean Configuration注解详解</span>
+                                        <span class="post-nav-title-item text-ellipsis">fastJSON的安全性问题及其解决方案</span>
                                         <span class="post-nav-item">下一篇</span>
                                     </span>
                                     <span class="right arrow-icon flex-center">
@@ -454,7 +422,7 @@
             <div class="pc-post-toc right-toc">
                 <div class="post-toc-wrap border-box">
     <div class="post-toc border-box">
-        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B8%B8%E7%94%A8%E6%B3%A8%E8%A7%A3%EF%BC%9A"><span class="nav-text">常用注解：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%94%A8%E6%B3%95%EF%BC%9A"><span class="nav-text">用法：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#RequiredArgsConstructor"><span class="nav-text">@RequiredArgsConstructor</span></a></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BC%98%E5%8A%BF"><span class="nav-text">优势</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%8E%E4%B9%88%E7%94%A8%EF%BC%9F"><span class="nav-text">怎么用？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Java-%E6%A0%B8%E5%BF%83%E6%B5%81%E7%A8%8B%EF%BC%9A"><span class="nav-text">Java 核心流程：</span></a></li></ol>
     </div>
 </div>
 
@@ -632,7 +600,7 @@
             <div class="tablet-post-toc">
                 <div class="post-toc-wrap border-box">
     <div class="post-toc border-box">
-        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B8%B8%E7%94%A8%E6%B3%A8%E8%A7%A3%EF%BC%9A"><span class="nav-text">常用注解：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%94%A8%E6%B3%95%EF%BC%9A"><span class="nav-text">用法：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#RequiredArgsConstructor"><span class="nav-text">@RequiredArgsConstructor</span></a></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BC%98%E5%8A%BF"><span class="nav-text">优势</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%8E%E4%B9%88%E7%94%A8%EF%BC%9F"><span class="nav-text">怎么用？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Java-%E6%A0%B8%E5%BF%83%E6%B5%81%E7%A8%8B%EF%BC%9A"><span class="nav-text">Java 核心流程：</span></a></li></ol>
     </div>
 </div>
 
