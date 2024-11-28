@@ -1,37 +1,623 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>WebSocket</title>
-    <url>/2024/11/19/00%20WebSocket/</url>
-    <content><![CDATA[<p>WebSocket 就是个双向通讯协议，只需建立一次链接，<strong>服务端和客户端就可以实时交互</strong>，不像 HTTP 一样只能客户端请求、服务端回应。</p>
-<h3 id="优势"><a href="#优势" class="headerlink" title="优势"></a><strong>优势</strong></h3><ol>
-<li><strong>实时性强</strong>：只要连接一建立，客户端和服务端可以互相推消息，不用来回请求。</li>
-<li><strong>效率高</strong>：省掉了 HTTP 的请求头，数据传输更轻量。</li>
-<li><strong>全双工</strong>：能同时发数据、收数据，比 HTTP 单工爽多了。</li>
+    <title>如何使用Hexo和GitHub部署静态网站</title>
+    <url>/2024/11/10/How-to-deploy-a-static-website-with-Hexo-and-GitHub/</url>
+    <content><![CDATA[<p>我使用的模板是hexo上的keep</p>
+<h3 id="1-安装-Node-js-和-Hexo"><a href="#1-安装-Node-js-和-Hexo" class="headerlink" title="1. 安装 Node.js 和 Hexo"></a>1. 安装 Node.js 和 Hexo</h3><ul>
+<li><p><strong>安装 Node.js</strong>：去 <a class="link"   href="https://nodejs.org/" >Node.js官网<i class="fas fa-external-link-alt"></i></a> 下载并安装 Node.js（装完会自动带上 npm）。</p>
+</li>
+<li><p><strong>安装 Hexo</strong>：打开终端（先win+R，输入cmd后回车），运行以下命令来全局安装 Hexo。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install -g hexo-cli</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h3 id="2-初始化-Hexo-项目"><a href="#2-初始化-Hexo-项目" class="headerlink" title="2. 初始化 Hexo 项目"></a>2. 初始化 Hexo 项目</h3><ul>
+<li><p>选择一个文件夹，作为你的网站项目目录。</p>
+</li>
+<li><p>进入这个文件夹，用 Hexo 初始化项目：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo init 你的项目名称</span><br><span class="line"><span class="built_in">cd</span> 你的项目名称</span><br><span class="line">npm install  <span class="comment"># 安装项目依赖</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p><strong>如果hexo init blog 卡住</strong></p>
+<p>​    此小节引用于：<a class="link"   href="https://blog.csdn.net/f6619082/article/details/109193251" >https://blog.csdn.net/f6619082/article/details/109193251<i class="fas fa-external-link-alt"></i></a></p>
+<p>​    替换成以下代码</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://gitee.com/weilining/hexo-starter.git blog</span><br><span class="line">   <span class="built_in">cd</span> blog</span><br><span class="line">   git submodule init</span><br><span class="line">   git submodule update</span><br><span class="line">   npm config <span class="built_in">set</span> registry http://registry.npm.taobao.org</span><br><span class="line">   npm i	</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="3-创建内容"><a href="#3-创建内容" class="headerlink" title="3. 创建内容"></a>3. 创建内容</h3><ul>
+<li>选择网站模板<br>可以到hexo官网找模板，点击模板链接到GitHub，里面会有网站模板应该如何部署的介绍<br>部署好模板之后就可以跟着介绍自定义自己的网站</li>
+</ul>
+<h3 id="4-配置-GitHub-Pages-部署"><a href="#4-配置-GitHub-Pages-部署" class="headerlink" title="4. 配置 GitHub Pages 部署"></a>4. 配置 GitHub Pages 部署</h3><ul>
+<li><p><strong>安装 GitHub 部署插件</strong>：<br>这个插件可以把生成的public文件上传到GitHub<br> public文件由hexo deploy命令生成</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>配置 <code>_config.yml</code> 文件</strong>：<br>打开项目根目录下的 <code>_config.yml</code>，在底部找到 <code>deploy</code> 配置，填入 GitHub 仓库信息：</p>
+</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  <span class="built_in">type</span>: git</span><br><span class="line">  repo: https://github.com/你的GitHub用户名/你的仓库名.git</span><br><span class="line">  branch: master  <span class="comment"># 如果用的主分支是 master，就写 master，不是的话改成对应分支</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="5-本地预览"><a href="#5-本地预览" class="headerlink" title="5. 本地预览"></a>5. 本地预览</h3><ul>
+<li><p>在本地生成静态文件并预览效果：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo generate</span><br><span class="line">hexo server</span><br></pre></td></tr></table></figure>
+
+<p>打开浏览器访问 <code>http://localhost:4000</code>，看看网站效果。</p>
+</li>
+</ul>
+<h3 id="6-部署到-GitHub-Pages"><a href="#6-部署到-GitHub-Pages" class="headerlink" title="6. 部署到 GitHub Pages"></a>6. 部署到 GitHub Pages</h3><ul>
+<li><p>生成并部署到 GitHub Pages：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo clean     <span class="comment"># 清理旧文件，确保是最新内容</span></span><br><span class="line">hexo generate  <span class="comment"># 生成静态文件</span></span><br><span class="line">hexo deploy    <span class="comment"># 部署到 GitHub</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>如果没有报错，访问 <code>https://你的GitHub用户名.github.io</code> 就可以看到你的 Hexo 网站上线了。</p>
+</li>
+</ul>
+<h3 id="7-更新和再次部署"><a href="#7-更新和再次部署" class="headerlink" title="7. 更新和再次部署"></a>7. 更新和再次部署</h3><p>每次修改内容或发布新文章时，重复以下步骤：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo generate</span><br><span class="line">hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>就这些，全流程下来网站就部署在 GitHub Pages 上了。</p>
+<p>hexo generate指令等价于hexo g</p>
+<p>hexo server指令等价于hexo s</p>
+]]></content>
+      <tags>
+        <tag>buildWebsite</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>序列化</title>
+    <url>/2024/11/17/%E5%BA%8F%E5%88%97%E5%8C%96/</url>
+    <content><![CDATA[<h1 id="what-it-is"><a href="#what-it-is" class="headerlink" title="what it is"></a><span style="background:#ff4d4f">what it is</span></h1><p><strong>序列化</strong>就是把对象转换成一串字节（二进制数据：“0010101”），这样对象可以存到文件里、数据库里，或者通过网络传输。<br>等需要用的时候，再把字节流转回对象，这叫<strong>反序列化</strong>。</p>
+<p>在Java里，想让类支持序列化，你得让它实现<code>Serializable</code>接口，没别的要求，直接上就行。<br>这样一来，Java会帮你把对象状态给“拍个快照”，方便以后拿出来用。</p>
+<h1 id="question"><a href="#question" class="headerlink" title="question"></a><span style="background:#ff4d4f">question</span></h1><h3 id="为什么在写redis模板配置类的时候需要设置key的序列化器"><a href="#为什么在写redis模板配置类的时候需要设置key的序列化器" class="headerlink" title="为什么在写redis模板配置类的时候需要设置key的序列化器"></a>为什么在写redis模板配置类的时候需要设置key的序列化器</h3><p>Redis里的key和value都是存<strong>储在内存里的数据</strong>，但本质上都是<strong>字节</strong>。所以，想在Redis里存对象（包括Java的各种复杂数据类型）的时候，就得<strong>序列化</strong>，不然Redis根本识别不了你这堆东西。</p>
+<p>设置key的序列化器，主要就是为了<strong>保证Redis能读懂和还原key</strong>。不然一堆乱码，查个数据都查不到，key直接废了。</p>
+<p>在Spring框架里，比如用<code>StringRedisSerializer</code>来序列化key，能保证存进去的和读出来的是一样的格式。这样查询就方便多了，不会出什么“找不到key”的蠢事儿。</p>
+<h3 id="序列化后的数据的具体形式是什么"><a href="#序列化后的数据的具体形式是什么" class="headerlink" title="序列化后的数据的具体形式是什么"></a>序列化后的数据的具体形式是什么</h3><p>字节的具体形式，就是对象被转成<strong>二进制数据流</strong>的那种形式。</p>
+<p>Java里用默认的<code>ObjectOutputStream</code>序列化时，数据会按特定的二进制协议来编码，所以你直接去看的话，是一大堆“1010…”**的二进制。这些字节就是对象的“快照”，别人看不懂，但Java反序列化能还原它。</p>
+<p>当然，用<code>JSON</code>或<code>XML</code>序列化的话，就是字符串格式，但底层传输时还是转成字节流。</p>
+]]></content>
+      <tags>
+        <tag>概念</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>创建静态网站时可能会遇到的问题</title>
+    <url>/2024/11/11/Many-question-in-developing-static-website/</url>
+    <content><![CDATA[<h1 id="新建文件"><a href="#新建文件" class="headerlink" title="新建文件"></a>新建文件</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo new [post] shit</span><br></pre></td></tr></table></figure>
+
+<p><span style="background:#ff4d4f">注意</span>：如果<em>文件名</em>为中文时，hexo g 指令无法正常生成网页文件，可以试试把电脑系统的编码模式设置为UTF-8</p>
+<h1 id="title中不允许存在-字符"><a href="#title中不允许存在-字符" class="headerlink" title="title中不允许存在@字符"></a>title中不允许存在@字符</h1><p><img   src="https://flichane.github.io/picx-images-hosting/%E5%9B%BE%E7%89%87.6wqqytzg3d.webp"  alt="none"></p>
+]]></content>
+      <tags>
+        <tag>question</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>图片上传测试</title>
+    <url>/2024/11/12/%E5%9B%BE%E7%89%87%E4%B8%8A%E4%BC%A0%E6%B5%8B%E8%AF%95/</url>
+    <content><![CDATA[<img     src="https://github.com/FlicHane/picx-images-hosting/raw/master/头像.7p3mgj28tl.webp"   alt="头像"  >
+]]></content>
+      <tags>
+        <tag>hexo</tag>
+        <tag>Test</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>中文文件名测试</title>
+    <url>/2024/11/11/%E4%B8%AD%E6%96%87%E6%96%87%E4%BB%B6%E5%90%8D%E6%B5%8B%E8%AF%95/</url>
+    <content><![CDATA[<h1 id="test"><a href="#test" class="headerlink" title="test"></a>test</h1><p>哈哈哈成功了，留个纪念</p>
+]]></content>
+      <tags>
+        <tag>hexo</tag>
+        <tag>Test</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Linux基础指令</title>
+    <url>/2024/11/28/06%20Linux/%E5%9F%BA%E7%A1%80%E5%91%BD%E4%BB%A4/</url>
+    <content><![CDATA[<h3 id="1-文件和目录操作"><a href="#1-文件和目录操作" class="headerlink" title="1. 文件和目录操作"></a><strong>1. 文件和目录操作</strong></h3><h4 id="1-1-查看目录内容：ls"><a href="#1-1-查看目录内容：ls" class="headerlink" title="1.1 查看目录内容：ls"></a><strong>1.1 查看目录内容：<code>ls</code></strong></h4><ul>
+<li><p>查看当前目录内容：</p>
+  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">ls</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>显示详细信息：</p>
+  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">ls</span> -l</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>显示所有文件，包括隐藏文件：</p>
+  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">ls</span> -a</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>组合选项：</p>
+  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">ls</span> -l -a</span><br><span class="line"><span class="built_in">ls</span> -la</span><br><span class="line"><span class="built_in">ls</span> -al</span><br></pre></td></tr></table></figure>
+
+
+</li>
+</ul>
+<h4 id="1-2-切换目录：cd"><a href="#1-2-切换目录：cd" class="headerlink" title="1.2 切换目录：cd"></a><strong>1.2 切换目录：<code>cd</code></strong></h4><ul>
+<li><p>切换到某目录：</p>
+  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> /home</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>切换到上一级目录</p>
+  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> ..</span><br><span class="line"><span class="built_in">cd</span> ../..  <span class="comment"># 退两级</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>表示当前目录</p>
+  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> .</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>表示HOME目录：</p>
+  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~</span><br><span class="line"><span class="built_in">cd</span> home/Flic</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>切换到根目录：</p>
+  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> /</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="1-3-查看当前路径：pwd"><a href="#1-3-查看当前路径：pwd" class="headerlink" title="1.3 查看当前路径：pwd"></a><strong>1.3 查看当前路径：<code>pwd</code></strong></h4><ul>
+<li><p>显示当前所在目录：</p>
+  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">pwd</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="1-4-创建目录：mkdir"><a href="#1-4-创建目录：mkdir" class="headerlink" title="1.4 创建目录：mkdir"></a><strong>1.4 创建目录：<code>mkdir</code></strong></h4><ul>
+<li><p>创建新文件夹：</p>
+  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> <span class="built_in">test</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>创建多级目录：</p>
+  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> -p a/b/c   <span class="comment"># 创建a文件夹，然后在a内创建b，最后在b内创建c</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>指定权限创建目录：</p>
+  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> -m 755 a   <span class="comment">#  结果:mydir 的权限是rwxr-xr-x（拥有者可读写执行，其他用户只能读和执行）</span></span><br></pre></td></tr></table></figure>
+<h4 id="1-5-删除文件和目录：rm"><a href="#1-5-删除文件和目录：rm" class="headerlink" title="1.5 删除文件和目录：rm"></a><strong>1.5 删除文件和目录：<code>rm</code></strong></h4></li>
+<li><p>删除文件：</p>
+  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">rm</span> 文件1 文件2 文件3 ...   <span class="comment"># 空格分隔</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>删除文件夹：</p>
+  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">rm</span> -r 文件夹1 ...</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h4 id="1-6-复制文件和目录：cp"><a href="#1-6-复制文件和目录：cp" class="headerlink" title="1.6 复制文件和目录：cp"></a><strong>1.6 复制文件和目录：<code>cp</code></strong></h4><ul>
+<li><p>复制文件：</p>
+  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cp</span> file1 file2</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>复制文夹：</p>
+  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cp</span> -r 文件夹1 ...</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="1-7-移动或重命名：mv"><a href="#1-7-移动或重命名：mv" class="headerlink" title="1.7 移动或重命名：mv"></a><strong>1.7 移动或重命名：<code>mv</code></strong></h4><ul>
+<li><p>重命名文件：</p>
+  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">mv</span> file1 file2</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>移动文件到目标目录：</p>
+  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">mv</span> file1 /目标目录</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="1-8-创建文件：touch"><a href="#1-8-创建文件：touch" class="headerlink" title="1.8 创建文件：touch"></a><strong>1.8 创建文件：<code>touch</code></strong></h4><ul>
+<li><p>新建一个空文件：</p>
+  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">touch</span> 新文件名</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="1-9-查看文件内容：cat"><a href="#1-9-查看文件内容：cat" class="headerlink" title="1.9 查看文件内容：cat"></a><strong>1.9 查看文件内容：<code>cat</code></strong></h4><ul>
+<li><p>显示文件内容：</p>
+  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cat</span> 文件名</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="1-10-分页查看文件：less-more"><a href="#1-10-分页查看文件：less-more" class="headerlink" title="1.10 分页查看文件：less,more"></a><strong>1.10 分页查看文件：<code>less</code>,<code>more</code></strong></h4><p><strong><code>more</code></strong> 和 <strong><code>less</code></strong> 是两个看文件内容的命令，功能类似，但有些区别。</p>
+<h5 id="more：一页一页地看"><a href="#more：一页一页地看" class="headerlink" title="more：一页一页地看"></a><strong><code>more</code>：一页一页地看</strong></h5><ul>
+<li><p>基本语法：</p>
+  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">more 文件名</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>特点：</p>
+<ul>
+<li>每次显示一屏内容。</li>
+<li>按 <code>Enter</code> 往下滚一行，按 <code>空格</code> 翻一页。</li>
+<li>到文件末尾后退出。</li>
+<li>按 <code>q</code> 退出。</li>
+</ul>
+</li>
+<li><p>不足：</p>
+<ul>
+<li><strong>不能往回翻</strong>（对，没办法后悔）。</li>
+<li>功能少，交互能力弱。</li>
+</ul>
+</li>
+</ul>
+<h5 id="less：牛逼的文件浏览器"><a href="#less：牛逼的文件浏览器" class="headerlink" title="less：牛逼的文件浏览器"></a><strong><code>less</code>：牛逼的文件浏览器</strong></h5><ul>
+<li><p>基本语法：</p>
+  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">less 文件名</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>特点：</p>
+<ul>
+<li><strong>支持往回翻</strong>，用 <code>↑</code> 和 <code>↓</code> 上下滚动，或者直接翻页：<ul>
+<li><code>PageUp</code>：上一页</li>
+<li><code>PageDown</code>：下一页</li>
+</ul>
+</li>
+<li>查找内容：<ul>
+<li>输入 <code>/关键字</code> 按 <code>Enter</code> 查找。</li>
+<li>按 <code>n</code> 找下一个匹配，<code>N</code> 找上一个。</li>
+</ul>
+</li>
+<li>文件再长也能搞定，不会一次性读入整个文件（节省内存）。</li>
+<li>按 <code>q</code> 退出。</li>
+</ul>
+</li>
+</ul>
+<h5 id="对比"><a href="#对比" class="headerlink" title="对比"></a><strong>对比</strong></h5><table>
+<thead>
+<tr>
+<th>功能</th>
+<th><code>more</code></th>
+<th><code>less</code></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>是否可往回翻</td>
+<td>否</td>
+<td>是</td>
+</tr>
+<tr>
+<td>查找功能</td>
+<td>没有</td>
+<td>有</td>
+</tr>
+<tr>
+<td>性能</td>
+<td>简单文件能顶</td>
+<td>适合大文件，效率高</td>
+</tr>
+</tbody></table>
+<p>tip：下面这个结论是ai说的哈，不是我<br><strong>结论：</strong> 用 <code>less</code>，<code>more</code> 被虐得毫无尊严，除非你懒得装软件或者怀旧！</p>
+<hr>
+<h4 id="1-11-which-find"><a href="#1-11-which-find" class="headerlink" title="1.11 which,find"></a><strong>1.11 <code>which</code>,<code>find</code></strong></h4><ul>
+<li><strong>找程序用 <code>which</code>。</strong></li>
+<li><strong>全盘搜文件用 <code>find</code></strong></li>
+</ul>
+<h5 id="1-which：找程序路径"><a href="#1-which：找程序路径" class="headerlink" title="1. which：找程序路径"></a><strong>1. <code>which</code>：找程序路径</strong></h5><h6 id="作用："><a href="#作用：" class="headerlink" title="作用："></a><strong>作用：</strong></h6><ul>
+<li>查看某个命令对应的可执行文件路径。</li>
+</ul>
+<h6 id="基本用法："><a href="#基本用法：" class="headerlink" title="基本用法："></a><strong>基本用法：</strong></h6><ol>
+<li><p><strong>查单个命令路径：</strong></p>
+ <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">which</span> <span class="built_in">ls</span></span><br></pre></td></tr></table></figure>
+<p> 结果：显示 <code>ls</code> 命令的绝对路径，比如 <code>/bin/ls</code>。</p>
+</li>
+<li><p><strong>查多个命令路径：</strong></p>
+ <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">which</span> <span class="built_in">ls</span> grep</span><br></pre></td></tr></table></figure>
+<p> 结果：分别显示 <code>ls</code> 和 <code>grep</code> 命令的路径。</p>
+</li>
 </ol>
-<h3 id="怎么用？"><a href="#怎么用？" class="headerlink" title="怎么用？"></a><strong>怎么用？</strong></h3><ol>
-<li><strong>握手阶段</strong>：客户端发个特殊的 HTTP 请求，服务端同意后升级为 WebSocket。</li>
-<li><strong>建立连接后</strong>：直接互发消息，像发短信一样简单。</li>
+<h6 id="常用选项："><a href="#常用选项：" class="headerlink" title="常用选项："></a><strong>常用选项：</strong></h6><ul>
+<li><p><code>-a</code>：显示所有匹配的路径（包括环境变量中同名的多个可执行文件）。</p>
+  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">which</span> -a python</span><br></pre></td></tr></table></figure>
+<p>  结果：可能返回多个 <code>python</code> 版本路径。</p>
+</li>
+</ul>
+<h6 id="局限性："><a href="#局限性：" class="headerlink" title="局限性："></a><strong>局限性：</strong></h6><ul>
+<li>只找可执行程序，不管普通文件或目录。</li>
+<li>仅限搜索环境变量 <code>$PATH</code> 中的目录，其他路径找不到。</li>
+</ul>
+<hr>
+<h5 id="2-find：全能搜索器"><a href="#2-find：全能搜索器" class="headerlink" title="2. find：全能搜索器"></a><strong>2. <code>find</code>：全能搜索器</strong></h5><h6 id="作用：-1"><a href="#作用：-1" class="headerlink" title="作用："></a><strong>作用：</strong></h6><ul>
+<li>在指定目录及其子目录中搜索文件或目录。</li>
+</ul>
+<h6 id="基本用法：-1"><a href="#基本用法：-1" class="headerlink" title="基本用法："></a><strong>基本用法：</strong></h6><ol>
+<li><p><strong>按文件名搜索：</strong></p>
+ <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">find /path/to/search -name <span class="string">&quot;filename&quot;</span></span><br></pre></td></tr></table></figure>
+<p> 示例：</p>
+ <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">find /home -name <span class="string">&quot;*.txt&quot;</span></span><br></pre></td></tr></table></figure>
+<p> 搜索 <code>/home</code> 目录下所有 <code>.txt</code> 文件。</p>
+</li>
+<li><p><strong>搜索目录：</strong></p>
+ <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">find / -<span class="built_in">type</span> d -name <span class="string">&quot;test&quot;</span></span><br></pre></td></tr></table></figure>
+<p> 搜索名为 <code>test</code> 的目录。</p>
+</li>
+<li><p><strong>按大小搜索：</strong></p>
+ <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">find /path -size +10M</span><br></pre></td></tr></table></figure>
+<p> 找出大于 10MB 的文件。</p>
+</li>
+<li><p><strong>按权限搜索：</strong></p>
+ <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">find /path -perm 755</span><br></pre></td></tr></table></figure>
+<p> 找出权限为 <code>755</code> 的文件。</p>
+</li>
 </ol>
-<h3 id="Java-核心流程："><a href="#Java-核心流程：" class="headerlink" title="Java 核心流程："></a><strong>Java 核心流程：</strong></h3><ol>
-<li><p><strong>依赖</strong>：如果是 Spring Boot，用 <code>spring-boot-starter-websocket</code>。</p>
+<h6 id="常用选项：-1"><a href="#常用选项：-1" class="headerlink" title="常用选项："></a><strong>常用选项：</strong></h6><ul>
+<li><p><code>-type</code>：指定类型（<code>f</code> 文件，<code>d</code> 目录）。</p>
 </li>
-<li><p><strong>服务端实现</strong>：</p>
+<li><p><code>-iname</code>：忽略大小写匹配文件名。</p>
 </li>
-<li><p>基础实现：演示用，只能用于单个用户</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@ServerEndpoint(&quot;/ws&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">WebSocketServer</span> &#123;</span><br><span class="line">	<span class="meta">@OnOpen</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">onOpen</span><span class="params">(Session session)</span> &#123;</span><br><span class="line">		System.out.println(<span class="string">&quot;连接建立: &quot;</span> + session.getId());</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@OnMessage</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">onMessage</span><span class="params">(String message, Session session)</span> &#123;</span><br><span class="line">		System.out.println(<span class="string">&quot;收到消息: &quot;</span> + message);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@OnClose</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">onClose</span><span class="params">(Session session)</span> &#123;</span><br><span class="line">		System.out.println(<span class="string">&quot;连接关闭: &quot;</span> + session.getId());</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-<li><p>高级实现：可用于多个用户</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**  </span></span><br><span class="line"><span class="comment"> * WebSocket服务  </span></span><br><span class="line"><span class="comment"> */</span>  </span><br><span class="line"><span class="meta">@Component</span>  </span><br><span class="line"><span class="meta">@ServerEndpoint(&quot;/ws/&#123;sid&#125;&quot;)</span>  </span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">WebSocketServer</span> &#123;  </span><br><span class="line">  </span><br><span class="line">    <span class="comment">//存放会话对象  </span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Map&lt;String, Session&gt; sessionMap = <span class="keyword">new</span> <span class="title class_">HashMap</span>();  </span><br><span class="line">  </span><br><span class="line">    <span class="comment">/**  </span></span><br><span class="line"><span class="comment">     * 连接建立成功调用的方法  </span></span><br><span class="line"><span class="comment">     */</span>  </span><br><span class="line">    <span class="meta">@OnOpen</span>  </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">onOpen</span><span class="params">(Session session, <span class="meta">@PathParam(&quot;sid&quot;)</span> String sid)</span> &#123;  </span><br><span class="line">        System.out.println(<span class="string">&quot;客户端：&quot;</span> + sid + <span class="string">&quot;建立连接&quot;</span>);  </span><br><span class="line">        sessionMap.put(sid, session);  </span><br><span class="line">    &#125;  </span><br><span class="line">  </span><br><span class="line">    <span class="comment">/**  </span></span><br><span class="line"><span class="comment">     * 收到客户端消息后调用的方法  </span></span><br><span class="line"><span class="comment">     *  </span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> message 客户端发送过来的消息  </span></span><br><span class="line"><span class="comment">     */</span>  </span><br><span class="line">    <span class="meta">@OnMessage</span>  </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">onMessage</span><span class="params">(String message, <span class="meta">@PathParam(&quot;sid&quot;)</span> String sid)</span> &#123;  </span><br><span class="line">        System.out.println(<span class="string">&quot;收到来自客户端：&quot;</span> + sid + <span class="string">&quot;的信息:&quot;</span> + message);  </span><br><span class="line">    &#125;  </span><br><span class="line">  </span><br><span class="line">    <span class="comment">/**  </span></span><br><span class="line"><span class="comment">     * 连接关闭调用的方法  </span></span><br><span class="line"><span class="comment">     *  </span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> sid  </span></span><br><span class="line"><span class="comment">     */</span>  </span><br><span class="line">    <span class="meta">@OnClose</span>  </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">onClose</span><span class="params">(<span class="meta">@PathParam(&quot;sid&quot;)</span> String sid)</span> &#123;  </span><br><span class="line">        System.out.println(<span class="string">&quot;连接断开:&quot;</span> + sid);  </span><br><span class="line">        sessionMap.remove(sid);  </span><br><span class="line">    &#125;  </span><br><span class="line">  </span><br><span class="line">    <span class="comment">/**  </span></span><br><span class="line"><span class="comment">     * 群发  </span></span><br><span class="line"><span class="comment">     *  </span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> message  </span></span><br><span class="line"><span class="comment">     */</span>  </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">sendToAllClient</span><span class="params">(String message)</span> &#123;  </span><br><span class="line">        Collection&lt;Session&gt; sessions = sessionMap.values();  </span><br><span class="line">        <span class="keyword">for</span> (Session session : sessions) &#123;  </span><br><span class="line">            <span class="keyword">try</span> &#123;  </span><br><span class="line">                <span class="comment">//服务器向客户端发送消息  </span></span><br><span class="line">                session.getBasicRemote().sendText(message);  </span><br><span class="line">            &#125; <span class="keyword">catch</span> (Exception e) &#123;  </span><br><span class="line">                e.printStackTrace();  </span><br><span class="line">            &#125;  </span><br><span class="line">        &#125;  </span><br><span class="line">    &#125;  </span><br><span class="line">  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<li><p><code>-exec</code>：对搜索结果执行操作。</p>
+  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">find . -name <span class="string">&quot;*.log&quot;</span> -<span class="built_in">exec</span> <span class="built_in">rm</span> &#123;&#125; \;</span><br></pre></td></tr></table></figure>
+<p>  找出当前目录的 <code>.log</code> 文件并删除。</p>
 </li>
-<li><p><strong>客户端实现</strong>：用浏览器或库，前端最简单的：</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> ws = <span class="keyword">new</span> <span class="title class_">WebSocket</span>(<span class="string">&quot;ws://localhost:8080/ws&quot;</span>);</span><br><span class="line">ws.<span class="property">onopen</span> = <span class="function">() =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;连接成功&quot;</span>);</span><br><span class="line">ws.<span class="property">onmessage</span> = <span class="function">(<span class="params">msg</span>) =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;收到消息: &quot;</span>, msg.<span class="property">data</span>);</span><br><span class="line">ws.<span class="title function_">send</span>(<span class="string">&quot;Hello WebSocket!&quot;</span>);</span><br></pre></td></tr></table></figure>
+</ul>
+<h6 id="优点："><a href="#优点：" class="headerlink" title="优点："></a><strong>优点：</strong></h6><ul>
+<li>搜索范围不限，能找任何文件或目录。</li>
+<li>支持强大的筛选条件（按时间、大小、权限等）。</li>
+</ul>
+<hr>
+<h5 id="对比总结："><a href="#对比总结：" class="headerlink" title="对比总结："></a><strong>对比总结：</strong></h5><table>
+<thead>
+<tr>
+<th>功能</th>
+<th><code>which</code></th>
+<th><code>find</code></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>搜索范围</td>
+<td>只在 <code>$PATH</code> 中的可执行文件</td>
+<td>任意目录和文件</td>
+</tr>
+<tr>
+<td>搜索对象</td>
+<td>可执行程序</td>
+<td>文件、目录等</td>
+</tr>
+<tr>
+<td>是否递归</td>
+<td>不递归</td>
+<td>递归搜索</td>
+</tr>
+<tr>
+<td>功能复杂度</td>
+<td>简单，专注找程序</td>
+<td>强大，可按多种条件筛选</td>
+</tr>
+<tr>
+<td>常用场景</td>
+<td>查看命令路径、定位程序安装位置</td>
+<td>全盘找文件、目录、或按属性搜索</td>
+</tr>
+</tbody></table>
+<h3 id="2-权限管理"><a href="#2-权限管理" class="headerlink" title="2. 权限管理"></a><strong>2. 权限管理</strong></h3><h4 id="2-1-查看权限：ls-l"><a href="#2-1-查看权限：ls-l" class="headerlink" title="2.1 查看权限：ls -l"></a><strong>2.1 查看权限：<code>ls -l</code></strong></h4><ul>
+<li><p>查看文件权限：</p>
+  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">ls</span> -l</span><br></pre></td></tr></table></figure>
+<p>  权限格式示例：</p>
+  <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">-rw-r--r--  1 user group 文件名</span><br></pre></td></tr></table></figure>
 </li>
+</ul>
+<h4 id="2-2-修改权限：chmod"><a href="#2-2-修改权限：chmod" class="headerlink" title="2.2 修改权限：chmod"></a><strong>2.2 修改权限：<code>chmod</code></strong></h4><ul>
+<li><p>给文件加执行权限：</p>
+  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">chmod</span> +x 文件名</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="2-3-修改所有者：chown"><a href="#2-3-修改所有者：chown" class="headerlink" title="2.3 修改所有者：chown"></a><strong>2.3 修改所有者：<code>chown</code></strong></h4><ul>
+<li><p>修改文件的所有者和组：</p>
+  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">chown</span> 新用户:新组 文件名</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<hr>
+<h3 id="3-系统管理"><a href="#3-系统管理" class="headerlink" title="3. 系统管理"></a><strong>3. 系统管理</strong></h3><h4 id="3-1-查看系统状态：top"><a href="#3-1-查看系统状态：top" class="headerlink" title="3.1 查看系统状态：top"></a><strong>3.1 查看系统状态：<code>top</code></strong></h4><ul>
+<li><p>实时查看系统资源和进程：</p>
+  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">top</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>按<code>q</code>退出。</p>
+</li>
+</ul>
+<h4 id="3-2-查看进程：ps"><a href="#3-2-查看进程：ps" class="headerlink" title="3.2 查看进程：ps"></a><strong>3.2 查看进程：<code>ps</code></strong></h4><ul>
+<li><p>列出所有进程：</p>
+  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ps aux</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="3-3-结束进程：kill"><a href="#3-3-结束进程：kill" class="headerlink" title="3.3 结束进程：kill"></a><strong>3.3 结束进程：<code>kill</code></strong></h4><ul>
+<li><p>杀掉某进程：</p>
+  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">kill</span> PID</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>强制结束进程：</p>
+  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">kill</span> -9 PID</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="3-4-查看运行时间：uptime"><a href="#3-4-查看运行时间：uptime" class="headerlink" title="3.4 查看运行时间：uptime"></a><strong>3.4 查看运行时间：<code>uptime</code></strong></h4><ul>
+<li><p>查看系统运行时长：</p>
+  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">uptime</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="3-5-重启和关机"><a href="#3-5-重启和关机" class="headerlink" title="3.5 重启和关机"></a><strong>3.5 重启和关机</strong></h4><ul>
+<li><p>重启系统：</p>
+  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">reboot</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>立即关机：</p>
+  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">shutdown now</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<hr>
+<h3 id="4-网络相关"><a href="#4-网络相关" class="headerlink" title="4. 网络相关"></a><strong>4. 网络相关</strong></h3><h4 id="4-1-测试网络：ping"><a href="#4-1-测试网络：ping" class="headerlink" title="4.1 测试网络：ping"></a><strong>4.1 测试网络：<code>ping</code></strong></h4><ul>
+<li><p>检查网络连接：</p>
+  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ping www.baidu.com</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>按<code>Ctrl+C</code>停止。</p>
+</li>
+</ul>
+<h4 id="4-2-查看网络配置：ifconfig"><a href="#4-2-查看网络配置：ifconfig" class="headerlink" title="4.2 查看网络配置：ifconfig"></a><strong>4.2 查看网络配置：<code>ifconfig</code></strong></h4><ul>
+<li><p>显示网络配置信息：</p>
+  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ifconfig</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h4 id="4-3-查看ip：ip-addr"><a href="#4-3-查看ip：ip-addr" class="headerlink" title="4.3 查看ip：ip addr"></a><strong>4.3 查看ip：<code>ip addr</code></strong></h4><ul>
+<li><p>查看ip：</p>
+  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ip addr</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h4 id="4-4-下载网页内容：curl"><a href="#4-4-下载网页内容：curl" class="headerlink" title="4.4 下载网页内容：curl"></a><strong>4.4 下载网页内容：<code>curl</code></strong></h4><ul>
+<li><p>获取网页数据：</p>
+  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl https://example.com</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<hr>
+<h3 id="5-软件和包管理"><a href="#5-软件和包管理" class="headerlink" title="5. 软件和包管理"></a><strong>5. 软件和包管理</strong></h3><h4 id="5-1-使用apt管理包（适用于Ubuntu-Debian）"><a href="#5-1-使用apt管理包（适用于Ubuntu-Debian）" class="headerlink" title="5.1 使用apt管理包（适用于Ubuntu/Debian）"></a><strong>5.1 使用<code>apt</code>管理包（适用于Ubuntu/Debian）</strong></h4><ul>
+<li><p>安装软件：</p>
+  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> apt install 软件名</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>更新和升级系统：</p>
+  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> apt update &amp;&amp; <span class="built_in">sudo</span> apt upgrade</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<hr>
+<h3 id="6-打包和解压"><a href="#6-打包和解压" class="headerlink" title="6. 打包和解压"></a><strong>6. 打包和解压</strong></h3><h4 id="6-1-使用tar"><a href="#6-1-使用tar" class="headerlink" title="6.1 使用tar"></a><strong>6.1 使用<code>tar</code></strong></h4><ul>
+<li><p>解压<code>tar</code>包：</p>
+  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">tar -xvf 压缩包.tar</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>打包目录为<code>tar</code>文件：</p>
+  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">tar -cvf 压缩包.tar 目录</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="6-2-使用zip和unzip"><a href="#6-2-使用zip和unzip" class="headerlink" title="6.2 使用zip和unzip"></a><strong>6.2 使用<code>zip</code>和<code>unzip</code></strong></h4><ul>
+<li><p>压缩文件夹为<code>zip</code>：</p>
+  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">zip -r 压缩包.zip 目录</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>解压<code>zip</code>文件：</p>
+  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">unzip 压缩包.zip</span><br></pre></td></tr></table></figure></li>
+</ul>
+]]></content>
+      <tags>
+        <tag>Linux基础命令</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>su - root详解</title>
+    <url>/2024/11/28/06%20Linux/su%20-%20root/</url>
+    <content><![CDATA[<h3 id="1-su-root"><a href="#1-su-root" class="headerlink" title="1. su - root"></a><strong>1. <code>su - root</code></strong></h3><h4 id="1-1-命令作用"><a href="#1-1-命令作用" class="headerlink" title="1.1 命令作用"></a><strong>1.1 命令作用</strong></h4><ul>
+<li><code>su</code> 命令用于切换用户，默认切换到 root 用户。</li>
+<li><code>-</code> 参数用于模拟登录，意味着切换到 root 用户时，加载 root 用户的环境变量（包括 PATH、HOME 等），就像真正以 root 用户身份登录系统一样。</li>
+</ul>
+<h4 id="1-2-基本用法"><a href="#1-2-基本用法" class="headerlink" title="1.2 基本用法"></a><strong>1.2 基本用法</strong></h4><ul>
+<li>切换到 root 用户：  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">su - root</span><br></pre></td></tr></table></figure>
+  系统会要求你输入 root 用户的密码，输入正确后会进入 root 用户的 shell 环境。</li>
+</ul>
+<h4 id="1-3-使用场景"><a href="#1-3-使用场景" class="headerlink" title="1.3 使用场景"></a><strong>1.3 使用场景</strong></h4><ul>
+<li>需要执行需要管理员权限的命令时，可以使用 <code>su - root</code> 来切换到 root 用户。</li>
+<li>执行完毕后，可以使用 <code>exit</code> 退出 root 用户的 shell，返回到之前的普通用户。</li>
+</ul>
+<h4 id="1-4-关键点"><a href="#1-4-关键点" class="headerlink" title="1.4 关键点"></a><strong>1.4 关键点</strong></h4><ul>
+<li>使用 <code>su</code> 切换用户时，<strong>如果没有 <code>-</code> 参数</strong>，则只会切换到 root 用户，但不会加载环境变量，只有 shell 变成 root 的身份。</li>
+<li><code>su</code> 命令需要提供 root 用户的密码，而不是当前用户的密码。</li>
+</ul>
+<h4 id="1-5-小技巧"><a href="#1-5-小技巧" class="headerlink" title="1.5 小技巧"></a><strong>1.5 小技巧</strong></h4><ul>
+<li>如果你只是想临时执行一个命令，并且不想进入 root 的 shell，可以用下面的方式：  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">su -c <span class="string">&quot;command&quot;</span></span><br></pre></td></tr></table></figure>
+  这会执行 <code>command</code> 命令，执行完后直接退出，不会进入 root shell。</li>
+</ul>
+]]></content>
+      <tags>
+        <tag>su, root, Linux基础命令</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Linux通配符</title>
+    <url>/2024/11/28/06%20Linux/%E9%80%9A%E9%85%8D%E7%AC%A6/</url>
+    <content><![CDATA[<h3 id="通配符简介"><a href="#通配符简介" class="headerlink" title="通配符简介"></a><strong>通配符简介</strong></h3><p><strong>通配符</strong> 是在命令行操作中，用来匹配文件名或目录名的一种特殊符号，可以大幅提升效率，省去重复敲文件名的麻烦。</p>
+<hr>
+<h3 id="1-通配符的种类和用法"><a href="#1-通配符的种类和用法" class="headerlink" title="1. 通配符的种类和用法"></a><strong>1. 通配符的种类和用法</strong></h3><h4 id="1-1"><a href="#1-1" class="headerlink" title="1.1 *"></a><strong>1.1 <code>*</code></strong></h4><ul>
+<li><p>匹配 <strong>任意长度</strong> 的字符（包括没有字符）。</p>
+</li>
+<li><p>示例：</p>
+  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">ls</span> *.txt</span><br></pre></td></tr></table></figure>
+<p>  匹配当前目录下所有以 <code>.txt</code> 结尾的文件，如 <code>abc.txt</code>、<code>123.txt</code>。</p>
+</li>
+</ul>
+<hr>
+<h4 id="1-2"><a href="#1-2" class="headerlink" title="1.2 ?"></a><strong>1.2 <code>?</code></strong></h4><ul>
+<li><p>匹配 <strong>任意单个字符</strong>。</p>
+</li>
+<li><p>示例：</p>
+  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">ls</span> file?.txt</span><br></pre></td></tr></table></figure>
+<p>  匹配 <code>file1.txt</code>、<code>file2.txt</code>，但不包括 <code>file10.txt</code>。</p>
+</li>
+</ul>
+<hr>
+<h4 id="1-3"><a href="#1-3" class="headerlink" title="1.3 []"></a><strong>1.3 <code>[]</code></strong></h4><ul>
+<li><p>匹配 <strong>指定范围内的任意单个字符</strong>。</p>
+</li>
+<li><p>示例：</p>
+  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">ls</span> file[1-3].txt</span><br></pre></td></tr></table></figure>
+<p>  匹配 <code>file1.txt</code>、<code>file2.txt</code>、<code>file3.txt</code>。</p>
+</li>
+</ul>
+<hr>
+<h4 id="1-4"><a href="#1-4" class="headerlink" title="1.4 [^]"></a><strong>1.4 <code>[^]</code></strong></h4><ul>
+<li><p>匹配 <strong>不在指定范围内的任意单个字符</strong>。</p>
+</li>
+<li><p>示例：</p>
+  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">ls</span> file[^1-3].txt</span><br></pre></td></tr></table></figure>
+<p>  匹配不带 <code>1</code> 到 <code>3</code> 的文件，比如 <code>file4.txt</code>、<code>filex.txt</code>。</p>
+</li>
+</ul>
+<hr>
+<h3 id="2-进阶通配符"><a href="#2-进阶通配符" class="headerlink" title="2. 进阶通配符"></a><strong>2. 进阶通配符</strong></h3><h4 id="2-1-（花括号）"><a href="#2-1-（花括号）" class="headerlink" title="2.1 {}（花括号）"></a><strong>2.1 <code>&#123;&#125;</code>（花括号）</strong></h4><ul>
+<li><p>用于生成多个文件名或路径。</p>
+</li>
+<li><p>示例：</p>
+  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">echo</span> file&#123;1,2,3&#125;.txt</span><br></pre></td></tr></table></figure>
+<p>  输出：<code>file1.txt file2.txt file3.txt</code>。</p>
+</li>
+</ul>
+<hr>
+<h4 id="2-2"><a href="#2-2" class="headerlink" title="2.2 ~"></a><strong>2.2 <code>~</code></strong></h4><ul>
+<li><p>代表 <strong>当前用户的主目录</strong>。</p>
+</li>
+<li><p>示例：</p>
+  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~</span><br></pre></td></tr></table></figure>
+<p>  等同于：</p>
+  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> /home/你的用户名</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<hr>
+<h4 id="2-3-双星号"><a href="#2-3-双星号" class="headerlink" title="2.3 双星号"></a><strong>2.3 双星号</strong></h4><ul>
+<li><p><code>**</code></p>
+</li>
+<li><p>递归匹配当前目录及其所有子目录。</p>
+</li>
+<li><p>示例：</p>
+  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">ls</span> **/*.txt</span><br></pre></td></tr></table></figure>
+<p>  匹配所有子目录中的 <code>.txt</code> 文件。</p>
+</li>
+</ul>
+<hr>
+<h3 id="3-使用通配符的注意事项"><a href="#3-使用通配符的注意事项" class="headerlink" title="3. 使用通配符的注意事项"></a><strong>3. 使用通配符的注意事项</strong></h3><ul>
+<li><p><strong>避免误操作</strong>：特别是删除文件时，用通配符前可以先确认匹配结果：</p>
+  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">ls</span> *.txt</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>保护特殊字符</strong>：如果文件名里真的包含 <code>*</code> 或 <code>?</code>，用引号保护它：</p>
+  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">ls</span> <span class="string">&quot;file*&quot;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<hr>
+<p><strong>总结：</strong> 通配符是命令行的必杀技，学会后能极大提升效率，但操作前一定多加小心，别玩过头！</p>
+]]></content>
+      <tags>
+        <tag>Linux基础命令，通配符</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>redis的数据类型</title>
+    <url>/2024/11/17/redis/redis%E7%9A%84%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/</url>
+    <content><![CDATA[<p><img   src="https://flichane.github.io/picx-images-hosting/redis%E4%B8%AD%E7%9A%84%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B.4uayhrb3ks.png" ></p>
+]]></content>
+      <tags>
+        <tag>redis</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Druid数据库连接池</title>
+    <url>/2024/11/19/java/13%20Druid%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%9E%E6%8E%A5%E6%B1%A0/</url>
+    <content><![CDATA[<p><strong>Druid</strong> 是阿里巴巴出品的数据库连接池，兼具监控和 SQL 优化功能，专为 Java 应用设计，性能和功能都很强悍。</p>
+<hr>
+<h3 id="核心特点："><a href="#核心特点：" class="headerlink" title="核心特点："></a><strong>核心特点：</strong></h3><ol>
+<li><strong>性能优秀</strong>：连接池管理高效，性能媲美甚至超过 HikariCP。</li>
+<li><strong>多功能</strong>：除了连接池，还支持 SQL 监控、慢查询分析、SQL 防火墙等。</li>
+<li><strong>兼容性强</strong>：支持常见数据库（MySQL、Oracle、PostgreSQL 等）。</li>
+<li><strong>易用性好</strong>：通过 Web 界面实时查看 SQL 执行情况。</li>
 </ol>
+<hr>
+<h3 id="基本用法："><a href="#基本用法：" class="headerlink" title="基本用法："></a><strong>基本用法：</strong></h3><h4 id="1-添加依赖"><a href="#1-添加依赖" class="headerlink" title="1. 添加依赖"></a><strong>1. 添加依赖</strong></h4><p>Maven 项目加依赖，选择SpringBoot项目后会默认引入：</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span>  </span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.alibaba<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span>  </span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>druid-spring-boot-starter<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span>  </span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="2-配置连接池"><a href="#2-配置连接池" class="headerlink" title="2. 配置连接池"></a><strong>2. 配置连接池</strong></h4><p>在 <code>application.properties</code> 中添加配置：</p>
+<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">spring:</span></span><br><span class="line">	<span class="attr">datasource:</span>  </span><br><span class="line">	  <span class="attr">druid:</span>  </span><br><span class="line">	    <span class="attr">driver-class-name:</span> <span class="string">com.mysql.cj.jdbc.Driver</span></span><br><span class="line">	    <span class="attr">url:</span> <span class="string">jdbc:mysql://$&#123;sky.datasource.host&#125;:$&#123;sky.datasource.port&#125;/$&#123;sky.datasource.database&#125;</span></span><br><span class="line">	    <span class="attr">username:</span> <span class="string">...</span></span><br><span class="line">	    <span class="attr">password:</span> <span class="string">...</span></span><br></pre></td></tr></table></figure>
+
+
+
 ]]></content>
   </entry>
   <entry>
     <title>fastJSON</title>
-    <url>/2024/11/19/11%20fastjson/</url>
+    <url>/2024/11/19/java/11%20fastjson/</url>
     <content><![CDATA[<p><strong>FastJSON</strong> 是阿里巴巴搞的一个 Java JSON 库，用来干啥的？简单说，就是用来<strong>解析和生成 JSON 数据</strong>，速度快得离谱，但也因为一些历史安全问题饱受争议。</p>
 <hr>
 <h3 id="特点："><a href="#特点：" class="headerlink" title="特点："></a><strong>特点：</strong></h3><ol>
@@ -68,30 +654,149 @@
       </tags>
   </entry>
   <entry>
-    <title>Druid数据库连接池</title>
-    <url>/2024/11/19/13%20Druid%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%9E%E6%8E%A5%E6%B1%A0/</url>
-    <content><![CDATA[<p><strong>Druid</strong> 是阿里巴巴出品的数据库连接池，兼具监控和 SQL 优化功能，专为 Java 应用设计，性能和功能都很强悍。</p>
-<hr>
-<h3 id="核心特点："><a href="#核心特点：" class="headerlink" title="核心特点："></a><strong>核心特点：</strong></h3><ol>
-<li><strong>性能优秀</strong>：连接池管理高效，性能媲美甚至超过 HikariCP。</li>
-<li><strong>多功能</strong>：除了连接池，还支持 SQL 监控、慢查询分析、SQL 防火墙等。</li>
-<li><strong>兼容性强</strong>：支持常见数据库（MySQL、Oracle、PostgreSQL 等）。</li>
-<li><strong>易用性好</strong>：通过 Web 界面实时查看 SQL 执行情况。</li>
+    <title>如何使用properties和properties-dev</title>
+    <url>/2024/11/19/java/20%20%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8properties%E5%92%8Cproperties-dev/</url>
+    <content><![CDATA[<ol>
+<li>启用dev配置文件<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">spring:</span>  </span><br><span class="line">  <span class="attr">profiles:</span></span><br><span class="line">	<span class="attr">active:</span> <span class="string">dev</span></span><br></pre></td></tr></table></figure></li>
+<li>使用dev中的配置<br> ${…}<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">spring:</span></span><br><span class="line">	<span class="attr">datasource:</span>  </span><br><span class="line">	  <span class="attr">druid:</span> </span><br><span class="line">		<span class="attr">driver-class-name:</span> <span class="string">$&#123;sky.datasource.driver-class-name&#125;</span>  </span><br><span class="line">	    <span class="attr">url:</span> <span class="string">jdbc:mysql://$&#123;sky.datasource.host&#125;:$&#123;sky.datasource.port&#125;/$&#123;sky.datasource.database&#125;?</span></span><br><span class="line">	    <span class="attr">username:</span> <span class="string">$&#123;sky.datasource.username&#125;</span>  </span><br><span class="line">	    <span class="attr">password:</span> <span class="string">$&#123;sky.datasource.password&#125;</span></span><br></pre></td></tr></table></figure></li>
 </ol>
-<hr>
-<h3 id="基本用法："><a href="#基本用法：" class="headerlink" title="基本用法："></a><strong>基本用法：</strong></h3><h4 id="1-添加依赖"><a href="#1-添加依赖" class="headerlink" title="1. 添加依赖"></a><strong>1. 添加依赖</strong></h4><p>Maven 项目加依赖，选择SpringBoot项目后会默认引入：</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span>  </span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.alibaba<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span>  </span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>druid-spring-boot-starter<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span>  </span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+]]></content>
+  </entry>
+  <entry>
+    <title>WebSocket</title>
+    <url>/2024/11/19/java/00%20WebSocket/</url>
+    <content><![CDATA[<p>WebSocket 就是个双向通讯协议，只需建立一次链接，<strong>服务端和客户端就可以实时交互</strong>，不像 HTTP 一样只能客户端请求、服务端回应。</p>
+<h3 id="优势"><a href="#优势" class="headerlink" title="优势"></a><strong>优势</strong></h3><ol>
+<li><strong>实时性强</strong>：只要连接一建立，客户端和服务端可以互相推消息，不用来回请求。</li>
+<li><strong>效率高</strong>：省掉了 HTTP 的请求头，数据传输更轻量。</li>
+<li><strong>全双工</strong>：能同时发数据、收数据，比 HTTP 单工爽多了。</li>
+</ol>
+<h3 id="怎么用？"><a href="#怎么用？" class="headerlink" title="怎么用？"></a><strong>怎么用？</strong></h3><ol>
+<li><strong>握手阶段</strong>：客户端发个特殊的 HTTP 请求，服务端同意后升级为 WebSocket。</li>
+<li><strong>建立连接后</strong>：直接互发消息，像发短信一样简单。</li>
+</ol>
+<h3 id="Java-核心流程："><a href="#Java-核心流程：" class="headerlink" title="Java 核心流程："></a><strong>Java 核心流程：</strong></h3><ol>
+<li><p><strong>依赖</strong>：如果是 Spring Boot，用 <code>spring-boot-starter-websocket</code>。</p>
+</li>
+<li><p><strong>服务端实现</strong>：</p>
+</li>
+<li><p>基础实现：演示用，只能用于单个用户</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@ServerEndpoint(&quot;/ws&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">WebSocketServer</span> &#123;</span><br><span class="line">	<span class="meta">@OnOpen</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">onOpen</span><span class="params">(Session session)</span> &#123;</span><br><span class="line">		System.out.println(<span class="string">&quot;连接建立: &quot;</span> + session.getId());</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@OnMessage</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">onMessage</span><span class="params">(String message, Session session)</span> &#123;</span><br><span class="line">		System.out.println(<span class="string">&quot;收到消息: &quot;</span> + message);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@OnClose</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">onClose</span><span class="params">(Session session)</span> &#123;</span><br><span class="line">		System.out.println(<span class="string">&quot;连接关闭: &quot;</span> + session.getId());</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>高级实现：可用于多个用户</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**  </span></span><br><span class="line"><span class="comment"> * WebSocket服务  </span></span><br><span class="line"><span class="comment"> */</span>  </span><br><span class="line"><span class="meta">@Component</span>  </span><br><span class="line"><span class="meta">@ServerEndpoint(&quot;/ws/&#123;sid&#125;&quot;)</span>  </span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">WebSocketServer</span> &#123;  </span><br><span class="line">  </span><br><span class="line">    <span class="comment">//存放会话对象  </span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Map&lt;String, Session&gt; sessionMap = <span class="keyword">new</span> <span class="title class_">HashMap</span>();  </span><br><span class="line">  </span><br><span class="line">    <span class="comment">/**  </span></span><br><span class="line"><span class="comment">     * 连接建立成功调用的方法  </span></span><br><span class="line"><span class="comment">     */</span>  </span><br><span class="line">    <span class="meta">@OnOpen</span>  </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">onOpen</span><span class="params">(Session session, <span class="meta">@PathParam(&quot;sid&quot;)</span> String sid)</span> &#123;  </span><br><span class="line">        System.out.println(<span class="string">&quot;客户端：&quot;</span> + sid + <span class="string">&quot;建立连接&quot;</span>);  </span><br><span class="line">        sessionMap.put(sid, session);  </span><br><span class="line">    &#125;  </span><br><span class="line">  </span><br><span class="line">    <span class="comment">/**  </span></span><br><span class="line"><span class="comment">     * 收到客户端消息后调用的方法  </span></span><br><span class="line"><span class="comment">     *  </span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> message 客户端发送过来的消息  </span></span><br><span class="line"><span class="comment">     */</span>  </span><br><span class="line">    <span class="meta">@OnMessage</span>  </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">onMessage</span><span class="params">(String message, <span class="meta">@PathParam(&quot;sid&quot;)</span> String sid)</span> &#123;  </span><br><span class="line">        System.out.println(<span class="string">&quot;收到来自客户端：&quot;</span> + sid + <span class="string">&quot;的信息:&quot;</span> + message);  </span><br><span class="line">    &#125;  </span><br><span class="line">  </span><br><span class="line">    <span class="comment">/**  </span></span><br><span class="line"><span class="comment">     * 连接关闭调用的方法  </span></span><br><span class="line"><span class="comment">     *  </span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> sid  </span></span><br><span class="line"><span class="comment">     */</span>  </span><br><span class="line">    <span class="meta">@OnClose</span>  </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">onClose</span><span class="params">(<span class="meta">@PathParam(&quot;sid&quot;)</span> String sid)</span> &#123;  </span><br><span class="line">        System.out.println(<span class="string">&quot;连接断开:&quot;</span> + sid);  </span><br><span class="line">        sessionMap.remove(sid);  </span><br><span class="line">    &#125;  </span><br><span class="line">  </span><br><span class="line">    <span class="comment">/**  </span></span><br><span class="line"><span class="comment">     * 群发  </span></span><br><span class="line"><span class="comment">     *  </span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> message  </span></span><br><span class="line"><span class="comment">     */</span>  </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">sendToAllClient</span><span class="params">(String message)</span> &#123;  </span><br><span class="line">        Collection&lt;Session&gt; sessions = sessionMap.values();  </span><br><span class="line">        <span class="keyword">for</span> (Session session : sessions) &#123;  </span><br><span class="line">            <span class="keyword">try</span> &#123;  </span><br><span class="line">                <span class="comment">//服务器向客户端发送消息  </span></span><br><span class="line">                session.getBasicRemote().sendText(message);  </span><br><span class="line">            &#125; <span class="keyword">catch</span> (Exception e) &#123;  </span><br><span class="line">                e.printStackTrace();  </span><br><span class="line">            &#125;  </span><br><span class="line">        &#125;  </span><br><span class="line">    &#125;  </span><br><span class="line">  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>客户端实现</strong>：用浏览器或库，前端最简单的：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> ws = <span class="keyword">new</span> <span class="title class_">WebSocket</span>(<span class="string">&quot;ws://localhost:8080/ws&quot;</span>);</span><br><span class="line">ws.<span class="property">onopen</span> = <span class="function">() =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;连接成功&quot;</span>);</span><br><span class="line">ws.<span class="property">onmessage</span> = <span class="function">(<span class="params">msg</span>) =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;收到消息: &quot;</span>, msg.<span class="property">data</span>);</span><br><span class="line">ws.<span class="title function_">send</span>(<span class="string">&quot;Hello WebSocket!&quot;</span>);</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+]]></content>
+  </entry>
+  <entry>
+    <title>驼峰命名的自动映射</title>
+    <url>/2024/11/19/java/30%20%E9%A9%BC%E5%B3%B0%E5%91%BD%E5%90%8D/</url>
+    <content><![CDATA[<h3 id="如何开启："><a href="#如何开启：" class="headerlink" title="如何开启："></a><strong>如何开启：</strong></h3><p>在application文件中配置</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">mybatis:</span></span><br><span class="line">  <span class="attr">configuration:</span></span><br><span class="line">    <span class="attr">map-underscore-to-camel-case:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+<p>用于将数据库表中的 <strong>下划线命名法</strong>（snake_case）字段自动转换为 <strong>驼峰命名法</strong>（camelCase）字段。</p>
+<h3 id="应用："><a href="#应用：" class="headerlink" title="应用："></a><strong>应用：</strong></h3><figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">&quot;selectUser&quot;</span> <span class="attr">resultType</span>=<span class="string">&quot;User&quot;</span>&gt;</span></span><br><span class="line">    SELECT user_id, first_name, last_name FROM users WHERE user_id = #&#123;userId&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>此处设置了返回值为User，则<font color="#ff0000">MyBatis</font>会把select取得的值赋给User中对应的字段<br>user_id-&gt;UserId<br>first_name-&gt;firstName</p>
+<h3 id="举例说明："><a href="#举例说明：" class="headerlink" title="举例说明："></a><strong>举例说明：</strong></h3><p>假设你有一个数据库表，字段命名使用下划线风格：</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> user_info (</span><br><span class="line">    user_id <span class="type">INT</span>,</span><br><span class="line">    first_name <span class="type">VARCHAR</span>(<span class="number">255</span>),</span><br><span class="line">    last_name <span class="type">VARCHAR</span>(<span class="number">255</span>)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
 
-<h4 id="2-配置连接池"><a href="#2-配置连接池" class="headerlink" title="2. 配置连接池"></a><strong>2. 配置连接池</strong></h4><p>在 <code>application.properties</code> 中添加配置：</p>
-<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">spring:</span></span><br><span class="line">	<span class="attr">datasource:</span>  </span><br><span class="line">	  <span class="attr">druid:</span>  </span><br><span class="line">	    <span class="attr">driver-class-name:</span> <span class="string">com.mysql.cj.jdbc.Driver</span></span><br><span class="line">	    <span class="attr">url:</span> <span class="string">jdbc:mysql://$&#123;sky.datasource.host&#125;:$&#123;sky.datasource.port&#125;/$&#123;sky.datasource.database&#125;</span></span><br><span class="line">	    <span class="attr">username:</span> <span class="string">...</span></span><br><span class="line">	    <span class="attr">password:</span> <span class="string">...</span></span><br></pre></td></tr></table></figure>
+<p>如果你在 Java 中映射这个表时，使用驼峰命名法类和字段名：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">UserInfo</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span> userId;    <span class="comment">// 对应 user_id</span></span><br><span class="line">    <span class="keyword">private</span> String firstName;  <span class="comment">// 对应 first_name</span></span><br><span class="line">    <span class="keyword">private</span> String lastName;   <span class="comment">// 对应 last_name</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
 
 ]]></content>
   </entry>
   <entry>
+    <title>dev-test-prod</title>
+    <url>/2024/11/19/java/21%20dev-test-prod/</url>
+    <content><![CDATA[<p><strong><code>dev</code></strong> 是 <strong>development</strong> 的缩写，意思是<strong>开发环境</strong>。在软件开发中，项目通常会有多个环境配置，<code>dev</code> 专门用来跑开发中的代码，方便调试和测试。</p>
+<hr>
+<h3 id="常见环境分类："><a href="#常见环境分类：" class="headerlink" title="常见环境分类："></a><strong>常见环境分类：</strong></h3><ol>
+<li><p><strong><code>dev</code>（开发环境）</strong>：</p>
+<ul>
+<li>给程序员写代码用的。</li>
+<li>数据库、服务都用测试版本，不怕数据乱搞。</li>
+<li>配置一般是：<ul>
+<li><strong>低安全性</strong>：简单密码、调试模式开。</li>
+<li><strong>日志多</strong>：输出详细信息（debug 级别）。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong><code>test</code>（测试环境）</strong>：</p>
+<ul>
+<li>测试人员用来验证功能。</li>
+<li>更接近上线环境，但数据还是假的。</li>
+<li>配置：和生产环境类似，但数据库是测试库。</li>
+</ul>
+</li>
+<li><p><strong><code>prod</code>（生产环境）</strong>：</p>
+<ul>
+<li>正式发布给用户的环境。</li>
+<li>数据、服务都是真实的。</li>
+<li>配置：<ul>
+<li><strong>高安全性</strong>：密码复杂、调试模式关。</li>
+<li><strong>日志简洁</strong>：只保留必要信息。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+]]></content>
+  </entry>
+  <entry>
+    <title>环境配置分离</title>
+    <url>/2024/11/19/java/22%20%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E5%88%86%E7%A6%BB/</url>
+    <content><![CDATA[<p>这种方法叫做 <strong>“配置文件分离”</strong> 或 <strong>“环境配置分离”**，在 Spring Boot 中通常通过 **<code>profiles</code></strong> 来管理。<br>具体来说，就是通过 <code>spring.profiles.active</code> 来激活不同的配置文件，以适应不同的运行环境。</p>
+<h3 id="这种做法的名字："><a href="#这种做法的名字：" class="headerlink" title="这种做法的名字："></a><strong>这种做法的名字</strong>：</h3><ul>
+<li><strong>Profile-based Configuration</strong>（基于配置文件的环境管理）</li>
+<li><strong>Environment-specific Configuration</strong>（环境特定配置）</li>
+</ul>
+<p>通过这种方式，可以在开发、测试和生产等不同环境下使用不同的配置文件，确保每个环境有独立的设置，而不会混淆。</p>
+<h3 id="工作原理："><a href="#工作原理：" class="headerlink" title="工作原理："></a><strong>工作原理</strong>：</h3><ol>
+<li><strong>基础配置</strong>：在 <code>application.properties</code> 中定义基础配置，适用于所有环境。</li>
+<li><strong>环境特定配置</strong>：比如 <code>application-dev.properties</code>（<font color="#ff0000">开发环境</font>）和 <code>application-prod.properties</code>（<font color="#ff0000">生产环境</font>），专门为不同环境设置不同的参数。</li>
+<li><strong>激活不同环境</strong>：通过设置 <code>spring.profiles.active</code> 来激活不同环境的配置。</li>
+</ol>
+<p>这样能让项目的配置更加清晰、灵活，避免一个配置文件冗长且复杂，特别适合有多个环境需求的项目。</p>
+]]></content>
+  </entry>
+  <entry>
+    <title>MyBatis中的Mapper配置</title>
+    <url>/2024/11/19/java/37%20MyBatis%E4%B8%AD%E7%9A%84Mapper%E9%85%8D%E7%BD%AE/</url>
+    <content><![CDATA[<p>这些设置能让 MyBatis 更高效地加载配置文件和映射类，减少手动配置工作量。</p>
+<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">mybatis:</span>  </span><br><span class="line">  <span class="comment">#mapper配置文件  </span></span><br><span class="line">  <span class="attr">mapper-locations:</span> <span class="string">classpath:mapper/*.xml</span>  </span><br><span class="line">  <span class="attr">type-aliases-package:</span> <span class="string">com.sky.entity</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="1-mapper-locations"><a href="#1-mapper-locations" class="headerlink" title="1. mapper-locations"></a><strong>1. <code>mapper-locations</code></strong></h3><figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">mapper-locations:</span> <span class="string">classpath:mapper/*.xml</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><p><strong><code>classpath:</code></strong> 表示文件路径是相对于应用的 <code>resources</code> 目录。</p>
+</li>
+<li><p><strong><code>mapper/*.xml</code></strong> 表示所有 <code>mapper</code> 文件夹中的 <code>.xml</code> 文件会被自动加载。</p>
+<h4 id="作用："><a href="#作用：" class="headerlink" title="作用："></a><strong>作用</strong>：</h4></li>
+<li><p><span style="background:#ff4d4f">告诉 MyBatis 在指定路径下寻找 SQL 映射文件</span>（Mapper XML），以便动态解析 SQL 并绑定到对应的 Java 方法。</p>
+</li>
+</ul>
+<hr>
+<h3 id="2-type-aliases-package"><a href="#2-type-aliases-package" class="headerlink" title="2. type-aliases-package"></a><strong>2. <code>type-aliases-package</code></strong></h3><figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">type-aliases-package:</span> <span class="string">com.sky.entity</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>com.sky.entity</code> 是你的实体类所在的包路径。</li>
+<li>实体类是用于映射数据库表的 Java 对象。<h4 id="作用：-1"><a href="#作用：-1" class="headerlink" title="作用："></a><strong>作用</strong>：</h4></li>
+<li><span style="background:#ff4d4f">简化 Mapper 文件中指定 <code>resultType</code> 或 <code>parameterType</code> 时的类路径。</span></li>
+<li>避免在 XML 中重复写全路径，提高可读性。<h4 id="示例："><a href="#示例：" class="headerlink" title="示例："></a><strong>示例</strong>：</h4>假设你有一个实体类 <code>User</code>：<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.sky.entity;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">User</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span> userId;</span><br><span class="line">    <span class="keyword">private</span> String userName;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>在 XML 中使用：</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">mapper</span> <span class="attr">namespace</span>=<span class="string">&quot;com.sky.mapper.UserMapper&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">&quot;selectUser&quot;</span> <span class="attr">resultType</span>=<span class="string">&quot;User&quot;</span>&gt;</span></span><br><span class="line">        SELECT * FROM users WHERE user_id = #&#123;userId&#125;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">mapper</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>在resultType处就只写User，而不是com.sky.enity.User</p>
+]]></content>
+  </entry>
+  <entry>
     <title>fastJSON的安全性问题及其解决方案</title>
-    <url>/2024/11/19/12%20fastJSON%E7%9A%84%E5%AE%89%E5%85%A8%E6%80%A7%E9%97%AE%E9%A2%98%E5%8F%8A%E5%85%B6%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/</url>
+    <url>/2024/11/19/java/12%20fastJSON%E7%9A%84%E5%AE%89%E5%85%A8%E6%80%A7%E9%97%AE%E9%A2%98%E5%8F%8A%E5%85%B6%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/</url>
     <content><![CDATA[<h3 id="1-使用更新版的-FastJSON"><a href="#1-使用更新版的-FastJSON" class="headerlink" title="1. 使用更新版的 FastJSON"></a><strong>1. 使用更新版的 FastJSON</strong></h3><ol>
 <li><p><strong>启用 SafeMode</strong></p>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line">ParserConfig.getGlobalInstance().setSafeMode(<span class="literal">true</span>);</span><br></pre></td></tr></table></figure>
@@ -129,108 +834,8 @@
 ]]></content>
   </entry>
   <entry>
-    <title>如何使用properties和properties-dev</title>
-    <url>/2024/11/19/20%20%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8properties%E5%92%8Cproperties-dev/</url>
-    <content><![CDATA[<ol>
-<li>启用dev配置文件<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">spring:</span>  </span><br><span class="line">  <span class="attr">profiles:</span></span><br><span class="line">	<span class="attr">active:</span> <span class="string">dev</span></span><br></pre></td></tr></table></figure></li>
-<li>使用dev中的配置<br> ${…}<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">spring:</span></span><br><span class="line">	<span class="attr">datasource:</span>  </span><br><span class="line">	  <span class="attr">druid:</span> </span><br><span class="line">		<span class="attr">driver-class-name:</span> <span class="string">$&#123;sky.datasource.driver-class-name&#125;</span>  </span><br><span class="line">	    <span class="attr">url:</span> <span class="string">jdbc:mysql://$&#123;sky.datasource.host&#125;:$&#123;sky.datasource.port&#125;/$&#123;sky.datasource.database&#125;?</span></span><br><span class="line">	    <span class="attr">username:</span> <span class="string">$&#123;sky.datasource.username&#125;</span>  </span><br><span class="line">	    <span class="attr">password:</span> <span class="string">$&#123;sky.datasource.password&#125;</span></span><br></pre></td></tr></table></figure></li>
-</ol>
-]]></content>
-  </entry>
-  <entry>
-    <title>JDBC URL配置</title>
-    <url>/2024/11/19/23%20JDBC%20URL%20%E9%85%8D%E7%BD%AE/</url>
-    <content><![CDATA[<h1 id="这是啥？"><a href="#这是啥？" class="headerlink" title="这是啥？"></a>这是啥？</h1><figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">datasource:</span></span><br><span class="line">	<span class="attr">durid:</span></span><br><span class="line">		<span class="attr">url:</span> <span class="string">jdbc:mysql://$&#123;sky.datasource.host&#125;:$&#123;sky.datasource.port&#125;/$&#123;sky.datasource.database&#125;</span></span><br><span class="line">		<span class="string">?serverTimezone=Asia/Shanghai</span></span><br><span class="line">		<span class="string">&amp;useUnicode=true</span></span><br><span class="line">		<span class="string">&amp;characterEncoding=utf-8</span></span><br><span class="line">		<span class="string">&amp;zeroDateTimeBehavior=convertToNull</span></span><br><span class="line">		<span class="string">&amp;useSSL=false&amp;allowPublicKeyRetrieval=true</span></span><br></pre></td></tr></table></figure>
-<p>在url:后的?后的部分就是<font color="#ff0000">JDBC URL 配置</font>，它指定了如何通过 JDBC 连接到数据库，并包含了所有连接参数。如果是在 Spring Boot 项目中，它通常被称为 <font color="#ff0000">DataSource 配置</font></p>
-<h1 id="具体配置项说明："><a href="#具体配置项说明：" class="headerlink" title="具体配置项说明："></a>具体配置项说明：</h1><pre><code>serverTimezone=Asia/Shanghai
-由 JDBC 驱动 提供，用于设置数据库连接的时区。若不指定时区，可能会导致时间数据出错。
-
-useUnicode=true 和 characterEncoding=utf-8
-由 JDBC 驱动 提供，用于设置字符编码，以便支持存储和读取 Unicode 字符（特别是中文）。
-
-zeroDateTimeBehavior=convertToNull
-由 JDBC 驱动 提供，处理数据库中的 0000-00-00 00:00:00（无效时间）值，将其转化为 null，避免出现错误。
-
-useSSL=false
-由 JDBC 驱动 提供，控制是否启用 SSL 加密连接。通常在开发环境中可以关闭。
-
-allowPublicKeyRetrieval=true
-由 JDBC 驱动 提供，允许从 MySQL 服务器获取公钥，通常与 SSL 或 RSA 密钥交换相关。
-</code></pre>
-<h1 id="这些配置选项由谁提供"><a href="#这些配置选项由谁提供" class="headerlink" title="这些配置选项由谁提供"></a>这些配置选项由谁提供</h1><p>这些配置选项通常由 <strong>数据库驱动</strong> 和 <strong>连接池</strong> 提供，具体来说：</p>
-<h3 id="1-数据库驱动提供的配置选项"><a href="#1-数据库驱动提供的配置选项" class="headerlink" title="1. 数据库驱动提供的配置选项"></a><strong>1. 数据库驱动提供的配置选项</strong></h3><p>在连接 MySQL 时，常见的 JDBC 驱动（如 <code>MySQL Connector/J</code>）提供了很多配置选项来优化连接性能、解决时区问题、控制字符集等。你提到的这些选项，如 <code>serverTimezone</code>, <code>useUnicode</code>, <code>characterEncoding</code> 等，都是 JDBC 驱动（例如 MySQL 官方的 JDBC 驱动）提供的配置参数。</p>
-<h3 id="2-Spring-配置"><a href="#2-Spring-配置" class="headerlink" title="2. Spring 配置"></a><strong>2. Spring 配置</strong></h3><p>这些配置项通常由 <strong>Spring Boot</strong> 配置文件提供。在 <code>application.yml</code> 或 <code>application.properties</code> 文件中，Spring Boot 提供了对 <code>spring.datasource.*</code> 配置项的支持。这些配置项的值（如数据库主机、端口、数据库名等）通常通过 Spring Boot 的环境变量注入来提供。</p>
-<h3 id="3-连接池"><a href="#3-连接池" class="headerlink" title="3. 连接池"></a><strong>3. 连接池</strong></h3><p>如果你使用了连接池（如 <strong>HikariCP</strong> 或 <strong>Druid</strong>），它们可能会通过一些额外的配置选项（比如数据库连接池的最大连接数、连接超时等）影响数据库的连接行为。</p>
-]]></content>
-  </entry>
-  <entry>
-    <title>dev-test-prod</title>
-    <url>/2024/11/19/21%20dev-test-prod/</url>
-    <content><![CDATA[<p><strong><code>dev</code></strong> 是 <strong>development</strong> 的缩写，意思是<strong>开发环境</strong>。在软件开发中，项目通常会有多个环境配置，<code>dev</code> 专门用来跑开发中的代码，方便调试和测试。</p>
-<hr>
-<h3 id="常见环境分类："><a href="#常见环境分类：" class="headerlink" title="常见环境分类："></a><strong>常见环境分类：</strong></h3><ol>
-<li><p><strong><code>dev</code>（开发环境）</strong>：</p>
-<ul>
-<li>给程序员写代码用的。</li>
-<li>数据库、服务都用测试版本，不怕数据乱搞。</li>
-<li>配置一般是：<ul>
-<li><strong>低安全性</strong>：简单密码、调试模式开。</li>
-<li><strong>日志多</strong>：输出详细信息（debug 级别）。</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p><strong><code>test</code>（测试环境）</strong>：</p>
-<ul>
-<li>测试人员用来验证功能。</li>
-<li>更接近上线环境，但数据还是假的。</li>
-<li>配置：和生产环境类似，但数据库是测试库。</li>
-</ul>
-</li>
-<li><p><strong><code>prod</code>（生产环境）</strong>：</p>
-<ul>
-<li>正式发布给用户的环境。</li>
-<li>数据、服务都是真实的。</li>
-<li>配置：<ul>
-<li><strong>高安全性</strong>：密码复杂、调试模式关。</li>
-<li><strong>日志简洁</strong>：只保留必要信息。</li>
-</ul>
-</li>
-</ul>
-</li>
-</ol>
-]]></content>
-  </entry>
-  <entry>
-    <title>驼峰命名的自动映射</title>
-    <url>/2024/11/19/30%20%E9%A9%BC%E5%B3%B0%E5%91%BD%E5%90%8D/</url>
-    <content><![CDATA[<h3 id="如何开启："><a href="#如何开启：" class="headerlink" title="如何开启："></a><strong>如何开启：</strong></h3><p>在application文件中配置</p>
-<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">mybatis:</span></span><br><span class="line">  <span class="attr">configuration:</span></span><br><span class="line">    <span class="attr">map-underscore-to-camel-case:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
-<p>用于将数据库表中的 <strong>下划线命名法</strong>（snake_case）字段自动转换为 <strong>驼峰命名法</strong>（camelCase）字段。</p>
-<h3 id="应用："><a href="#应用：" class="headerlink" title="应用："></a><strong>应用：</strong></h3><figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">&quot;selectUser&quot;</span> <span class="attr">resultType</span>=<span class="string">&quot;User&quot;</span>&gt;</span></span><br><span class="line">    SELECT user_id, first_name, last_name FROM users WHERE user_id = #&#123;userId&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>此处设置了返回值为User，则<font color="#ff0000">MyBatis</font>会把select取得的值赋给User中对应的字段<br>user_id-&gt;UserId<br>first_name-&gt;firstName</p>
-<h3 id="举例说明："><a href="#举例说明：" class="headerlink" title="举例说明："></a><strong>举例说明：</strong></h3><p>假设你有一个数据库表，字段命名使用下划线风格：</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> user_info (</span><br><span class="line">    user_id <span class="type">INT</span>,</span><br><span class="line">    first_name <span class="type">VARCHAR</span>(<span class="number">255</span>),</span><br><span class="line">    last_name <span class="type">VARCHAR</span>(<span class="number">255</span>)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
-
-<p>如果你在 Java 中映射这个表时，使用驼峰命名法类和字段名：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">UserInfo</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span> userId;    <span class="comment">// 对应 user_id</span></span><br><span class="line">    <span class="keyword">private</span> String firstName;  <span class="comment">// 对应 first_name</span></span><br><span class="line">    <span class="keyword">private</span> String lastName;   <span class="comment">// 对应 last_name</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-]]></content>
-  </entry>
-  <entry>
-    <title>Logback</title>
-    <url>/2024/11/20/40%20LogBack/</url>
-    <content><![CDATA[<p>Logback 是一个功能强大、灵活且高效的 <strong>日志框架</strong>，是 <strong>Log4j</strong> 的后继者，由 Log4j 的作者 Ceki Gülcü 开发。<br>它是 <strong>SLF4J（Simple Logging Facade for Java）</strong> 的默认实现，广泛用于 Java 应用程序中进行日志记录。</p>
-]]></content>
-      <tags>
-        <tag>日志</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Spring Boot 的日志级别设置</title>
-    <url>/2024/11/20/39%20Spring%20Boot%20%E7%9A%84%E6%97%A5%E5%BF%97%E7%BA%A7%E5%88%AB%E8%AE%BE%E7%BD%AE/</url>
+    <url>/2024/11/20/java/39%20Spring%20Boot%20%E7%9A%84%E6%97%A5%E5%BF%97%E7%BA%A7%E5%88%AB%E8%AE%BE%E7%BD%AE/</url>
     <content><![CDATA[<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">logging:</span>  </span><br><span class="line">  <span class="attr">level:</span></span><br><span class="line">	  <span class="attr">com:</span></span><br><span class="line">        <span class="attr">sky:</span>        </span><br><span class="line">	        <span class="attr">mapper:</span> <span class="string">debug</span>  </span><br><span class="line">	        <span class="attr">service:</span> <span class="string">info</span>  </span><br><span class="line">	        <span class="attr">controller:</span> <span class="string">info</span></span><br></pre></td></tr></table></figure>
 
 <p>这段配置是 <strong>Spring Boot 的日志级别设置</strong>，用于控制应用程序中不同包（<code>com.sky.mapper</code>、<code>com.sky.service</code> 和 <code>com.sky.controller</code>）的日志输出级别。<br>通过这种配置，你可以更细粒度地管理日志的输出内容。</p>
@@ -298,38 +903,67 @@ allowPublicKeyRetrieval=true
       </tags>
   </entry>
   <entry>
-    <title>PageHelper基础用法</title>
-    <url>/2024/11/20/41%20PageHelper%E5%9F%BA%E7%A1%80%E7%94%A8%E6%B3%95/</url>
-    <content><![CDATA[<p>PageHelper 是 MyBatis 的一个分页插件，用起来很简单，核心步骤如下：  </p>
-<ol>
-<li><p><strong>引入依赖</strong><br>在 <code>pom.xml</code> 中添加 PageHelper 的依赖：  </p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.github.pagehelper<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>pagehelper<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>5.3.2<span class="tag">&lt;/<span class="name">version</span>&gt;</span> <span class="comment">&lt;!-- 根据需要调整版本 --&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p><strong>配置插件</strong><br><span style="background:#ff4d4f">（新版的 PageHelper（比如 5.x）会自动注册，不需要手动配置插件）</span></p>
-</li>
+    <title>Logback</title>
+    <url>/2024/11/20/java/40%20LogBack/</url>
+    <content><![CDATA[<p>Logback 是一个功能强大、灵活且高效的 <strong>日志框架</strong>，是 <strong>Log4j</strong> 的后继者，由 Log4j 的作者 Ceki Gülcü 开发。<br>它是 <strong>SLF4J（Simple Logging Facade for Java）</strong> 的默认实现，广泛用于 Java 应用程序中进行日志记录。</p>
+]]></content>
+      <tags>
+        <tag>日志</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>PageHelper包装类详解</title>
+    <url>/2024/11/20/java/42%20PageHelper%E5%8C%85%E8%A3%85%E7%B1%BB%E8%AF%A6%E8%A7%A3/</url>
+    <content><![CDATA[<ol>
+<li>List：<br>一个普通的集合</li>
+<li>Page：<br>在List基础上增加了分页信息<br>getTotal() / getPages() / getPageNum() / getPageSize() / getResult()</li>
 </ol>
-<p><strong>如果你有特殊需求，比如非 MySQL 数据库或者自定义行为</strong>，才需要手动配置。简单用的话，省这步没问题。<br>在 MyBatis 配置文件中，注册 PageHelper 插件。对于 Spring Boot 项目，可以直接在配置类中添加：  </p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Bean</span></span><br><span class="line"><span class="keyword">public</span> PageInterceptor <span class="title function_">pageInterceptor</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">PageInterceptor</span> <span class="variable">interceptor</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">PageInterceptor</span>();</span><br><span class="line">    <span class="type">Properties</span> <span class="variable">properties</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Properties</span>();</span><br><span class="line">    properties.setProperty(<span class="string">&quot;helperDialect&quot;</span>, <span class="string">&quot;mysql&quot;</span>); <span class="comment">// 数据库类型</span></span><br><span class="line">    properties.setProperty(<span class="string">&quot;reasonable&quot;</span>, <span class="string">&quot;true&quot;</span>);</span><br><span class="line">    properties.setProperty(<span class="string">&quot;supportMethodsArguments&quot;</span>, <span class="string">&quot;true&quot;</span>);</span><br><span class="line">    properties.setProperty(<span class="string">&quot;pageSizeZero&quot;</span>, <span class="string">&quot;true&quot;</span>);</span><br><span class="line">    interceptor.setProperties(properties);</span><br><span class="line">    <span class="keyword">return</span> interceptor;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ol start="3">
-<li><strong>使用 PageHelper.startPage() 方法</strong><br>这里可以根据实际情况灵活调整<br>在查询数据库之前调用 <code>PageHelper.startPage()</code>：  <figure class="highlight java"><table><tr><td class="code"><pre><span class="line">PageHelper.startPage(pageNum, pageSize);</span><br><span class="line">List&lt;User&gt; userList = userMapper.selectAll(); <span class="comment">// 查询语句，就按照除去分页查询的样子写</span></span><br><span class="line">PageInfo&lt;User&gt; pageInfo = <span class="keyword">new</span> <span class="title class_">PageInfo</span>&lt;&gt;(userList); <span class="comment">// 封装结果</span></span><br></pre></td></tr></table></figure></li>
-</ol>
-<ul>
-<li>查询语句<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">&quot;selectAll&quot;</span> <span class="attr">resultType</span>=<span class="string">&quot;com.example.User&quot;</span>&gt;</span></span><br><span class="line">    SELECT * FROM users</span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
-</ul>
-<ol>
-<li><strong>返回分页结果</strong><br><code>PageInfo</code> 包含分页的详细信息，如总页数、总记录数等：  <figure class="highlight java"><table><tr><td class="code"><pre><span class="line">System.out.println(<span class="string">&quot;总页数: &quot;</span> + pageInfo.getPages());</span><br><span class="line">System.out.println(<span class="string">&quot;总记录数: &quot;</span> + pageInfo.getTotal());</span><br></pre></td></tr></table></figure>
-
-</li>
-</ol>
+<p>  <strong><code>Page</code> 是 <code>ArrayList</code> 的子类</strong>，继承了 <code>List</code> 的所有方法。<br>3. PageInfo：<br>  在Page或List的基础上再次进行封装<br>  信息更全面<br>4. PageResult：<br>  自定义封装类，可以选择要封装什么数据<br>  new PageResult(page.getTotal(),page.getResult()…);<br>  比如这一句就只封装了 数据总量 和 查询到的结果</p>
+<p><font color="#ff0000">page.getResult()会返回查询到的结果</font><br><font color="#ff0000">Page 是 ArrayList 的子类</font></p>
+<p>我可以获取一个List集合，再用Page对他进行封装，再用PageInfo或PageResult对page进行封装</p>
 ]]></content>
       <tags>
         <tag>PageHelper</tag>
       </tags>
   </entry>
   <entry>
+    <title>redis的用法</title>
+    <url>/2024/11/17/redis/redis%E7%9A%84%E7%94%A8%E6%B3%95/</url>
+    <content><![CDATA[<p><img   src="https://flichane.github.io/picx-images-hosting/redis%E7%9A%84%E7%94%A8%E6%B3%95.pfd5ng6te.webp" ></p>
+]]></content>
+      <tags>
+        <tag>redis</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>JDBC URL配置</title>
+    <url>/2024/11/19/java/23%20JDBC%20URL%20%E9%85%8D%E7%BD%AE/</url>
+    <content><![CDATA[<h1 id="这是啥？"><a href="#这是啥？" class="headerlink" title="这是啥？"></a>这是啥？</h1><figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">datasource:</span></span><br><span class="line">	<span class="attr">durid:</span></span><br><span class="line">		<span class="attr">url:</span> <span class="string">jdbc:mysql://$&#123;sky.datasource.host&#125;:$&#123;sky.datasource.port&#125;/$&#123;sky.datasource.database&#125;</span></span><br><span class="line">		<span class="string">?serverTimezone=Asia/Shanghai</span></span><br><span class="line">		<span class="string">&amp;useUnicode=true</span></span><br><span class="line">		<span class="string">&amp;characterEncoding=utf-8</span></span><br><span class="line">		<span class="string">&amp;zeroDateTimeBehavior=convertToNull</span></span><br><span class="line">		<span class="string">&amp;useSSL=false&amp;allowPublicKeyRetrieval=true</span></span><br></pre></td></tr></table></figure>
+<p>在url:后的?后的部分就是<font color="#ff0000">JDBC URL 配置</font>，它指定了如何通过 JDBC 连接到数据库，并包含了所有连接参数。如果是在 Spring Boot 项目中，它通常被称为 <font color="#ff0000">DataSource 配置</font></p>
+<h1 id="具体配置项说明："><a href="#具体配置项说明：" class="headerlink" title="具体配置项说明："></a>具体配置项说明：</h1><pre><code>serverTimezone=Asia/Shanghai
+由 JDBC 驱动 提供，用于设置数据库连接的时区。若不指定时区，可能会导致时间数据出错。
+
+useUnicode=true 和 characterEncoding=utf-8
+由 JDBC 驱动 提供，用于设置字符编码，以便支持存储和读取 Unicode 字符（特别是中文）。
+
+zeroDateTimeBehavior=convertToNull
+由 JDBC 驱动 提供，处理数据库中的 0000-00-00 00:00:00（无效时间）值，将其转化为 null，避免出现错误。
+
+useSSL=false
+由 JDBC 驱动 提供，控制是否启用 SSL 加密连接。通常在开发环境中可以关闭。
+
+allowPublicKeyRetrieval=true
+由 JDBC 驱动 提供，允许从 MySQL 服务器获取公钥，通常与 SSL 或 RSA 密钥交换相关。
+</code></pre>
+<h1 id="这些配置选项由谁提供"><a href="#这些配置选项由谁提供" class="headerlink" title="这些配置选项由谁提供"></a>这些配置选项由谁提供</h1><p>这些配置选项通常由 <strong>数据库驱动</strong> 和 <strong>连接池</strong> 提供，具体来说：</p>
+<h3 id="1-数据库驱动提供的配置选项"><a href="#1-数据库驱动提供的配置选项" class="headerlink" title="1. 数据库驱动提供的配置选项"></a><strong>1. 数据库驱动提供的配置选项</strong></h3><p>在连接 MySQL 时，常见的 JDBC 驱动（如 <code>MySQL Connector/J</code>）提供了很多配置选项来优化连接性能、解决时区问题、控制字符集等。你提到的这些选项，如 <code>serverTimezone</code>, <code>useUnicode</code>, <code>characterEncoding</code> 等，都是 JDBC 驱动（例如 MySQL 官方的 JDBC 驱动）提供的配置参数。</p>
+<h3 id="2-Spring-配置"><a href="#2-Spring-配置" class="headerlink" title="2. Spring 配置"></a><strong>2. Spring 配置</strong></h3><p>这些配置项通常由 <strong>Spring Boot</strong> 配置文件提供。在 <code>application.yml</code> 或 <code>application.properties</code> 文件中，Spring Boot 提供了对 <code>spring.datasource.*</code> 配置项的支持。这些配置项的值（如数据库主机、端口、数据库名等）通常通过 Spring Boot 的环境变量注入来提供。</p>
+<h3 id="3-连接池"><a href="#3-连接池" class="headerlink" title="3. 连接池"></a><strong>3. 连接池</strong></h3><p>如果你使用了连接池（如 <strong>HikariCP</strong> 或 <strong>Druid</strong>），它们可能会通过一些额外的配置选项（比如数据库连接池的最大连接数、连接超时等）影响数据库的连接行为。</p>
+]]></content>
+  </entry>
+  <entry>
     <title>Bean Configuration注解详解</title>
-    <url>/2024/11/12/@Bean%20@Configuration%E8%AF%A6%E8%A7%A3/</url>
+    <url>/2024/11/12/java/@Bean%20@Configuration%E8%AF%A6%E8%A7%A3/</url>
     <content><![CDATA[<h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p><strong>这个配置类里的<code>@Bean</code>注解方法会在</strong>Spring容器初始化时<strong>自动执行</strong>。</p>
 <p>具体来说：</p>
 <ol>
@@ -386,99 +1020,8 @@ allowPublicKeyRetrieval=true
       </tags>
   </entry>
   <entry>
-    <title>如何使用Hexo和GitHub部署静态网站</title>
-    <url>/2024/11/10/How-to-deploy-a-static-website-with-Hexo-and-GitHub/</url>
-    <content><![CDATA[<p>我使用的模板是hexo上的keep</p>
-<h3 id="1-安装-Node-js-和-Hexo"><a href="#1-安装-Node-js-和-Hexo" class="headerlink" title="1. 安装 Node.js 和 Hexo"></a>1. 安装 Node.js 和 Hexo</h3><ul>
-<li><p><strong>安装 Node.js</strong>：去 <a class="link"   href="https://nodejs.org/" >Node.js官网<i class="fas fa-external-link-alt"></i></a> 下载并安装 Node.js（装完会自动带上 npm）。</p>
-</li>
-<li><p><strong>安装 Hexo</strong>：打开终端（先win+R，输入cmd后回车），运行以下命令来全局安装 Hexo。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install -g hexo-cli</span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<h3 id="2-初始化-Hexo-项目"><a href="#2-初始化-Hexo-项目" class="headerlink" title="2. 初始化 Hexo 项目"></a>2. 初始化 Hexo 项目</h3><ul>
-<li><p>选择一个文件夹，作为你的网站项目目录。</p>
-</li>
-<li><p>进入这个文件夹，用 Hexo 初始化项目：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo init 你的项目名称</span><br><span class="line"><span class="built_in">cd</span> 你的项目名称</span><br><span class="line">npm install  <span class="comment"># 安装项目依赖</span></span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<p><strong>如果hexo init blog 卡住</strong></p>
-<p>​    此小节引用于：<a class="link"   href="https://blog.csdn.net/f6619082/article/details/109193251" >https://blog.csdn.net/f6619082/article/details/109193251<i class="fas fa-external-link-alt"></i></a></p>
-<p>​    替换成以下代码</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://gitee.com/weilining/hexo-starter.git blog</span><br><span class="line">   <span class="built_in">cd</span> blog</span><br><span class="line">   git submodule init</span><br><span class="line">   git submodule update</span><br><span class="line">   npm config <span class="built_in">set</span> registry http://registry.npm.taobao.org</span><br><span class="line">   npm i	</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="3-创建内容"><a href="#3-创建内容" class="headerlink" title="3. 创建内容"></a>3. 创建内容</h3><ul>
-<li>选择网站模板<br>可以到hexo官网找模板，点击模板链接到GitHub，里面会有网站模板应该如何部署的介绍<br>部署好模板之后就可以跟着介绍自定义自己的网站</li>
-</ul>
-<h3 id="4-配置-GitHub-Pages-部署"><a href="#4-配置-GitHub-Pages-部署" class="headerlink" title="4. 配置 GitHub Pages 部署"></a>4. 配置 GitHub Pages 部署</h3><ul>
-<li><p><strong>安装 GitHub 部署插件</strong>：<br>这个插件可以把生成的public文件上传到GitHub<br> public文件由hexo deploy命令生成</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
-</li>
-<li><p><strong>配置 <code>_config.yml</code> 文件</strong>：<br>打开项目根目录下的 <code>_config.yml</code>，在底部找到 <code>deploy</code> 配置，填入 GitHub 仓库信息：</p>
-</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  <span class="built_in">type</span>: git</span><br><span class="line">  repo: https://github.com/你的GitHub用户名/你的仓库名.git</span><br><span class="line">  branch: master  <span class="comment"># 如果用的主分支是 master，就写 master，不是的话改成对应分支</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="5-本地预览"><a href="#5-本地预览" class="headerlink" title="5. 本地预览"></a>5. 本地预览</h3><ul>
-<li><p>在本地生成静态文件并预览效果：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo generate</span><br><span class="line">hexo server</span><br></pre></td></tr></table></figure>
-
-<p>打开浏览器访问 <code>http://localhost:4000</code>，看看网站效果。</p>
-</li>
-</ul>
-<h3 id="6-部署到-GitHub-Pages"><a href="#6-部署到-GitHub-Pages" class="headerlink" title="6. 部署到 GitHub Pages"></a>6. 部署到 GitHub Pages</h3><ul>
-<li><p>生成并部署到 GitHub Pages：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo clean     <span class="comment"># 清理旧文件，确保是最新内容</span></span><br><span class="line">hexo generate  <span class="comment"># 生成静态文件</span></span><br><span class="line">hexo deploy    <span class="comment"># 部署到 GitHub</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>如果没有报错，访问 <code>https://你的GitHub用户名.github.io</code> 就可以看到你的 Hexo 网站上线了。</p>
-</li>
-</ul>
-<h3 id="7-更新和再次部署"><a href="#7-更新和再次部署" class="headerlink" title="7. 更新和再次部署"></a>7. 更新和再次部署</h3><p>每次修改内容或发布新文章时，重复以下步骤：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo generate</span><br><span class="line">hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>就这些，全流程下来网站就部署在 GitHub Pages 上了。</p>
-<p>hexo generate指令等价于hexo g</p>
-<p>hexo server指令等价于hexo s</p>
-]]></content>
-      <tags>
-        <tag>buildWebsite</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>创建静态网站时可能会遇到的问题</title>
-    <url>/2024/11/11/Many-question-in-developing-static-website/</url>
-    <content><![CDATA[<h1 id="新建文件"><a href="#新建文件" class="headerlink" title="新建文件"></a>新建文件</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo new [post] shit</span><br></pre></td></tr></table></figure>
-
-<p><span style="background:#ff4d4f">注意</span>：如果<em>文件名</em>为中文时，hexo g 指令无法正常生成网页文件，可以试试把电脑系统的编码模式设置为UTF-8</p>
-<h1 id="title中不允许存在-字符"><a href="#title中不允许存在-字符" class="headerlink" title="title中不允许存在@字符"></a>title中不允许存在@字符</h1><p><img   src="https://flichane.github.io/picx-images-hosting/%E5%9B%BE%E7%89%87.6wqqytzg3d.webp"  alt="none"></p>
-]]></content>
-      <tags>
-        <tag>question</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>PageHelper包装类详解</title>
-    <url>/2024/11/20/42%20PageHelper%E5%8C%85%E8%A3%85%E7%B1%BB%E8%AF%A6%E8%A7%A3/</url>
-    <content><![CDATA[<ol>
-<li>List：<br>一个普通的集合</li>
-<li>Page：<br>在List基础上增加了分页信息<br>getTotal() / getPages() / getPageNum() / getPageSize() / getResult()</li>
-</ol>
-<p>  <strong><code>Page</code> 是 <code>ArrayList</code> 的子类</strong>，继承了 <code>List</code> 的所有方法。<br>3. PageInfo：<br>  在Page或List的基础上再次进行封装<br>  信息更全面<br>4. PageResult：<br>  自定义封装类，可以选择要封装什么数据<br>  new PageResult(page.getTotal(),page.getResult()…);<br>  比如这一句就只封装了 数据总量 和 查询到的结果</p>
-<p><font color="#ff0000">page.getResult()会返回查询到的结果</font><br><font color="#ff0000">Page 是 ArrayList 的子类</font></p>
-<p>我可以获取一个List集合，再用Page对他进行封装，再用PageInfo或PageResult对page进行封装</p>
-]]></content>
-      <tags>
-        <tag>PageHelper</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>lombok</title>
-    <url>/2024/11/17/lombok/</url>
+    <url>/2024/11/17/java/lombok/</url>
     <content><![CDATA[<p>它通过注解帮你自动生成 getter、setter、toString、构造器之类的常用代码，省得你手动敲半天。</p>
 <h1 id="常用注解："><a href="#常用注解：" class="headerlink" title="常用注解："></a>常用注解：</h1><ul>
 <li><code>@Getter</code> / <code>@Setter</code>：生成 getter 和 setter 方法。</li>
@@ -508,53 +1051,38 @@ allowPublicKeyRetrieval=true
       </tags>
   </entry>
   <entry>
-    <title>环境配置分离</title>
-    <url>/2024/11/19/22%20%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E5%88%86%E7%A6%BB/</url>
-    <content><![CDATA[<p>这种方法叫做 <strong>“配置文件分离”</strong> 或 <strong>“环境配置分离”**，在 Spring Boot 中通常通过 **<code>profiles</code></strong> 来管理。<br>具体来说，就是通过 <code>spring.profiles.active</code> 来激活不同的配置文件，以适应不同的运行环境。</p>
-<h3 id="这种做法的名字："><a href="#这种做法的名字：" class="headerlink" title="这种做法的名字："></a><strong>这种做法的名字</strong>：</h3><ul>
-<li><strong>Profile-based Configuration</strong>（基于配置文件的环境管理）</li>
-<li><strong>Environment-specific Configuration</strong>（环境特定配置）</li>
-</ul>
-<p>通过这种方式，可以在开发、测试和生产等不同环境下使用不同的配置文件，确保每个环境有独立的设置，而不会混淆。</p>
-<h3 id="工作原理："><a href="#工作原理：" class="headerlink" title="工作原理："></a><strong>工作原理</strong>：</h3><ol>
-<li><strong>基础配置</strong>：在 <code>application.properties</code> 中定义基础配置，适用于所有环境。</li>
-<li><strong>环境特定配置</strong>：比如 <code>application-dev.properties</code>（<font color="#ff0000">开发环境</font>）和 <code>application-prod.properties</code>（<font color="#ff0000">生产环境</font>），专门为不同环境设置不同的参数。</li>
-<li><strong>激活不同环境</strong>：通过设置 <code>spring.profiles.active</code> 来激活不同环境的配置。</li>
+    <title>PageHelper基础用法</title>
+    <url>/2024/11/20/java/41%20PageHelper%E5%9F%BA%E7%A1%80%E7%94%A8%E6%B3%95/</url>
+    <content><![CDATA[<p>PageHelper 是 MyBatis 的一个分页插件，用起来很简单，核心步骤如下：  </p>
+<ol>
+<li><p><strong>引入依赖</strong><br>在 <code>pom.xml</code> 中添加 PageHelper 的依赖：  </p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.github.pagehelper<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>pagehelper<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>5.3.2<span class="tag">&lt;/<span class="name">version</span>&gt;</span> <span class="comment">&lt;!-- 根据需要调整版本 --&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>配置插件</strong><br><span style="background:#ff4d4f">（新版的 PageHelper（比如 5.x）会自动注册，不需要手动配置插件）</span></p>
+</li>
 </ol>
-<p>这样能让项目的配置更加清晰、灵活，避免一个配置文件冗长且复杂，特别适合有多个环境需求的项目。</p>
-]]></content>
-  </entry>
-  <entry>
-    <title>redis的数据类型</title>
-    <url>/2024/11/17/redis%E7%9A%84%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/</url>
-    <content><![CDATA[<p><img   src="https://flichane.github.io/picx-images-hosting/redis%E4%B8%AD%E7%9A%84%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B.4uayhrb3ks.png" ></p>
-]]></content>
-      <tags>
-        <tag>redis</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>redis的用法</title>
-    <url>/2024/11/17/redis%E7%9A%84%E7%94%A8%E6%B3%95/</url>
-    <content><![CDATA[<p><img   src="https://flichane.github.io/picx-images-hosting/redis%E7%9A%84%E7%94%A8%E6%B3%95.pfd5ng6te.webp" ></p>
+<p><strong>如果你有特殊需求，比如非 MySQL 数据库或者自定义行为</strong>，才需要手动配置。简单用的话，省这步没问题。<br>在 MyBatis 配置文件中，注册 PageHelper 插件。对于 Spring Boot 项目，可以直接在配置类中添加：  </p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Bean</span></span><br><span class="line"><span class="keyword">public</span> PageInterceptor <span class="title function_">pageInterceptor</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">PageInterceptor</span> <span class="variable">interceptor</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">PageInterceptor</span>();</span><br><span class="line">    <span class="type">Properties</span> <span class="variable">properties</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Properties</span>();</span><br><span class="line">    properties.setProperty(<span class="string">&quot;helperDialect&quot;</span>, <span class="string">&quot;mysql&quot;</span>); <span class="comment">// 数据库类型</span></span><br><span class="line">    properties.setProperty(<span class="string">&quot;reasonable&quot;</span>, <span class="string">&quot;true&quot;</span>);</span><br><span class="line">    properties.setProperty(<span class="string">&quot;supportMethodsArguments&quot;</span>, <span class="string">&quot;true&quot;</span>);</span><br><span class="line">    properties.setProperty(<span class="string">&quot;pageSizeZero&quot;</span>, <span class="string">&quot;true&quot;</span>);</span><br><span class="line">    interceptor.setProperties(properties);</span><br><span class="line">    <span class="keyword">return</span> interceptor;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li><strong>使用 PageHelper.startPage() 方法</strong><br>这里可以根据实际情况灵活调整<br>在查询数据库之前调用 <code>PageHelper.startPage()</code>：  <figure class="highlight java"><table><tr><td class="code"><pre><span class="line">PageHelper.startPage(pageNum, pageSize);</span><br><span class="line">List&lt;User&gt; userList = userMapper.selectAll(); <span class="comment">// 查询语句，就按照除去分页查询的样子写</span></span><br><span class="line">PageInfo&lt;User&gt; pageInfo = <span class="keyword">new</span> <span class="title class_">PageInfo</span>&lt;&gt;(userList); <span class="comment">// 封装结果</span></span><br></pre></td></tr></table></figure></li>
+</ol>
+<ul>
+<li>查询语句<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">&quot;selectAll&quot;</span> <span class="attr">resultType</span>=<span class="string">&quot;com.example.User&quot;</span>&gt;</span></span><br><span class="line">    SELECT * FROM users</span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<ol>
+<li><strong>返回分页结果</strong><br><code>PageInfo</code> 包含分页的详细信息，如总页数、总记录数等：  <figure class="highlight java"><table><tr><td class="code"><pre><span class="line">System.out.println(<span class="string">&quot;总页数: &quot;</span> + pageInfo.getPages());</span><br><span class="line">System.out.println(<span class="string">&quot;总记录数: &quot;</span> + pageInfo.getTotal());</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
 ]]></content>
       <tags>
-        <tag>redis</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>图片上传测试</title>
-    <url>/2024/11/12/%E5%9B%BE%E7%89%87%E4%B8%8A%E4%BC%A0%E6%B5%8B%E8%AF%95/</url>
-    <content><![CDATA[<img     src="https://github.com/FlicHane/picx-images-hosting/raw/master/头像.7p3mgj28tl.webp"   alt="头像"  >
-]]></content>
-      <tags>
-        <tag>hexo</tag>
-        <tag>Test</tag>
+        <tag>PageHelper</tag>
       </tags>
   </entry>
   <entry>
     <title>Apache POI</title>
-    <url>/2024/11/17/Apache-POI/</url>
+    <url>/2024/11/17/java/Apache-POI/</url>
     <content><![CDATA[<p>Apache POI是处理Office文档的Java库，主要用来读写Excel、Word、PowerPoint文件。以下是个简单示例，用来操作Excel。</p>
 <h3 id="依赖"><a href="#依赖" class="headerlink" title="依赖"></a>依赖</h3><p>先加上Maven依赖：</p>
 <figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.poi<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>poi<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>5.2.3<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.poi<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>poi-ooxml<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>5.2.3<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
@@ -572,34 +1100,8 @@ allowPublicKeyRetrieval=true
       </tags>
   </entry>
   <entry>
-    <title>中文文件名测试</title>
-    <url>/2024/11/11/%E4%B8%AD%E6%96%87%E6%96%87%E4%BB%B6%E5%90%8D%E6%B5%8B%E8%AF%95/</url>
-    <content><![CDATA[<h1 id="test"><a href="#test" class="headerlink" title="test"></a>test</h1><p>哈哈哈成功了，留个纪念</p>
-]]></content>
-      <tags>
-        <tag>hexo</tag>
-        <tag>Test</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>序列化</title>
-    <url>/2024/11/17/%E5%BA%8F%E5%88%97%E5%8C%96/</url>
-    <content><![CDATA[<h1 id="what-it-is"><a href="#what-it-is" class="headerlink" title="what it is"></a><span style="background:#ff4d4f">what it is</span></h1><p><strong>序列化</strong>就是把对象转换成一串字节（二进制数据：“0010101”），这样对象可以存到文件里、数据库里，或者通过网络传输。<br>等需要用的时候，再把字节流转回对象，这叫<strong>反序列化</strong>。</p>
-<p>在Java里，想让类支持序列化，你得让它实现<code>Serializable</code>接口，没别的要求，直接上就行。<br>这样一来，Java会帮你把对象状态给“拍个快照”，方便以后拿出来用。</p>
-<h1 id="question"><a href="#question" class="headerlink" title="question"></a><span style="background:#ff4d4f">question</span></h1><h3 id="为什么在写redis模板配置类的时候需要设置key的序列化器"><a href="#为什么在写redis模板配置类的时候需要设置key的序列化器" class="headerlink" title="为什么在写redis模板配置类的时候需要设置key的序列化器"></a>为什么在写redis模板配置类的时候需要设置key的序列化器</h3><p>Redis里的key和value都是存<strong>储在内存里的数据</strong>，但本质上都是<strong>字节</strong>。所以，想在Redis里存对象（包括Java的各种复杂数据类型）的时候，就得<strong>序列化</strong>，不然Redis根本识别不了你这堆东西。</p>
-<p>设置key的序列化器，主要就是为了<strong>保证Redis能读懂和还原key</strong>。不然一堆乱码，查个数据都查不到，key直接废了。</p>
-<p>在Spring框架里，比如用<code>StringRedisSerializer</code>来序列化key，能保证存进去的和读出来的是一样的格式。这样查询就方便多了，不会出什么“找不到key”的蠢事儿。</p>
-<h3 id="序列化后的数据的具体形式是什么"><a href="#序列化后的数据的具体形式是什么" class="headerlink" title="序列化后的数据的具体形式是什么"></a>序列化后的数据的具体形式是什么</h3><p>字节的具体形式，就是对象被转成<strong>二进制数据流</strong>的那种形式。</p>
-<p>Java里用默认的<code>ObjectOutputStream</code>序列化时，数据会按特定的二进制协议来编码，所以你直接去看的话，是一大堆“1010…”**的二进制。这些字节就是对象的“快照”，别人看不懂，但Java反序列化能还原它。</p>
-<p>当然，用<code>JSON</code>或<code>XML</code>序列化的话，就是字符串格式，但底层传输时还是转成字节流。</p>
-]]></content>
-      <tags>
-        <tag>概念</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>各种概念之间的联系</title>
-    <url>/2024/11/17/%E5%90%84%E7%A7%8D%E6%A6%82%E5%BF%B5%E4%B9%8B%E9%97%B4%E7%9A%84%E8%81%94%E7%B3%BB/</url>
+    <url>/2024/11/17/java/%E5%90%84%E7%A7%8D%E6%A6%82%E5%BF%B5%E4%B9%8B%E9%97%B4%E7%9A%84%E8%81%94%E7%B3%BB/</url>
     <content><![CDATA[<p>这些技术和工具大致可以分为 <strong>框架</strong>、<strong>工具</strong> 和 <strong>服务</strong>，它们在功能上有不同侧重，也可以相互配合使用。下面简单梳理它们的区别和联系。</p>
 <hr>
 <h3 id="1-Spring-Boot"><a href="#1-Spring-Boot" class="headerlink" title="1. Spring Boot"></a><strong>1. Spring Boot</strong></h3><ul>
@@ -707,63 +1209,5 @@ allowPublicKeyRetrieval=true
       <tags>
         <tag>概念</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>su - root详解</title>
-    <url>/2024/11/28/06%20Linux/su%20-%20root/</url>
-    <content><![CDATA[<h3 id="1-su-root"><a href="#1-su-root" class="headerlink" title="1. su - root"></a><strong>1. <code>su - root</code></strong></h3><h4 id="1-1-命令作用"><a href="#1-1-命令作用" class="headerlink" title="1.1 命令作用"></a><strong>1.1 命令作用</strong></h4><ul>
-<li><code>su</code> 命令用于切换用户，默认切换到 root 用户。</li>
-<li><code>-</code> 参数用于模拟登录，意味着切换到 root 用户时，加载 root 用户的环境变量（包括 PATH、HOME 等），就像真正以 root 用户身份登录系统一样。</li>
-</ul>
-<h4 id="1-2-基本用法"><a href="#1-2-基本用法" class="headerlink" title="1.2 基本用法"></a><strong>1.2 基本用法</strong></h4><ul>
-<li>切换到 root 用户：  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">su - root</span><br></pre></td></tr></table></figure>
-  系统会要求你输入 root 用户的密码，输入正确后会进入 root 用户的 shell 环境。</li>
-</ul>
-<h4 id="1-3-使用场景"><a href="#1-3-使用场景" class="headerlink" title="1.3 使用场景"></a><strong>1.3 使用场景</strong></h4><ul>
-<li>需要执行需要管理员权限的命令时，可以使用 <code>su - root</code> 来切换到 root 用户。</li>
-<li>执行完毕后，可以使用 <code>exit</code> 退出 root 用户的 shell，返回到之前的普通用户。</li>
-</ul>
-<h4 id="1-4-关键点"><a href="#1-4-关键点" class="headerlink" title="1.4 关键点"></a><strong>1.4 关键点</strong></h4><ul>
-<li>使用 <code>su</code> 切换用户时，<strong>如果没有 <code>-</code> 参数</strong>，则只会切换到 root 用户，但不会加载环境变量，只有 shell 变成 root 的身份。</li>
-<li><code>su</code> 命令需要提供 root 用户的密码，而不是当前用户的密码。</li>
-</ul>
-<h4 id="1-5-小技巧"><a href="#1-5-小技巧" class="headerlink" title="1.5 小技巧"></a><strong>1.5 小技巧</strong></h4><ul>
-<li>如果你只是想临时执行一个命令，并且不想进入 root 的 shell，可以用下面的方式：  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">su -c <span class="string">&quot;command&quot;</span></span><br></pre></td></tr></table></figure>
-  这会执行 <code>command</code> 命令，执行完后直接退出，不会进入 root shell。</li>
-</ul>
-]]></content>
-      <tags>
-        <tag>su, root, Linux基础命令</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>MyBatis中的Mapper配置</title>
-    <url>/2024/11/19/37%20MyBatis%E4%B8%AD%E7%9A%84Mapper%E9%85%8D%E7%BD%AE/</url>
-    <content><![CDATA[<p>这些设置能让 MyBatis 更高效地加载配置文件和映射类，减少手动配置工作量。</p>
-<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">mybatis:</span>  </span><br><span class="line">  <span class="comment">#mapper配置文件  </span></span><br><span class="line">  <span class="attr">mapper-locations:</span> <span class="string">classpath:mapper/*.xml</span>  </span><br><span class="line">  <span class="attr">type-aliases-package:</span> <span class="string">com.sky.entity</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="1-mapper-locations"><a href="#1-mapper-locations" class="headerlink" title="1. mapper-locations"></a><strong>1. <code>mapper-locations</code></strong></h3><figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">mapper-locations:</span> <span class="string">classpath:mapper/*.xml</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li><p><strong><code>classpath:</code></strong> 表示文件路径是相对于应用的 <code>resources</code> 目录。</p>
-</li>
-<li><p><strong><code>mapper/*.xml</code></strong> 表示所有 <code>mapper</code> 文件夹中的 <code>.xml</code> 文件会被自动加载。</p>
-<h4 id="作用："><a href="#作用：" class="headerlink" title="作用："></a><strong>作用</strong>：</h4></li>
-<li><p><span style="background:#ff4d4f">告诉 MyBatis 在指定路径下寻找 SQL 映射文件</span>（Mapper XML），以便动态解析 SQL 并绑定到对应的 Java 方法。</p>
-</li>
-</ul>
-<hr>
-<h3 id="2-type-aliases-package"><a href="#2-type-aliases-package" class="headerlink" title="2. type-aliases-package"></a><strong>2. <code>type-aliases-package</code></strong></h3><figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">type-aliases-package:</span> <span class="string">com.sky.entity</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>com.sky.entity</code> 是你的实体类所在的包路径。</li>
-<li>实体类是用于映射数据库表的 Java 对象。<h4 id="作用：-1"><a href="#作用：-1" class="headerlink" title="作用："></a><strong>作用</strong>：</h4></li>
-<li><span style="background:#ff4d4f">简化 Mapper 文件中指定 <code>resultType</code> 或 <code>parameterType</code> 时的类路径。</span></li>
-<li>避免在 XML 中重复写全路径，提高可读性。<h4 id="示例："><a href="#示例：" class="headerlink" title="示例："></a><strong>示例</strong>：</h4>假设你有一个实体类 <code>User</code>：<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.sky.entity;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">User</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span> userId;</span><br><span class="line">    <span class="keyword">private</span> String userName;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<p>在 XML 中使用：</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">mapper</span> <span class="attr">namespace</span>=<span class="string">&quot;com.sky.mapper.UserMapper&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">&quot;selectUser&quot;</span> <span class="attr">resultType</span>=<span class="string">&quot;User&quot;</span>&gt;</span></span><br><span class="line">        SELECT * FROM users WHERE user_id = #&#123;userId&#125;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">mapper</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>在resultType处就只写User，而不是com.sky.enity.User</p>
-]]></content>
   </entry>
 </search>
