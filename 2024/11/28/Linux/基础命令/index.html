@@ -1,0 +1,1052 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="Flic Hane">
+    
+    <title>
+        
+            Linux基础指令 |
+        
+        Flic&#39;s Blog
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+        <link rel="shortcut icon" href="/images/avatar.jpg">
+    
+    
+<link rel="stylesheet" href="/font/css/fontawesome.min.css">
+
+    
+<link rel="stylesheet" href="/font/css/regular.min.css">
+
+    
+<link rel="stylesheet" href="/font/css/solid.min.css">
+
+    
+<link rel="stylesheet" href="/font/css/brands.min.css">
+
+    
+        
+            
+                
+<link rel="stylesheet" href="/css/custom-1.css">
+
+            
+        
+    
+    <script class="keep-theme-configurations">
+    const KEEP = window.KEEP || {}
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"zh-CN","path":"search.xml"}
+    KEEP.theme_config = {"base_info":{"primary_color":"#fab1a0","title":"Flic's Blog","author":"Flic Hane","avatar":"/images/avatar.jpg","logo":"/images/avatar.jpg","favicon":"/images/avatar.jpg"},"menu":{"home":"/                        || fa-solid fa-home","archive":"/archives             || fa-solid fa-box-archive","tags":"/tags                    || fa-solid fa-tags","links":"/links                  || fa-solid fa-link","about":"/about                   || fa-solid fa-user-graduate"},"first_screen":{"enable":true,"background_img":"/images/bg.svg","background_img_dark":"/images/bg.svg","description":"On my way NOW","hitokoto":false},"social_contact":{"enable":null,"links":{"github":null,"weixin":null,"qq":null,"weibo":null,"zhihu":null,"twitter":null,"x":null,"facebook":null,"email":null}},"scroll":{"progress_bar":false,"percent":false,"hide_header":true},"home":{"announcement":null,"category":false,"tag":"ture","post_datetime":"updated"},"post":{"author_badge":{"enable":true,"level_badge":false,"custom_badge":["One","Two","Three"]},"word_count":{"wordcount":true,"min2read":true},"datetime_format":"YYYY-MM-DD HH:mm:ss","copyright_info":false,"share":false,"reward":{"enable":false,"img_link":null,"text":null,"icon":null}},"code_block":{"tools":{"enable":true,"style":"default"},"highlight_theme":"default"},"toc":{"enable":true,"number":false,"expand_all":true,"init_open":true,"layout":"right"},"website_count":{"busuanzi_count":{"enable":true,"site_uv":true,"site_pv":true,"page_pv":true}},"local_search":{"enable":true,"preload":true},"search":{"path":"search.json","field":"post","content":true,"format":"striptags"},"comment":{"enable":false,"use":"valine","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":null,"region":null,"version":"1.6.36"},"waline":{"server_url":null,"reaction":false,"version":"3.2.1"},"giscus":{"repo":null,"repo_id":null,"category":"Announcements","category_id":null,"reactions_enabled":false},"artalk":{"server":null},"disqus":{"shortname":null}},"rss":{"enable":false},"lazyload":{"enable":false},"cdn":{"enable":false,"provider":"cdnjs"},"pjax":{"enable":false},"footer":{"since":2020,"word_count":false,"site_deploy":{"enable":false,"provider":"github","url":null},"record":{"enable":false,"list":[{"code":null,"link":null}]}},"inject":{"enable":true,"css":["/css/custom-1.css"],"js":[null]},"root":"","source_data":{},"version":"4.2.3"}
+    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"}
+    KEEP.language_code_block = {"copy":"复制代码","copied":"已复制","fold":"折叠代码块","folded":"已折叠"}
+    KEEP.language_copy_copyright = {"copy":"复制版权信息","copied":"已复制","title":"原文标题","author":"原文作者","link":"原文链接"}
+  </script>
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+</div>
+
+
+
+<main class="page-container border-box">
+    <!-- home first screen  -->
+    
+
+    <!-- page content -->
+    <div class="page-main-content border-box">
+        <div class="page-main-content-top">
+            
+<header class="header-wrapper">
+
+    <div class="border-box header-content">
+        <div class="left flex-start border-box">
+            
+                <a class="logo-image border-box" href="/">
+                    <img src="/images/avatar.jpg">
+                </a>
+            
+            <a class="site-name border-box" href="/">
+               Flic&#39;s Blog
+            </a>
+        </div>
+
+        <div class="right border-box">
+            <div class="pc border-box">
+                <ul class="menu-list border-box">
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/">
+                                
+                                    <i class="menu-text-color menu-icon fa-solid fa-home"></i>
+                                
+                                首页
+                                
+                            </a>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/archives">
+                                
+                                    <i class="menu-text-color menu-icon fa-solid fa-box-archive"></i>
+                                
+                                归档
+                                
+                            </a>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/tags">
+                                
+                                    <i class="menu-text-color menu-icon fa-solid fa-tags"></i>
+                                
+                                标签
+                                
+                            </a>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/links">
+                                
+                                    <i class="menu-text-color menu-icon fa-solid fa-link"></i>
+                                
+                                友链
+                                
+                            </a>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/about">
+                                
+                                    <i class="menu-text-color menu-icon fa-solid fa-user-graduate"></i>
+                                
+                                关于
+                                
+                            </a>
+                            
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="menu-text-color fas search fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile border-box flex-start">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list border-box">
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/">
+                            
+                                <span class="menu-icon-wrap border-box flex-center">
+                                    <i class="drawer-menu-text-color menu-icon fa-solid fa-home"></i>
+                                </span>
+                            
+                            首页
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/archives">
+                            
+                                <span class="menu-icon-wrap border-box flex-center">
+                                    <i class="drawer-menu-text-color menu-icon fa-solid fa-box-archive"></i>
+                                </span>
+                            
+                            归档
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/tags">
+                            
+                                <span class="menu-icon-wrap border-box flex-center">
+                                    <i class="drawer-menu-text-color menu-icon fa-solid fa-tags"></i>
+                                </span>
+                            
+                            标签
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/links">
+                            
+                                <span class="menu-icon-wrap border-box flex-center">
+                                    <i class="drawer-menu-text-color menu-icon fa-solid fa-link"></i>
+                                </span>
+                            
+                            友链
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/about">
+                            
+                                <span class="menu-icon-wrap border-box flex-center">
+                                    <i class="drawer-menu-text-color menu-icon fa-solid fa-user-graduate"></i>
+                                </span>
+                            
+                            关于
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle border-box">
+
+            <div class="main-content border-box">
+                
+
+                    
+<div class="fade-in-down-animation">
+    <div class="post-page-container border-box">
+        <div class="post-content-container border-box">
+            
+
+            <div class="post-content-bottom border-box">
+                
+                    <div class="post-title">
+                        Linux基础指令
+                    </div>
+                
+
+                
+                    <div class="post-header border-box">
+                        
+                            <div class="avatar-box border-box">
+                                <img src="/images/avatar.jpg">
+                            </div>
+                        
+                        <div class="info-box">
+                            <div class="author border-box">
+                                <span class="name">Flic Hane</span>
+                                
+                                    <span class="author-badge">Three</span>
+                                
+                            </div>
+                            <div class="meta-info border-box">
+                                
+
+<div class="post-meta-info-container border-box post">
+    <div class="post-meta-info border-box">
+        
+
+        
+            <span class="meta-info-item post-create-date">
+                <i class="icon fa-solid fa-calendar-plus"></i>&nbsp;
+                <span class="datetime">2024-11-28 22:11:19</span>
+            </span>
+
+            <span class="meta-info-item post-update-date">
+                <i class="icon fa-solid fa-file-pen"></i>&nbsp;
+                <span class="datetime" data-updated="Thu Nov 28 2024 23:30:58 GMT+0800">2024-11-28 23:30:58</span>
+            </span>
+        
+
+        
+
+        
+            <span class="post-tag meta-info-item border-box">
+                <ul class="post-tag-ul">
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/Linux%E5%9F%BA%E7%A1%80%E5%91%BD%E4%BB%A4/">Linux基础命令</a></li>
+                        
+                    
+                </ul>
+            </span>
+        
+
+        
+        
+            <span class="meta-info-item post-wordcount">
+                <i class="icon fas fa-file-word"></i>&nbsp;<span>1.5k 字</span>
+            </span>
+        
+        
+            <span class="meta-info-item post-min2read">
+                <i class="icon fas fa-clock"></i>&nbsp;<span>5 分钟</span>
+            </span>
+        
+        
+            <span class="meta-info-item post-pv">
+                <i class="icon fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+            </span>
+        
+    </div>
+
+    
+</div>
+
+                            </div>
+                        </div>
+                    </div>
+                
+
+                <div class="post-content keep-markdown-body ">
+                    
+
+                    
+                         <h3 id="1-文件和目录操作"><a href="#1-文件和目录操作" class="headerlink" title="1. 文件和目录操作"></a><strong>1. 文件和目录操作</strong></h3><h4 id="1-1-查看目录内容：ls"><a href="#1-1-查看目录内容：ls" class="headerlink" title="1.1 查看目录内容：ls"></a><strong>1.1 查看目录内容：<code>ls</code></strong></h4><ul>
+<li><p>查看当前目录内容：</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">ls</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>显示详细信息：</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">ls</span> -l</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>显示所有文件，包括隐藏文件：</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">ls</span> -a</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>组合选项：</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">ls</span> -l -a</span><br><span class="line"><span class="built_in">ls</span> -la</span><br><span class="line"><span class="built_in">ls</span> -al</span><br></pre></td></tr></table></figure>
+
+
+</li>
+</ul>
+<h4 id="1-2-切换目录：cd"><a href="#1-2-切换目录：cd" class="headerlink" title="1.2 切换目录：cd"></a><strong>1.2 切换目录：<code>cd</code></strong></h4><ul>
+<li><p>切换到某目录：</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /home</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>切换到上一级目录</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ..</span><br><span class="line"><span class="built_in">cd</span> ../..  <span class="comment"># 退两级</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>表示当前目录</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> .</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>表示HOME目录：</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~</span><br><span class="line"><span class="built_in">cd</span> home/Flic</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>切换到根目录：</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="1-3-查看当前路径：pwd"><a href="#1-3-查看当前路径：pwd" class="headerlink" title="1.3 查看当前路径：pwd"></a><strong>1.3 查看当前路径：<code>pwd</code></strong></h4><ul>
+<li><p>显示当前所在目录：</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">pwd</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="1-4-创建目录：mkdir"><a href="#1-4-创建目录：mkdir" class="headerlink" title="1.4 创建目录：mkdir"></a><strong>1.4 创建目录：<code>mkdir</code></strong></h4><ul>
+<li><p>创建新文件夹：</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> <span class="built_in">test</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>创建多级目录：</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> -p a/b/c   <span class="comment"># 创建a文件夹，然后在a内创建b，最后在b内创建c</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>指定权限创建目录：</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> -m 755 a   <span class="comment">#  结果:mydir 的权限是rwxr-xr-x（拥有者可读写执行，其他用户只能读和执行）</span></span><br></pre></td></tr></table></figure>
+<h4 id="1-5-删除文件和目录：rm"><a href="#1-5-删除文件和目录：rm" class="headerlink" title="1.5 删除文件和目录：rm"></a><strong>1.5 删除文件和目录：<code>rm</code></strong></h4></li>
+<li><p>删除文件：</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">rm</span> 文件1 文件2 文件3 ...   <span class="comment"># 空格分隔</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>删除文件夹：</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">rm</span> -r 文件夹1 ...</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h4 id="1-6-复制文件和目录：cp"><a href="#1-6-复制文件和目录：cp" class="headerlink" title="1.6 复制文件和目录：cp"></a><strong>1.6 复制文件和目录：<code>cp</code></strong></h4><ul>
+<li><p>复制文件：</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cp</span> file1 file2</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>复制文夹：</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cp</span> -r 文件夹1 ...</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="1-7-移动或重命名：mv"><a href="#1-7-移动或重命名：mv" class="headerlink" title="1.7 移动或重命名：mv"></a><strong>1.7 移动或重命名：<code>mv</code></strong></h4><ul>
+<li><p>重命名文件：</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mv</span> file1 file2</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>移动文件到目标目录：</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mv</span> file1 /目标目录</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="1-8-创建文件：touch"><a href="#1-8-创建文件：touch" class="headerlink" title="1.8 创建文件：touch"></a><strong>1.8 创建文件：<code>touch</code></strong></h4><ul>
+<li><p>新建一个空文件：</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">touch</span> 新文件名</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="1-9-查看文件内容：cat"><a href="#1-9-查看文件内容：cat" class="headerlink" title="1.9 查看文件内容：cat"></a><strong>1.9 查看文件内容：<code>cat</code></strong></h4><ul>
+<li><p>显示文件内容：</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cat</span> 文件名</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="1-10-分页查看文件：less-more"><a href="#1-10-分页查看文件：less-more" class="headerlink" title="1.10 分页查看文件：less,more"></a><strong>1.10 分页查看文件：<code>less</code>,<code>more</code></strong></h4><p><strong><code>more</code></strong> 和 <strong><code>less</code></strong> 是两个看文件内容的命令，功能类似，但有些区别。</p>
+<h5 id="more：一页一页地看"><a href="#more：一页一页地看" class="headerlink" title="more：一页一页地看"></a><strong><code>more</code>：一页一页地看</strong></h5><ul>
+<li><p>基本语法：</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">more 文件名</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>特点：</p>
+<ul>
+<li>每次显示一屏内容。</li>
+<li>按 <code>Enter</code> 往下滚一行，按 <code>空格</code> 翻一页。</li>
+<li>到文件末尾后退出。</li>
+<li>按 <code>q</code> 退出。</li>
+</ul>
+</li>
+<li><p>不足：</p>
+<ul>
+<li><strong>不能往回翻</strong>（对，没办法后悔）。</li>
+<li>功能少，交互能力弱。</li>
+</ul>
+</li>
+</ul>
+<h5 id="less：牛逼的文件浏览器"><a href="#less：牛逼的文件浏览器" class="headerlink" title="less：牛逼的文件浏览器"></a><strong><code>less</code>：牛逼的文件浏览器</strong></h5><ul>
+<li><p>基本语法：</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">less 文件名</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>特点：</p>
+<ul>
+<li><strong>支持往回翻</strong>，用 <code>↑</code> 和 <code>↓</code> 上下滚动，或者直接翻页：<ul>
+<li><code>PageUp</code>：上一页</li>
+<li><code>PageDown</code>：下一页</li>
+</ul>
+</li>
+<li>查找内容：<ul>
+<li>输入 <code>/关键字</code> 按 <code>Enter</code> 查找。</li>
+<li>按 <code>n</code> 找下一个匹配，<code>N</code> 找上一个。</li>
+</ul>
+</li>
+<li>文件再长也能搞定，不会一次性读入整个文件（节省内存）。</li>
+<li>按 <code>q</code> 退出。</li>
+</ul>
+</li>
+</ul>
+<h5 id="对比"><a href="#对比" class="headerlink" title="对比"></a><strong>对比</strong></h5><table>
+<thead>
+<tr>
+<th>功能</th>
+<th><code>more</code></th>
+<th><code>less</code></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>是否可往回翻</td>
+<td>否</td>
+<td>是</td>
+</tr>
+<tr>
+<td>查找功能</td>
+<td>没有</td>
+<td>有</td>
+</tr>
+<tr>
+<td>性能</td>
+<td>简单文件能顶</td>
+<td>适合大文件，效率高</td>
+</tr>
+</tbody></table>
+<p>tip：下面这个结论是ai说的哈，不是我<br><strong>结论：</strong> 用 <code>less</code>，<code>more</code> 被虐得毫无尊严，除非你懒得装软件或者怀旧！</p>
+<hr>
+<h4 id="1-11-which-find"><a href="#1-11-which-find" class="headerlink" title="1.11 which,find"></a><strong>1.11 <code>which</code>,<code>find</code></strong></h4><ul>
+<li><strong>找程序用 <code>which</code>。</strong></li>
+<li><strong>全盘搜文件用 <code>find</code></strong></li>
+</ul>
+<h5 id="1-which：找程序路径"><a href="#1-which：找程序路径" class="headerlink" title="1. which：找程序路径"></a><strong>1. <code>which</code>：找程序路径</strong></h5><h6 id="作用："><a href="#作用：" class="headerlink" title="作用："></a><strong>作用：</strong></h6><ul>
+<li>查看某个命令对应的可执行文件路径。</li>
+</ul>
+<h6 id="基本用法："><a href="#基本用法：" class="headerlink" title="基本用法："></a><strong>基本用法：</strong></h6><ol>
+<li><p><strong>查单个命令路径：</strong></p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">which</span> <span class="built_in">ls</span></span><br></pre></td></tr></table></figure>
+<p> 结果：显示 <code>ls</code> 命令的绝对路径，比如 <code>/bin/ls</code>。</p>
+</li>
+<li><p><strong>查多个命令路径：</strong></p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">which</span> <span class="built_in">ls</span> grep</span><br></pre></td></tr></table></figure>
+<p> 结果：分别显示 <code>ls</code> 和 <code>grep</code> 命令的路径。</p>
+</li>
+</ol>
+<h6 id="常用选项："><a href="#常用选项：" class="headerlink" title="常用选项："></a><strong>常用选项：</strong></h6><ul>
+<li><p><code>-a</code>：显示所有匹配的路径（包括环境变量中同名的多个可执行文件）。</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">which</span> -a python</span><br></pre></td></tr></table></figure>
+<p>  结果：可能返回多个 <code>python</code> 版本路径。</p>
+</li>
+</ul>
+<h6 id="局限性："><a href="#局限性：" class="headerlink" title="局限性："></a><strong>局限性：</strong></h6><ul>
+<li>只找可执行程序，不管普通文件或目录。</li>
+<li>仅限搜索环境变量 <code>$PATH</code> 中的目录，其他路径找不到。</li>
+</ul>
+<hr>
+<h5 id="2-find：全能搜索器"><a href="#2-find：全能搜索器" class="headerlink" title="2. find：全能搜索器"></a><strong>2. <code>find</code>：全能搜索器</strong></h5><h6 id="作用：-1"><a href="#作用：-1" class="headerlink" title="作用："></a><strong>作用：</strong></h6><ul>
+<li>在指定目录及其子目录中搜索文件或目录。</li>
+</ul>
+<h6 id="基本用法：-1"><a href="#基本用法：-1" class="headerlink" title="基本用法："></a><strong>基本用法：</strong></h6><ol>
+<li><p><strong>按文件名搜索：</strong></p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find /path/to/search -name <span class="string">&quot;filename&quot;</span></span><br></pre></td></tr></table></figure>
+<p> 示例：</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find /home -name <span class="string">&quot;*.txt&quot;</span></span><br></pre></td></tr></table></figure>
+<p> 搜索 <code>/home</code> 目录下所有 <code>.txt</code> 文件。</p>
+</li>
+<li><p><strong>搜索目录：</strong></p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find / -<span class="built_in">type</span> d -name <span class="string">&quot;test&quot;</span></span><br></pre></td></tr></table></figure>
+<p> 搜索名为 <code>test</code> 的目录。</p>
+</li>
+<li><p><strong>按大小搜索：</strong></p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find /path -size +10M</span><br></pre></td></tr></table></figure>
+<p> 找出大于 10MB 的文件。</p>
+</li>
+<li><p><strong>按权限搜索：</strong></p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find /path -perm 755</span><br></pre></td></tr></table></figure>
+<p> 找出权限为 <code>755</code> 的文件。</p>
+</li>
+</ol>
+<h6 id="常用选项：-1"><a href="#常用选项：-1" class="headerlink" title="常用选项："></a><strong>常用选项：</strong></h6><ul>
+<li><p><code>-type</code>：指定类型（<code>f</code> 文件，<code>d</code> 目录）。</p>
+</li>
+<li><p><code>-iname</code>：忽略大小写匹配文件名。</p>
+</li>
+<li><p><code>-exec</code>：对搜索结果执行操作。</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find . -name <span class="string">&quot;*.log&quot;</span> -<span class="built_in">exec</span> <span class="built_in">rm</span> &#123;&#125; \;</span><br></pre></td></tr></table></figure>
+<p>  找出当前目录的 <code>.log</code> 文件并删除。</p>
+</li>
+</ul>
+<h6 id="优点："><a href="#优点：" class="headerlink" title="优点："></a><strong>优点：</strong></h6><ul>
+<li>搜索范围不限，能找任何文件或目录。</li>
+<li>支持强大的筛选条件（按时间、大小、权限等）。</li>
+</ul>
+<hr>
+<h5 id="对比总结："><a href="#对比总结：" class="headerlink" title="对比总结："></a><strong>对比总结：</strong></h5><table>
+<thead>
+<tr>
+<th>功能</th>
+<th><code>which</code></th>
+<th><code>find</code></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>搜索范围</td>
+<td>只在 <code>$PATH</code> 中的可执行文件</td>
+<td>任意目录和文件</td>
+</tr>
+<tr>
+<td>搜索对象</td>
+<td>可执行程序</td>
+<td>文件、目录等</td>
+</tr>
+<tr>
+<td>是否递归</td>
+<td>不递归</td>
+<td>递归搜索</td>
+</tr>
+<tr>
+<td>功能复杂度</td>
+<td>简单，专注找程序</td>
+<td>强大，可按多种条件筛选</td>
+</tr>
+<tr>
+<td>常用场景</td>
+<td>查看命令路径、定位程序安装位置</td>
+<td>全盘找文件、目录、或按属性搜索</td>
+</tr>
+</tbody></table>
+<h3 id="2-权限管理"><a href="#2-权限管理" class="headerlink" title="2. 权限管理"></a><strong>2. 权限管理</strong></h3><h4 id="2-1-查看权限：ls-l"><a href="#2-1-查看权限：ls-l" class="headerlink" title="2.1 查看权限：ls -l"></a><strong>2.1 查看权限：<code>ls -l</code></strong></h4><ul>
+<li><p>查看文件权限：</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">ls</span> -l</span><br></pre></td></tr></table></figure>
+<p>  权限格式示例：</p>
+  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-rw-r--r--  1 user group 文件名</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="2-2-修改权限：chmod"><a href="#2-2-修改权限：chmod" class="headerlink" title="2.2 修改权限：chmod"></a><strong>2.2 修改权限：<code>chmod</code></strong></h4><ul>
+<li><p>给文件加执行权限：</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">chmod</span> +x 文件名</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="2-3-修改所有者：chown"><a href="#2-3-修改所有者：chown" class="headerlink" title="2.3 修改所有者：chown"></a><strong>2.3 修改所有者：<code>chown</code></strong></h4><ul>
+<li><p>修改文件的所有者和组：</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">chown</span> 新用户:新组 文件名</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<hr>
+<h3 id="3-系统管理"><a href="#3-系统管理" class="headerlink" title="3. 系统管理"></a><strong>3. 系统管理</strong></h3><h4 id="3-1-查看系统状态：top"><a href="#3-1-查看系统状态：top" class="headerlink" title="3.1 查看系统状态：top"></a><strong>3.1 查看系统状态：<code>top</code></strong></h4><ul>
+<li><p>实时查看系统资源和进程：</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">top</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>按<code>q</code>退出。</p>
+</li>
+</ul>
+<h4 id="3-2-查看进程：ps"><a href="#3-2-查看进程：ps" class="headerlink" title="3.2 查看进程：ps"></a><strong>3.2 查看进程：<code>ps</code></strong></h4><ul>
+<li><p>列出所有进程：</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps aux</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="3-3-结束进程：kill"><a href="#3-3-结束进程：kill" class="headerlink" title="3.3 结束进程：kill"></a><strong>3.3 结束进程：<code>kill</code></strong></h4><ul>
+<li><p>杀掉某进程：</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">kill</span> PID</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>强制结束进程：</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">kill</span> -9 PID</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="3-4-查看运行时间：uptime"><a href="#3-4-查看运行时间：uptime" class="headerlink" title="3.4 查看运行时间：uptime"></a><strong>3.4 查看运行时间：<code>uptime</code></strong></h4><ul>
+<li><p>查看系统运行时长：</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">uptime</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="3-5-重启和关机"><a href="#3-5-重启和关机" class="headerlink" title="3.5 重启和关机"></a><strong>3.5 重启和关机</strong></h4><ul>
+<li><p>重启系统：</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">reboot</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>立即关机：</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">shutdown now</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<hr>
+<h3 id="4-网络相关"><a href="#4-网络相关" class="headerlink" title="4. 网络相关"></a><strong>4. 网络相关</strong></h3><h4 id="4-1-测试网络：ping"><a href="#4-1-测试网络：ping" class="headerlink" title="4.1 测试网络：ping"></a><strong>4.1 测试网络：<code>ping</code></strong></h4><ul>
+<li><p>检查网络连接：</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ping www.baidu.com</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>按<code>Ctrl+C</code>停止。</p>
+</li>
+</ul>
+<h4 id="4-2-查看网络配置：ifconfig"><a href="#4-2-查看网络配置：ifconfig" class="headerlink" title="4.2 查看网络配置：ifconfig"></a><strong>4.2 查看网络配置：<code>ifconfig</code></strong></h4><ul>
+<li><p>显示网络配置信息：</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ifconfig</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h4 id="4-3-查看ip：ip-addr"><a href="#4-3-查看ip：ip-addr" class="headerlink" title="4.3 查看ip：ip addr"></a><strong>4.3 查看ip：<code>ip addr</code></strong></h4><ul>
+<li><p>查看ip：</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ip addr</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h4 id="4-4-下载网页内容：curl"><a href="#4-4-下载网页内容：curl" class="headerlink" title="4.4 下载网页内容：curl"></a><strong>4.4 下载网页内容：<code>curl</code></strong></h4><ul>
+<li><p>获取网页数据：</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl https://example.com</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<hr>
+<h3 id="5-软件和包管理"><a href="#5-软件和包管理" class="headerlink" title="5. 软件和包管理"></a><strong>5. 软件和包管理</strong></h3><h4 id="5-1-使用apt管理包（适用于Ubuntu-Debian）"><a href="#5-1-使用apt管理包（适用于Ubuntu-Debian）" class="headerlink" title="5.1 使用apt管理包（适用于Ubuntu/Debian）"></a><strong>5.1 使用<code>apt</code>管理包（适用于Ubuntu/Debian）</strong></h4><ul>
+<li><p>安装软件：</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> apt install 软件名</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>更新和升级系统：</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> apt update &amp;&amp; <span class="built_in">sudo</span> apt upgrade</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<hr>
+<h3 id="6-打包和解压"><a href="#6-打包和解压" class="headerlink" title="6. 打包和解压"></a><strong>6. 打包和解压</strong></h3><h4 id="6-1-使用tar"><a href="#6-1-使用tar" class="headerlink" title="6.1 使用tar"></a><strong>6.1 使用<code>tar</code></strong></h4><ul>
+<li><p>解压<code>tar</code>包：</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -xvf 压缩包.tar</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>打包目录为<code>tar</code>文件：</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -cvf 压缩包.tar 目录</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="6-2-使用zip和unzip"><a href="#6-2-使用zip和unzip" class="headerlink" title="6.2 使用zip和unzip"></a><strong>6.2 使用<code>zip</code>和<code>unzip</code></strong></h4><ul>
+<li><p>压缩文件夹为<code>zip</code>：</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">zip -r 压缩包.zip 目录</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>解压<code>zip</code>文件：</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">unzip 压缩包.zip</span><br></pre></td></tr></table></figure></li>
+</ul>
+
+                    
+                </div>
+
+                
+
+                <div class="post-bottom-tags-and-share border-box">
+                    <div>
+                        
+                            <ul class="post-tags-box border-box">
+                                
+                                    <li class="tag-item border-box">
+                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/Linux%E5%9F%BA%E7%A1%80%E5%91%BD%E4%BB%A4/">Linux基础命令</a>
+                                    </li>
+                                
+                            </ul>
+                        
+                    </div>
+                    <div>
+                        
+                    </div>
+                </div>
+
+                
+
+                
+                    <div class="post-nav border-box">
+                        
+                            <div class="prev-post">
+                                <a class="prev"
+                                   rel="prev"
+                                   href="/2024/12/09/java/43%20enmu%E6%9E%9A%E4%B8%BE/"
+                                   title="enmu枚举"
+                                >
+                                    <span class="left arrow-icon flex-center">
+                                        <i class="fas fa-chevron-left"></i>
+                                    </span>
+                                    <span class="title flex-center">
+                                        <span class="post-nav-title-item text-ellipsis">enmu枚举</span>
+                                        <span class="post-nav-item">上一篇</span>
+                                    </span>
+                                </a>
+                            </div>
+                        
+                        
+                            <div class="next-post">
+                                <a class="next"
+                                   rel="next"
+                                   href="/2024/11/28/Linux/su%20-%20root/"
+                                   title="su - root详解"
+                                >
+                                    <span class="title flex-center">
+                                        <span class="post-nav-title-item text-ellipsis">su - root详解</span>
+                                        <span class="post-nav-item">下一篇</span>
+                                    </span>
+                                    <span class="right arrow-icon flex-center">
+                                        <i class="fas fa-chevron-right"></i>
+                                    </span>
+                                </a>
+                            </div>
+                        
+                    </div>
+                
+
+                
+                    
+
+
+
+
+
+
+                
+            </div>
+        </div>
+
+        
+            <div class="pc-post-toc right-toc">
+                <div class="post-toc-wrap border-box">
+    <div class="post-toc border-box">
+        <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E6%96%87%E4%BB%B6%E5%92%8C%E7%9B%AE%E5%BD%95%E6%93%8D%E4%BD%9C"><span class="nav-text">1. 文件和目录操作</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-1-%E6%9F%A5%E7%9C%8B%E7%9B%AE%E5%BD%95%E5%86%85%E5%AE%B9%EF%BC%9Als"><span class="nav-text">1.1 查看目录内容：ls</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-%E5%88%87%E6%8D%A2%E7%9B%AE%E5%BD%95%EF%BC%9Acd"><span class="nav-text">1.2 切换目录：cd</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-3-%E6%9F%A5%E7%9C%8B%E5%BD%93%E5%89%8D%E8%B7%AF%E5%BE%84%EF%BC%9Apwd"><span class="nav-text">1.3 查看当前路径：pwd</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-4-%E5%88%9B%E5%BB%BA%E7%9B%AE%E5%BD%95%EF%BC%9Amkdir"><span class="nav-text">1.4 创建目录：mkdir</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-5-%E5%88%A0%E9%99%A4%E6%96%87%E4%BB%B6%E5%92%8C%E7%9B%AE%E5%BD%95%EF%BC%9Arm"><span class="nav-text">1.5 删除文件和目录：rm</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-6-%E5%A4%8D%E5%88%B6%E6%96%87%E4%BB%B6%E5%92%8C%E7%9B%AE%E5%BD%95%EF%BC%9Acp"><span class="nav-text">1.6 复制文件和目录：cp</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-7-%E7%A7%BB%E5%8A%A8%E6%88%96%E9%87%8D%E5%91%BD%E5%90%8D%EF%BC%9Amv"><span class="nav-text">1.7 移动或重命名：mv</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-8-%E5%88%9B%E5%BB%BA%E6%96%87%E4%BB%B6%EF%BC%9Atouch"><span class="nav-text">1.8 创建文件：touch</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-9-%E6%9F%A5%E7%9C%8B%E6%96%87%E4%BB%B6%E5%86%85%E5%AE%B9%EF%BC%9Acat"><span class="nav-text">1.9 查看文件内容：cat</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-10-%E5%88%86%E9%A1%B5%E6%9F%A5%E7%9C%8B%E6%96%87%E4%BB%B6%EF%BC%9Aless-more"><span class="nav-text">1.10 分页查看文件：less,more</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#more%EF%BC%9A%E4%B8%80%E9%A1%B5%E4%B8%80%E9%A1%B5%E5%9C%B0%E7%9C%8B"><span class="nav-text">more：一页一页地看</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#less%EF%BC%9A%E7%89%9B%E9%80%BC%E7%9A%84%E6%96%87%E4%BB%B6%E6%B5%8F%E8%A7%88%E5%99%A8"><span class="nav-text">less：牛逼的文件浏览器</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%AF%B9%E6%AF%94"><span class="nav-text">对比</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-11-which-find"><span class="nav-text">1.11 which,find</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-which%EF%BC%9A%E6%89%BE%E7%A8%8B%E5%BA%8F%E8%B7%AF%E5%BE%84"><span class="nav-text">1. which：找程序路径</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E4%BD%9C%E7%94%A8%EF%BC%9A"><span class="nav-text">作用：</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95%EF%BC%9A"><span class="nav-text">基本用法：</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%B8%B8%E7%94%A8%E9%80%89%E9%A1%B9%EF%BC%9A"><span class="nav-text">常用选项：</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%B1%80%E9%99%90%E6%80%A7%EF%BC%9A"><span class="nav-text">局限性：</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-find%EF%BC%9A%E5%85%A8%E8%83%BD%E6%90%9C%E7%B4%A2%E5%99%A8"><span class="nav-text">2. find：全能搜索器</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E4%BD%9C%E7%94%A8%EF%BC%9A-1"><span class="nav-text">作用：</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95%EF%BC%9A-1"><span class="nav-text">基本用法：</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%B8%B8%E7%94%A8%E9%80%89%E9%A1%B9%EF%BC%9A-1"><span class="nav-text">常用选项：</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E4%BC%98%E7%82%B9%EF%BC%9A"><span class="nav-text">优点：</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%AF%B9%E6%AF%94%E6%80%BB%E7%BB%93%EF%BC%9A"><span class="nav-text">对比总结：</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86"><span class="nav-text">2. 权限管理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-%E6%9F%A5%E7%9C%8B%E6%9D%83%E9%99%90%EF%BC%9Als-l"><span class="nav-text">2.1 查看权限：ls -l</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-%E4%BF%AE%E6%94%B9%E6%9D%83%E9%99%90%EF%BC%9Achmod"><span class="nav-text">2.2 修改权限：chmod</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-3-%E4%BF%AE%E6%94%B9%E6%89%80%E6%9C%89%E8%80%85%EF%BC%9Achown"><span class="nav-text">2.3 修改所有者：chown</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E7%B3%BB%E7%BB%9F%E7%AE%A1%E7%90%86"><span class="nav-text">3. 系统管理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-%E6%9F%A5%E7%9C%8B%E7%B3%BB%E7%BB%9F%E7%8A%B6%E6%80%81%EF%BC%9Atop"><span class="nav-text">3.1 查看系统状态：top</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-%E6%9F%A5%E7%9C%8B%E8%BF%9B%E7%A8%8B%EF%BC%9Aps"><span class="nav-text">3.2 查看进程：ps</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-3-%E7%BB%93%E6%9D%9F%E8%BF%9B%E7%A8%8B%EF%BC%9Akill"><span class="nav-text">3.3 结束进程：kill</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-4-%E6%9F%A5%E7%9C%8B%E8%BF%90%E8%A1%8C%E6%97%B6%E9%97%B4%EF%BC%9Auptime"><span class="nav-text">3.4 查看运行时间：uptime</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-5-%E9%87%8D%E5%90%AF%E5%92%8C%E5%85%B3%E6%9C%BA"><span class="nav-text">3.5 重启和关机</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E7%BD%91%E7%BB%9C%E7%9B%B8%E5%85%B3"><span class="nav-text">4. 网络相关</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#4-1-%E6%B5%8B%E8%AF%95%E7%BD%91%E7%BB%9C%EF%BC%9Aping"><span class="nav-text">4.1 测试网络：ping</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-2-%E6%9F%A5%E7%9C%8B%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE%EF%BC%9Aifconfig"><span class="nav-text">4.2 查看网络配置：ifconfig</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-3-%E6%9F%A5%E7%9C%8Bip%EF%BC%9Aip-addr"><span class="nav-text">4.3 查看ip：ip addr</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-4-%E4%B8%8B%E8%BD%BD%E7%BD%91%E9%A1%B5%E5%86%85%E5%AE%B9%EF%BC%9Acurl"><span class="nav-text">4.4 下载网页内容：curl</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-%E8%BD%AF%E4%BB%B6%E5%92%8C%E5%8C%85%E7%AE%A1%E7%90%86"><span class="nav-text">5. 软件和包管理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#5-1-%E4%BD%BF%E7%94%A8apt%E7%AE%A1%E7%90%86%E5%8C%85%EF%BC%88%E9%80%82%E7%94%A8%E4%BA%8EUbuntu-Debian%EF%BC%89"><span class="nav-text">5.1 使用apt管理包（适用于Ubuntu&#x2F;Debian）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-%E6%89%93%E5%8C%85%E5%92%8C%E8%A7%A3%E5%8E%8B"><span class="nav-text">6. 打包和解压</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#6-1-%E4%BD%BF%E7%94%A8tar"><span class="nav-text">6.1 使用tar</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-2-%E4%BD%BF%E7%94%A8zip%E5%92%8Cunzip"><span class="nav-text">6.2 使用zip和unzip</span></a></li></ol></li></ol>
+    </div>
+</div>
+
+            </div>
+        
+    </div>
+</div>
+
+
+                
+            </div>
+        </div>
+
+        <div class="page-main-content-bottom border-box">
+            
+<footer class="footer border-box">
+    <div class="copyright-info info-item">
+        &copy;&nbsp;<span>2020</span>&nbsp;-&nbsp;2024
+        
+            &nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;&nbsp;<a href="/">Flic Hane</a>
+        
+    </div>
+
+    <div class="theme-info info-item">
+        由&nbsp;<a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;驱动&nbsp;&&nbsp;主题&nbsp;<a class="keep-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep</a>
+    </div>
+
+    
+
+    
+        <div class="count-info info-item">
+            
+
+            
+                <span class="count-item border-box uv">
+                    <span class="item-type border-box">访客数</span>
+                    <span class="item-value border-box uv" id="busuanzi_value_site_uv"></span>
+                </span>
+            
+
+            
+                <span class="count-item border-box pv">
+                    <span class="item-type border-box">访问量</span>
+                    <span class="item-value border-box pv" id="busuanzi_value_site_pv"></span>
+                </span>
+            
+        </div>
+    
+
+    
+</footer>
+
+        </div>
+    </div>
+
+    <!-- post tools -->
+    
+        <div class="post-tools right-toc">
+            <div class="post-tools-container border-box">
+    <ul class="post-tools-list border-box">
+        <!-- PC encrypt again -->
+        
+
+        <!-- PC TOC show toggle -->
+        
+            <li class="tools-item flex-center toggle-show-toc">
+                <i class="fas fa-list"></i>
+            </li>
+        
+
+        <!-- PC go comment -->
+        
+
+        <!-- PC full screen -->
+        <li class="tools-item flex-center full-screen">
+            <i class="fa-solid fa-expand"></i>
+        </li>
+    </ul>
+</div>
+
+        </div>
+    
+
+    <!-- side tools -->
+    <div class="side-tools">
+        <div class="side-tools-container border-box ">
+    <ul class="side-tools-list side-tools-show-handle border-box">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <!-- toggle mode -->
+        
+            <li class="tools-item tool-toggle-theme-mode flex-center">
+                <i class="fas fa-moon"></i>
+            </li>
+        
+
+        <!-- rss -->
+        
+
+        <!-- to bottom -->
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list border-box">
+        
+            <li class="tools-item toggle-show-toc-tablet flex-center">
+                <i class="fas fa-list"></i>
+            </li>
+        
+
+        
+
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+
+        <li class="tools-item tool-scroll-to-top flex-center show-arrow">
+            <i class="arrow fas fa-arrow-up"></i>
+            <span class="percent"></span>
+        </li>
+    </ul>
+</div>
+
+    </div>
+
+    <!-- image mask -->
+    <div class="zoom-in-image-mask">
+    <img class="zoom-in-image">
+</div>
+
+
+    <!-- local search -->
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="close-popup-btn">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+    <!-- tablet toc -->
+    
+        <div class="tablet-post-toc-mask">
+            <div class="tablet-post-toc">
+                <div class="post-toc-wrap border-box">
+    <div class="post-toc border-box">
+        <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E6%96%87%E4%BB%B6%E5%92%8C%E7%9B%AE%E5%BD%95%E6%93%8D%E4%BD%9C"><span class="nav-text">1. 文件和目录操作</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-1-%E6%9F%A5%E7%9C%8B%E7%9B%AE%E5%BD%95%E5%86%85%E5%AE%B9%EF%BC%9Als"><span class="nav-text">1.1 查看目录内容：ls</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-%E5%88%87%E6%8D%A2%E7%9B%AE%E5%BD%95%EF%BC%9Acd"><span class="nav-text">1.2 切换目录：cd</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-3-%E6%9F%A5%E7%9C%8B%E5%BD%93%E5%89%8D%E8%B7%AF%E5%BE%84%EF%BC%9Apwd"><span class="nav-text">1.3 查看当前路径：pwd</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-4-%E5%88%9B%E5%BB%BA%E7%9B%AE%E5%BD%95%EF%BC%9Amkdir"><span class="nav-text">1.4 创建目录：mkdir</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-5-%E5%88%A0%E9%99%A4%E6%96%87%E4%BB%B6%E5%92%8C%E7%9B%AE%E5%BD%95%EF%BC%9Arm"><span class="nav-text">1.5 删除文件和目录：rm</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-6-%E5%A4%8D%E5%88%B6%E6%96%87%E4%BB%B6%E5%92%8C%E7%9B%AE%E5%BD%95%EF%BC%9Acp"><span class="nav-text">1.6 复制文件和目录：cp</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-7-%E7%A7%BB%E5%8A%A8%E6%88%96%E9%87%8D%E5%91%BD%E5%90%8D%EF%BC%9Amv"><span class="nav-text">1.7 移动或重命名：mv</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-8-%E5%88%9B%E5%BB%BA%E6%96%87%E4%BB%B6%EF%BC%9Atouch"><span class="nav-text">1.8 创建文件：touch</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-9-%E6%9F%A5%E7%9C%8B%E6%96%87%E4%BB%B6%E5%86%85%E5%AE%B9%EF%BC%9Acat"><span class="nav-text">1.9 查看文件内容：cat</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-10-%E5%88%86%E9%A1%B5%E6%9F%A5%E7%9C%8B%E6%96%87%E4%BB%B6%EF%BC%9Aless-more"><span class="nav-text">1.10 分页查看文件：less,more</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#more%EF%BC%9A%E4%B8%80%E9%A1%B5%E4%B8%80%E9%A1%B5%E5%9C%B0%E7%9C%8B"><span class="nav-text">more：一页一页地看</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#less%EF%BC%9A%E7%89%9B%E9%80%BC%E7%9A%84%E6%96%87%E4%BB%B6%E6%B5%8F%E8%A7%88%E5%99%A8"><span class="nav-text">less：牛逼的文件浏览器</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%AF%B9%E6%AF%94"><span class="nav-text">对比</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-11-which-find"><span class="nav-text">1.11 which,find</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-which%EF%BC%9A%E6%89%BE%E7%A8%8B%E5%BA%8F%E8%B7%AF%E5%BE%84"><span class="nav-text">1. which：找程序路径</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E4%BD%9C%E7%94%A8%EF%BC%9A"><span class="nav-text">作用：</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95%EF%BC%9A"><span class="nav-text">基本用法：</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%B8%B8%E7%94%A8%E9%80%89%E9%A1%B9%EF%BC%9A"><span class="nav-text">常用选项：</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%B1%80%E9%99%90%E6%80%A7%EF%BC%9A"><span class="nav-text">局限性：</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-find%EF%BC%9A%E5%85%A8%E8%83%BD%E6%90%9C%E7%B4%A2%E5%99%A8"><span class="nav-text">2. find：全能搜索器</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E4%BD%9C%E7%94%A8%EF%BC%9A-1"><span class="nav-text">作用：</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95%EF%BC%9A-1"><span class="nav-text">基本用法：</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%B8%B8%E7%94%A8%E9%80%89%E9%A1%B9%EF%BC%9A-1"><span class="nav-text">常用选项：</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E4%BC%98%E7%82%B9%EF%BC%9A"><span class="nav-text">优点：</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%AF%B9%E6%AF%94%E6%80%BB%E7%BB%93%EF%BC%9A"><span class="nav-text">对比总结：</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86"><span class="nav-text">2. 权限管理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-%E6%9F%A5%E7%9C%8B%E6%9D%83%E9%99%90%EF%BC%9Als-l"><span class="nav-text">2.1 查看权限：ls -l</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-%E4%BF%AE%E6%94%B9%E6%9D%83%E9%99%90%EF%BC%9Achmod"><span class="nav-text">2.2 修改权限：chmod</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-3-%E4%BF%AE%E6%94%B9%E6%89%80%E6%9C%89%E8%80%85%EF%BC%9Achown"><span class="nav-text">2.3 修改所有者：chown</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E7%B3%BB%E7%BB%9F%E7%AE%A1%E7%90%86"><span class="nav-text">3. 系统管理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-%E6%9F%A5%E7%9C%8B%E7%B3%BB%E7%BB%9F%E7%8A%B6%E6%80%81%EF%BC%9Atop"><span class="nav-text">3.1 查看系统状态：top</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-%E6%9F%A5%E7%9C%8B%E8%BF%9B%E7%A8%8B%EF%BC%9Aps"><span class="nav-text">3.2 查看进程：ps</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-3-%E7%BB%93%E6%9D%9F%E8%BF%9B%E7%A8%8B%EF%BC%9Akill"><span class="nav-text">3.3 结束进程：kill</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-4-%E6%9F%A5%E7%9C%8B%E8%BF%90%E8%A1%8C%E6%97%B6%E9%97%B4%EF%BC%9Auptime"><span class="nav-text">3.4 查看运行时间：uptime</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-5-%E9%87%8D%E5%90%AF%E5%92%8C%E5%85%B3%E6%9C%BA"><span class="nav-text">3.5 重启和关机</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E7%BD%91%E7%BB%9C%E7%9B%B8%E5%85%B3"><span class="nav-text">4. 网络相关</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#4-1-%E6%B5%8B%E8%AF%95%E7%BD%91%E7%BB%9C%EF%BC%9Aping"><span class="nav-text">4.1 测试网络：ping</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-2-%E6%9F%A5%E7%9C%8B%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE%EF%BC%9Aifconfig"><span class="nav-text">4.2 查看网络配置：ifconfig</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-3-%E6%9F%A5%E7%9C%8Bip%EF%BC%9Aip-addr"><span class="nav-text">4.3 查看ip：ip addr</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-4-%E4%B8%8B%E8%BD%BD%E7%BD%91%E9%A1%B5%E5%86%85%E5%AE%B9%EF%BC%9Acurl"><span class="nav-text">4.4 下载网页内容：curl</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-%E8%BD%AF%E4%BB%B6%E5%92%8C%E5%8C%85%E7%AE%A1%E7%90%86"><span class="nav-text">5. 软件和包管理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#5-1-%E4%BD%BF%E7%94%A8apt%E7%AE%A1%E7%90%86%E5%8C%85%EF%BC%88%E9%80%82%E7%94%A8%E4%BA%8EUbuntu-Debian%EF%BC%89"><span class="nav-text">5.1 使用apt管理包（适用于Ubuntu&#x2F;Debian）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-%E6%89%93%E5%8C%85%E5%92%8C%E8%A7%A3%E5%8E%8B"><span class="nav-text">6. 打包和解压</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#6-1-%E4%BD%BF%E7%94%A8tar"><span class="nav-text">6.1 使用tar</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-2-%E4%BD%BF%E7%94%A8zip%E5%92%8Cunzip"><span class="nav-text">6.2 使用zip和unzip</span></a></li></ol></li></ol>
+    </div>
+</div>
+
+            </div>
+        </div>
+    
+</main>
+
+
+
+
+
+<!-- common js -->
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/header-shrink.js"></script>
+
+<script src="/js/back2top.js"></script>
+
+<script src="/js/toggle-theme.js"></script>
+
+<script src="/js/code-block.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/libs/anime.min.js"></script>
+
+
+<!-- local search -->
+
+    
+<script src="/js/local-search.js"></script>
+
+
+
+<!-- lazyload -->
+
+
+<div class="">
+    <!-- home page -->
+    
+
+    <!-- post page -->
+    
+        <!-- post-helper -->
+        
+<script src="/js/post/post-helper.js"></script>
+
+
+        <!-- toc -->
+        
+            
+<script src="/js/post/toc.js"></script>
+
+        
+
+        <!-- copyright-info -->
+        
+
+        <!-- share -->
+        
+    
+
+    <!-- categories page -->
+    
+
+    <!-- links page -->
+    
+
+    <!-- photos page -->
+    
+
+    <!-- tools page -->
+    
+</div>
+
+<!-- mermaid -->
+
+
+<!-- pjax -->
+
+
+
+    
+        
+    
+
+</body>
+</html>

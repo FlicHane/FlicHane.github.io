@@ -11,13 +11,67 @@
       </tags>
   </entry>
   <entry>
-    <title>中文文件名测试</title>
-    <url>/2024/11/11/%E4%B8%AD%E6%96%87%E6%96%87%E4%BB%B6%E5%90%8D%E6%B5%8B%E8%AF%95/</url>
-    <content><![CDATA[<h1 id="test"><a href="#test" class="headerlink" title="test"></a>test</h1><p>哈哈哈成功了，留个纪念</p>
+    <title>如何使用Hexo和GitHub部署静态网站</title>
+    <url>/2024/11/10/How-to-deploy-a-static-website-with-Hexo-and-GitHub/</url>
+    <content><![CDATA[<p>我使用的模板是hexo上的keep</p>
+<h3 id="1-安装-Node-js-和-Hexo"><a href="#1-安装-Node-js-和-Hexo" class="headerlink" title="1. 安装 Node.js 和 Hexo"></a>1. 安装 Node.js 和 Hexo</h3><ul>
+<li><p><strong>安装 Node.js</strong>：去 <a class="link"   href="https://nodejs.org/" >Node.js官网<i class="fas fa-external-link-alt"></i></a> 下载并安装 Node.js（装完会自动带上 npm）。</p>
+</li>
+<li><p><strong>安装 Hexo</strong>：打开终端（先win+R，输入cmd后回车），运行以下命令来全局安装 Hexo。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install -g hexo-cli</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h3 id="2-初始化-Hexo-项目"><a href="#2-初始化-Hexo-项目" class="headerlink" title="2. 初始化 Hexo 项目"></a>2. 初始化 Hexo 项目</h3><ul>
+<li><p>选择一个文件夹，作为你的网站项目目录。</p>
+</li>
+<li><p>进入这个文件夹，用 Hexo 初始化项目：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo init 你的项目名称</span><br><span class="line"><span class="built_in">cd</span> 你的项目名称</span><br><span class="line">npm install  <span class="comment"># 安装项目依赖</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p><strong>如果hexo init blog 卡住</strong></p>
+<p>​    此小节引用于：<a class="link"   href="https://blog.csdn.net/f6619082/article/details/109193251" >https://blog.csdn.net/f6619082/article/details/109193251<i class="fas fa-external-link-alt"></i></a></p>
+<p>​    替换成以下代码</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://gitee.com/weilining/hexo-starter.git blog</span><br><span class="line">   <span class="built_in">cd</span> blog</span><br><span class="line">   git submodule init</span><br><span class="line">   git submodule update</span><br><span class="line">   npm config <span class="built_in">set</span> registry http://registry.npm.taobao.org</span><br><span class="line">   npm i	</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="3-创建内容"><a href="#3-创建内容" class="headerlink" title="3. 创建内容"></a>3. 创建内容</h3><ul>
+<li>选择网站模板<br>可以到hexo官网找模板，点击模板链接到GitHub，里面会有网站模板应该如何部署的介绍<br>部署好模板之后就可以跟着介绍自定义自己的网站</li>
+</ul>
+<h3 id="4-配置-GitHub-Pages-部署"><a href="#4-配置-GitHub-Pages-部署" class="headerlink" title="4. 配置 GitHub Pages 部署"></a>4. 配置 GitHub Pages 部署</h3><ul>
+<li><p><strong>安装 GitHub 部署插件</strong>：<br>这个插件可以把生成的public文件上传到GitHub<br> public文件由hexo deploy命令生成</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>配置 <code>_config.yml</code> 文件</strong>：<br>打开项目根目录下的 <code>_config.yml</code>，在底部找到 <code>deploy</code> 配置，填入 GitHub 仓库信息：</p>
+</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  <span class="built_in">type</span>: git</span><br><span class="line">  repo: https://github.com/你的GitHub用户名/你的仓库名.git</span><br><span class="line">  branch: master  <span class="comment"># 如果用的主分支是 master，就写 master，不是的话改成对应分支</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="5-本地预览"><a href="#5-本地预览" class="headerlink" title="5. 本地预览"></a>5. 本地预览</h3><ul>
+<li><p>在本地生成静态文件并预览效果：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo generate</span><br><span class="line">hexo server</span><br></pre></td></tr></table></figure>
+
+<p>打开浏览器访问 <code>http://localhost:4000</code>，看看网站效果。</p>
+</li>
+</ul>
+<h3 id="6-部署到-GitHub-Pages"><a href="#6-部署到-GitHub-Pages" class="headerlink" title="6. 部署到 GitHub Pages"></a>6. 部署到 GitHub Pages</h3><ul>
+<li><p>生成并部署到 GitHub Pages：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo clean     <span class="comment"># 清理旧文件，确保是最新内容</span></span><br><span class="line">hexo generate  <span class="comment"># 生成静态文件</span></span><br><span class="line">hexo deploy    <span class="comment"># 部署到 GitHub</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>如果没有报错，访问 <code>https://你的GitHub用户名.github.io</code> 就可以看到你的 Hexo 网站上线了。</p>
+</li>
+</ul>
+<h3 id="7-更新和再次部署"><a href="#7-更新和再次部署" class="headerlink" title="7. 更新和再次部署"></a>7. 更新和再次部署</h3><p>每次修改内容或发布新文章时，重复以下步骤：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo generate</span><br><span class="line">hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>就这些，全流程下来网站就部署在 GitHub Pages 上了。</p>
+<p>hexo generate指令等价于hexo g</p>
+<p>hexo server指令等价于hexo s</p>
 ]]></content>
       <tags>
-        <tag>hexo</tag>
-        <tag>Test</tag>
+        <tag>buildWebsite</tag>
       </tags>
   </entry>
   <entry>
@@ -49,8 +103,27 @@
       </tags>
   </entry>
   <entry>
+    <title>redis的数据类型</title>
+    <url>/2024/11/17/redis/redis%E7%9A%84%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/</url>
+    <content><![CDATA[<p><img   src="https://flichane.github.io/picx-images-hosting/redis%E4%B8%AD%E7%9A%84%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B.4uayhrb3ks.png" ></p>
+]]></content>
+      <tags>
+        <tag>redis</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>中文文件名测试</title>
+    <url>/2024/11/11/%E4%B8%AD%E6%96%87%E6%96%87%E4%BB%B6%E5%90%8D%E6%B5%8B%E8%AF%95/</url>
+    <content><![CDATA[<h1 id="test"><a href="#test" class="headerlink" title="test"></a>test</h1><p>哈哈哈成功了，留个纪念</p>
+]]></content>
+      <tags>
+        <tag>hexo</tag>
+        <tag>Test</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Linux基础指令</title>
-    <url>/2024/11/28/06%20Linux/%E5%9F%BA%E7%A1%80%E5%91%BD%E4%BB%A4/</url>
+    <url>/2024/11/28/Linux/%E5%9F%BA%E7%A1%80%E5%91%BD%E4%BB%A4/</url>
     <content><![CDATA[<h3 id="1-文件和目录操作"><a href="#1-文件和目录操作" class="headerlink" title="1. 文件和目录操作"></a><strong>1. 文件和目录操作</strong></h3><h4 id="1-1-查看目录内容：ls"><a href="#1-1-查看目录内容：ls" class="headerlink" title="1.1 查看目录内容：ls"></a><strong>1.1 查看目录内容：<code>ls</code></strong></h4><ul>
 <li><p>查看当前目录内容：</p>
   <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">ls</span></span><br></pre></td></tr></table></figure>
@@ -407,8 +480,17 @@
       </tags>
   </entry>
   <entry>
+    <title>redis的用法</title>
+    <url>/2024/11/17/redis/redis%E7%9A%84%E7%94%A8%E6%B3%95/</url>
+    <content><![CDATA[<p><img   src="https://flichane.github.io/picx-images-hosting/redis%E7%9A%84%E7%94%A8%E6%B3%95.pfd5ng6te.webp" ></p>
+]]></content>
+      <tags>
+        <tag>redis</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>su - root详解</title>
-    <url>/2024/11/28/06%20Linux/su%20-%20root/</url>
+    <url>/2024/11/28/Linux/su%20-%20root/</url>
     <content><![CDATA[<h3 id="1-su-root"><a href="#1-su-root" class="headerlink" title="1. su - root"></a><strong>1. <code>su - root</code></strong></h3><h4 id="1-1-命令作用"><a href="#1-1-命令作用" class="headerlink" title="1.1 命令作用"></a><strong>1.1 命令作用</strong></h4><ul>
 <li><code>su</code> 命令用于切换用户，默认切换到 root 用户。</li>
 <li><code>-</code> 参数用于模拟登录，意味着切换到 root 用户时，加载 root 用户的环境变量（包括 PATH、HOME 等），就像真正以 root 用户身份登录系统一样。</li>
@@ -441,90 +523,8 @@
       </tags>
   </entry>
   <entry>
-    <title>redis的用法</title>
-    <url>/2024/11/17/redis/redis%E7%9A%84%E7%94%A8%E6%B3%95/</url>
-    <content><![CDATA[<p><img   src="https://flichane.github.io/picx-images-hosting/redis%E7%9A%84%E7%94%A8%E6%B3%95.pfd5ng6te.webp" ></p>
-]]></content>
-      <tags>
-        <tag>redis</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>如何使用Hexo和GitHub部署静态网站</title>
-    <url>/2024/11/10/How-to-deploy-a-static-website-with-Hexo-and-GitHub/</url>
-    <content><![CDATA[<p>我使用的模板是hexo上的keep</p>
-<h3 id="1-安装-Node-js-和-Hexo"><a href="#1-安装-Node-js-和-Hexo" class="headerlink" title="1. 安装 Node.js 和 Hexo"></a>1. 安装 Node.js 和 Hexo</h3><ul>
-<li><p><strong>安装 Node.js</strong>：去 <a class="link"   href="https://nodejs.org/" >Node.js官网<i class="fas fa-external-link-alt"></i></a> 下载并安装 Node.js（装完会自动带上 npm）。</p>
-</li>
-<li><p><strong>安装 Hexo</strong>：打开终端（先win+R，输入cmd后回车），运行以下命令来全局安装 Hexo。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install -g hexo-cli</span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<h3 id="2-初始化-Hexo-项目"><a href="#2-初始化-Hexo-项目" class="headerlink" title="2. 初始化 Hexo 项目"></a>2. 初始化 Hexo 项目</h3><ul>
-<li><p>选择一个文件夹，作为你的网站项目目录。</p>
-</li>
-<li><p>进入这个文件夹，用 Hexo 初始化项目：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo init 你的项目名称</span><br><span class="line"><span class="built_in">cd</span> 你的项目名称</span><br><span class="line">npm install  <span class="comment"># 安装项目依赖</span></span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<p><strong>如果hexo init blog 卡住</strong></p>
-<p>​    此小节引用于：<a class="link"   href="https://blog.csdn.net/f6619082/article/details/109193251" >https://blog.csdn.net/f6619082/article/details/109193251<i class="fas fa-external-link-alt"></i></a></p>
-<p>​    替换成以下代码</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://gitee.com/weilining/hexo-starter.git blog</span><br><span class="line">   <span class="built_in">cd</span> blog</span><br><span class="line">   git submodule init</span><br><span class="line">   git submodule update</span><br><span class="line">   npm config <span class="built_in">set</span> registry http://registry.npm.taobao.org</span><br><span class="line">   npm i	</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="3-创建内容"><a href="#3-创建内容" class="headerlink" title="3. 创建内容"></a>3. 创建内容</h3><ul>
-<li>选择网站模板<br>可以到hexo官网找模板，点击模板链接到GitHub，里面会有网站模板应该如何部署的介绍<br>部署好模板之后就可以跟着介绍自定义自己的网站</li>
-</ul>
-<h3 id="4-配置-GitHub-Pages-部署"><a href="#4-配置-GitHub-Pages-部署" class="headerlink" title="4. 配置 GitHub Pages 部署"></a>4. 配置 GitHub Pages 部署</h3><ul>
-<li><p><strong>安装 GitHub 部署插件</strong>：<br>这个插件可以把生成的public文件上传到GitHub<br> public文件由hexo deploy命令生成</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
-</li>
-<li><p><strong>配置 <code>_config.yml</code> 文件</strong>：<br>打开项目根目录下的 <code>_config.yml</code>，在底部找到 <code>deploy</code> 配置，填入 GitHub 仓库信息：</p>
-</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  <span class="built_in">type</span>: git</span><br><span class="line">  repo: https://github.com/你的GitHub用户名/你的仓库名.git</span><br><span class="line">  branch: master  <span class="comment"># 如果用的主分支是 master，就写 master，不是的话改成对应分支</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="5-本地预览"><a href="#5-本地预览" class="headerlink" title="5. 本地预览"></a>5. 本地预览</h3><ul>
-<li><p>在本地生成静态文件并预览效果：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo generate</span><br><span class="line">hexo server</span><br></pre></td></tr></table></figure>
-
-<p>打开浏览器访问 <code>http://localhost:4000</code>，看看网站效果。</p>
-</li>
-</ul>
-<h3 id="6-部署到-GitHub-Pages"><a href="#6-部署到-GitHub-Pages" class="headerlink" title="6. 部署到 GitHub Pages"></a>6. 部署到 GitHub Pages</h3><ul>
-<li><p>生成并部署到 GitHub Pages：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo clean     <span class="comment"># 清理旧文件，确保是最新内容</span></span><br><span class="line">hexo generate  <span class="comment"># 生成静态文件</span></span><br><span class="line">hexo deploy    <span class="comment"># 部署到 GitHub</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>如果没有报错，访问 <code>https://你的GitHub用户名.github.io</code> 就可以看到你的 Hexo 网站上线了。</p>
-</li>
-</ul>
-<h3 id="7-更新和再次部署"><a href="#7-更新和再次部署" class="headerlink" title="7. 更新和再次部署"></a>7. 更新和再次部署</h3><p>每次修改内容或发布新文章时，重复以下步骤：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo generate</span><br><span class="line">hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>就这些，全流程下来网站就部署在 GitHub Pages 上了。</p>
-<p>hexo generate指令等价于hexo g</p>
-<p>hexo server指令等价于hexo s</p>
-]]></content>
-      <tags>
-        <tag>buildWebsite</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>redis的数据类型</title>
-    <url>/2024/11/17/redis/redis%E7%9A%84%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/</url>
-    <content><![CDATA[<p><img   src="https://flichane.github.io/picx-images-hosting/redis%E4%B8%AD%E7%9A%84%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B.4uayhrb3ks.png" ></p>
-]]></content>
-      <tags>
-        <tag>redis</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Linux通配符</title>
-    <url>/2024/11/28/06%20Linux/%E9%80%9A%E9%85%8D%E7%AC%A6/</url>
+    <url>/2024/11/28/Linux/%E9%80%9A%E9%85%8D%E7%AC%A6/</url>
     <content><![CDATA[<h3 id="通配符简介"><a href="#通配符简介" class="headerlink" title="通配符简介"></a><strong>通配符简介</strong></h3><p><strong>通配符</strong> 是在命令行操作中，用来匹配文件名或目录名的一种特殊符号，可以大幅提升效率，省去重复敲文件名的麻烦。</p>
 <hr>
 <h3 id="1-通配符的种类和用法"><a href="#1-通配符的种类和用法" class="headerlink" title="1. 通配符的种类和用法"></a><strong>1. 通配符的种类和用法</strong></h3><h4 id="1-1"><a href="#1-1" class="headerlink" title="1.1 *"></a><strong>1.1 <code>*</code></strong></h4><ul>
@@ -610,8 +610,225 @@
       </tags>
   </entry>
   <entry>
+    <title>yml配置</title>
+    <url>/2024/12/09/java/00%20yml%E9%85%8D%E7%BD%AE/</url>
+    <content><![CDATA[<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">server:</span>  </span><br><span class="line">  <span class="attr">port:</span> <span class="number">8080</span>  </span><br><span class="line">  </span><br><span class="line"><span class="attr">spring:</span>  </span><br><span class="line">  <span class="attr">profiles:</span>    </span><br><span class="line">	<span class="attr">active:</span> <span class="string">dev</span>  </span><br><span class="line">  <span class="attr">main:</span>  </span><br><span class="line">    <span class="attr">allow-circular-references:</span> <span class="literal">true</span>  <span class="comment"># 允许循环依赖</span></span><br><span class="line">  <span class="attr">datasource:</span>    </span><br><span class="line">    <span class="attr">druid:</span>      </span><br><span class="line">      <span class="attr">driver-class-name:</span> <span class="string">$&#123;sky.datasource.driver-class-name&#125;</span>  </span><br><span class="line">      <span class="attr">url:</span> <span class="string">jdbc:mysql://$&#123;sky.datasource.host&#125;:$&#123;sky.datasource.port&#125;/$&#123;sky.datasource.database&#125;?serverTimezone=Asia/Shanghai&amp;useUnicode=true&amp;characterEncoding=utf-8&amp;zeroDateTimeBehavior=convertToNull&amp;useSSL=false&amp;allowPublicKeyRetrieval=true</span>  </span><br><span class="line">      <span class="comment"># com.mysql.cj.jdbc.Driver</span></span><br><span class="line">      <span class="attr">username:</span> <span class="string">$&#123;sky.datasource.username&#125;</span>  </span><br><span class="line">      <span class="attr">password:</span> <span class="string">$&#123;sky.datasource.password&#125;</span>  </span><br><span class="line">  <span class="attr">redis:</span>  </span><br><span class="line">    <span class="attr">host:</span> <span class="string">$&#123;spring.redis.host&#125;</span>  <span class="comment"># localhost</span></span><br><span class="line">    <span class="attr">port:</span> <span class="string">$&#123;spring.redis.port&#125;</span>  <span class="comment"># 6379</span></span><br><span class="line">    <span class="attr">password:</span> <span class="string">$&#123;spring.redis.password&#125;</span>  </span><br><span class="line">    <span class="attr">database:</span> <span class="string">$&#123;spring.redis.database&#125;</span>  <span class="comment"># 0</span></span><br><span class="line">  </span><br><span class="line"><span class="attr">mybatis:</span>  </span><br><span class="line">  <span class="comment">#mapper配置文件  </span></span><br><span class="line">  <span class="attr">mapper-locations:</span> <span class="string">classpath:mapper/*.xml</span>  </span><br><span class="line">  <span class="attr">type-aliases-package:</span> <span class="string">com.sky.entity</span>  </span><br><span class="line">  </span><br><span class="line">  <span class="attr">configuration:</span>  </span><br><span class="line">    <span class="attr">map-underscore-to-camel-case:</span> <span class="literal">true</span>  <span class="comment">#开启驼峰命名  </span></span><br><span class="line">	  </span><br><span class="line"><span class="attr">logging:</span>  </span><br><span class="line">  <span class="attr">level:</span>    </span><br><span class="line">    <span class="attr">com:</span>      </span><br><span class="line">	  <span class="attr">sky:</span>        </span><br><span class="line">	    <span class="attr">mapper:</span> <span class="string">debug</span>  </span><br><span class="line">        <span class="attr">service:</span> <span class="string">info</span>  </span><br><span class="line">        <span class="attr">controller:</span> <span class="string">info</span>  </span><br><span class="line">	  </span><br><span class="line"><span class="attr">sky:</span>  </span><br><span class="line">  <span class="attr">jwt:</span>   </span><br><span class="line">    <span class="attr">admin-secret-key:</span> <span class="string">itcast</span>   <span class="comment"># 设置jwt签名加密时使用的秘钥  </span></span><br><span class="line">    <span class="attr">admin-ttl:</span> <span class="number">7200000</span>  <span class="comment"># 设置jwt过期时间(ms)</span></span><br><span class="line">    <span class="attr">admin-token-name:</span> <span class="string">token</span>  <span class="comment"># 设置前端传递过来的令牌名称 </span></span><br><span class="line">    </span><br><span class="line">    <span class="attr">user-secret-key:</span> <span class="string">itcast</span>  </span><br><span class="line">    <span class="attr">user-ttl:</span> <span class="number">7200000</span>  </span><br><span class="line">    <span class="attr">user-token-name:</span> <span class="string">authentication</span>  </span><br><span class="line">  <span class="attr">alioss:</span>  </span><br><span class="line">    <span class="attr">access-key-id:</span> <span class="string">$&#123;sky.alioss.access-key-id&#125;</span>  </span><br><span class="line">    <span class="attr">access-key-secret:</span> <span class="string">$&#123;sky.alioss.access-key-secret&#125;</span>  </span><br><span class="line">    <span class="attr">endpoint:</span> <span class="string">$&#123;sky.alioss.endpoint&#125;</span>  <span class="comment"># oss-cn-guangzhou.aliyuncs.com</span></span><br><span class="line">    <span class="attr">bucket-name:</span> <span class="string">$&#123;sky.alioss.bucket-name&#125;</span>  </span><br><span class="line">  <span class="attr">wechat:</span>  </span><br><span class="line">    <span class="attr">secret:</span> <span class="string">$&#123;sky.wechat.secret&#125;</span>  </span><br><span class="line">    <span class="attr">appid:</span> <span class="string">$&#123;sky.wechat.appid&#125;</span></span><br></pre></td></tr></table></figure>]]></content>
+      <tags>
+        <tag>Java</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title></title>
+    <url>/2024/12/10/java/01%20Apache%20ECharts/</url>
+    <content><![CDATA[<p>用于展示可视化报表<br>![[../attachments/Pasted image 20241116174858.png]]</p>
+]]></content>
+  </entry>
+  <entry>
+    <title>fastjson</title>
+    <url>/2024/12/09/java/11%20fastjson/</url>
+    <content><![CDATA[<p><strong>FastJSON</strong> 是阿里巴巴搞的一个 Java JSON 库，用来干啥的？简单说，就是用来<strong>解析和生成 JSON 数据</strong>，速度快得离谱，但也因为一些历史安全问题饱受争议。</p>
+<hr>
+<h3 id="特点："><a href="#特点：" class="headerlink" title="特点："></a><strong>特点：</strong></h3><ol>
+<li><strong>性能贼快</strong>：号称解析速度吊打 Gson 和 Jackson（大多数情况下的确快）。</li>
+<li><strong>使用简单</strong>：API 设计人畜无害，几行代码就能搞定 JSON 操作。</li>
+<li><strong>功能丰富</strong>：支持 JSON 与 Java Bean 的互转、复杂集合结构解析等。</li>
+<li><strong>国产</strong>：贴近中国开发者需求，更新还算勤快。</li>
+</ol>
+<hr>
+<h3 id="常用功能："><a href="#常用功能：" class="headerlink" title="常用功能："></a><strong>常用功能：</strong></h3><h4 id="1-JSON-字符串转-Java-对象"><a href="#1-JSON-字符串转-Java-对象" class="headerlink" title="1. JSON 字符串转 Java 对象"></a><strong>1. JSON 字符串转 Java 对象</strong></h4><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> com.alibaba.fastjson.JSON;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">User</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span> age;</span><br><span class="line">    <span class="comment">// getter、setter</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">String</span> <span class="variable">json</span> <span class="operator">=</span> <span class="string">&quot;&#123;\&quot;name\&quot;:\&quot;张三\&quot;,\&quot;age\&quot;:20&#125;&quot;</span>;</span><br><span class="line">        <span class="type">User</span> <span class="variable">user</span> <span class="operator">=</span> JSON.parseObject(json, User.class);</span><br><span class="line">        System.out.println(user.getName()); <span class="comment">// 张三</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-Java-对象转-JSON-字符串"><a href="#2-Java-对象转-JSON-字符串" class="headerlink" title="2. Java 对象转 JSON 字符串"></a><strong>2. Java 对象转 JSON 字符串</strong></h4><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="type">User</span> <span class="variable">user</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">User</span>();</span><br><span class="line">user.setName(<span class="string">&quot;李四&quot;</span>);</span><br><span class="line">user.setAge(<span class="number">25</span>);</span><br><span class="line"><span class="type">String</span> <span class="variable">json</span> <span class="operator">=</span> JSON.toJSONString(user);</span><br><span class="line">System.out.println(json); <span class="comment">// &#123;&quot;age&quot;:25,&quot;name&quot;:&quot;李四&quot;&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="3-JSON-数组转-List"><a href="#3-JSON-数组转-List" class="headerlink" title="3. JSON 数组转 List"></a><strong>3. JSON 数组转 List</strong></h4><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="type">String</span> <span class="variable">jsonArray</span> <span class="operator">=</span> <span class="string">&quot;[&#123;\&quot;name\&quot;:\&quot;张三\&quot;,\&quot;age\&quot;:20&#125;,&#123;\&quot;name\&quot;:\&quot;李四\&quot;,\&quot;age\&quot;:25&#125;]&quot;</span>;</span><br><span class="line">List&lt;User&gt; users = JSON.parseArray(jsonArray, User.class);</span><br><span class="line">System.out.println(users.size()); <span class="comment">// 2</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="优缺点："><a href="#优缺点：" class="headerlink" title="优缺点："></a><strong>优缺点：</strong></h3><p><strong>优点：</strong></p>
+<ul>
+<li>快，真快，不是吹的。</li>
+<li>API 简单，支持超复杂数据结构。</li>
+<li>文档还算友好，国内支持力度强。</li>
+</ul>
+<p><strong>缺点：</strong></p>
+<ul>
+<li><strong>历史上有安全问题</strong>：比如反序列化漏洞，建议用新版。</li>
+<li>相比 Gson 和 Jackson，社区讨论相对少。</li>
+<li>性能过于追求快，牺牲了一些代码规范性。</li>
+</ul>
+<hr>
+<p><strong>总结：</strong><br>你要是图速度、方便，FastJSON 没毛病；但如果特别看重安全性和社区支持，可能要权衡下。</p>
+]]></content>
+      <tags>
+        <tag>Java</tag>
+        <tag>Java依赖</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>lombok</title>
+    <url>/2024/12/09/java/10%20lombok/</url>
+    <content><![CDATA[<p>它通过注解帮你自动生成 getter、setter、toString、构造器之类的常用代码，省得你手动敲半天。</p>
+<h1 id="常用注解："><a href="#常用注解：" class="headerlink" title="常用注解："></a>常用注解：</h1><ul>
+<li><code>@Getter</code> / <code>@Setter</code>：生成 getter 和 setter 方法。</li>
+<li><code>@ToString</code>：生成 <code>toString</code> 方法。</li>
+<li><code>@NoArgsConstructor</code> / <code>@AllArgsConstructor</code>：生成无参和全参构造器。</li>
+<li><code>@Builder</code>：比如说User user = User.<font color="#ff0000">builder()</font>.id(75).name(“shit”).build;</li>
+<li><code>@Data</code>：包含 <code>@Getter</code>、<code>@Setter</code>、<code>@ToString</code>、<code>@EqualsAndHashCode</code>、<code>@RequiredArgsConstructor</code>。</li>
+<li><code>@Slf4j</code>：省去声明日志 <code>Logger</code> 对象的步骤。</li>
+</ul>
+<h1 id="用法："><a href="#用法：" class="headerlink" title="用法："></a>用法：</h1><ol>
+<li>在项目的 <code>pom.xml</code> 里加上 Lombok 依赖（Maven 项目）：<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.projectlombok<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>lombok<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.18.30<span class="tag">&lt;/<span class="name">version</span>&gt;</span> <span class="comment">&lt;!-- 根据需要换版本 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">scope</span>&gt;</span>provided<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+<li>IDEA 里装个 Lombok 插件，记得打开 <strong>Enable Annotation Processing</strong>（设置 -&gt; Build, Execution, Deployment -&gt; Compiler -&gt; Annotation Processors）。</li>
+</ol>
+<h1 id="RequiredArgsConstructor"><a href="#RequiredArgsConstructor" class="headerlink" title="@RequiredArgsConstructor"></a>@RequiredArgsConstructor</h1><p>这个似乎不常用<br><code>@RequiredArgsConstructor</code> 是用来自动生成<strong>包含 <code>final</code> 修饰符字段</strong>和**<code>@NonNull</code> 注解字段<strong>的</strong>构造方法**。  </p>
+<p><strong>具体意思：</strong>  </p>
+<ul>
+<li>只对 <strong><code>final</code> 和 <code>@NonNull</code> 字段</strong>生成构造参数。  </li>
+<li>非 <code>final</code> 和无 <code>@NonNull</code> 的字段直接无视，不会加入构造器。  </li>
+</ul>
+<p> <strong>举个栗子：</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> lombok.RequiredArgsConstructor;</span><br><span class="line"></span><br><span class="line"><span class="meta">@RequiredArgsConstructor</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Demo</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> String name; <span class="comment">// 构造方法会有这个</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="type">int</span> age;     <span class="comment">// 构造方法会有这个</span></span><br><span class="line">    <span class="keyword">private</span> String nickname;   <span class="comment">// 构造方法没有这个</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>编译后自动生成：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Demo</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> String name;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="type">int</span> age;</span><br><span class="line">    <span class="keyword">private</span> String nickname;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Demo</span><span class="params">(String name, <span class="type">int</span> age)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.name = name;</span><br><span class="line">        <span class="built_in">this</span>.age = age;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+      <tags>
+        <tag>Java</tag>
+        <tag>Java依赖</tag>
+        <tag>Slf4j</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>WebSocket</title>
+    <url>/2024/12/09/java/00%20WebSocket/</url>
+    <content><![CDATA[<p>WebSocket 就是个双向通讯协议，只需建立一次链接，<strong>服务端和客户端就可以实时交互</strong>，不像 HTTP 一样只能客户端请求、服务端回应。</p>
+<h3 id="优势"><a href="#优势" class="headerlink" title="优势"></a><strong>优势</strong></h3><ol>
+<li><strong>实时性强</strong>：只要连接一建立，客户端和服务端可以互相推消息，不用来回请求。</li>
+<li><strong>效率高</strong>：省掉了 HTTP 的请求头，数据传输更轻量。</li>
+<li><strong>全双工</strong>：能同时发数据、收数据，比 HTTP 单工爽多了。</li>
+</ol>
+<h3 id="怎么用？"><a href="#怎么用？" class="headerlink" title="怎么用？"></a><strong>怎么用？</strong></h3><ol>
+<li><strong>握手阶段</strong>：客户端发个特殊的 HTTP 请求，服务端同意后升级为 WebSocket。</li>
+<li><strong>建立连接后</strong>：直接互发消息，像发短信一样简单。</li>
+</ol>
+<h3 id="Java-核心流程："><a href="#Java-核心流程：" class="headerlink" title="Java 核心流程："></a><strong>Java 核心流程：</strong></h3><ol>
+<li><p><strong>依赖</strong>：如果是 Spring Boot，用 <code>spring-boot-starter-websocket</code>。</p>
+</li>
+<li><p><strong>服务端实现</strong>：</p>
+</li>
+<li><p>基础实现：演示用，只能用于单个用户</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@ServerEndpoint(&quot;/ws&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">WebSocketServer</span> &#123;</span><br><span class="line">	<span class="meta">@OnOpen</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">onOpen</span><span class="params">(Session session)</span> &#123;</span><br><span class="line">		System.out.println(<span class="string">&quot;连接建立: &quot;</span> + session.getId());</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@OnMessage</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">onMessage</span><span class="params">(String message, Session session)</span> &#123;</span><br><span class="line">		System.out.println(<span class="string">&quot;收到消息: &quot;</span> + message);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@OnClose</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">onClose</span><span class="params">(Session session)</span> &#123;</span><br><span class="line">		System.out.println(<span class="string">&quot;连接关闭: &quot;</span> + session.getId());</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>高级实现：可用于多个用户</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**  </span></span><br><span class="line"><span class="comment"> * WebSocket服务  </span></span><br><span class="line"><span class="comment"> */</span>  </span><br><span class="line"><span class="meta">@Component</span>  </span><br><span class="line"><span class="meta">@ServerEndpoint(&quot;/ws/&#123;sid&#125;&quot;)</span>  </span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">WebSocketServer</span> &#123;  </span><br><span class="line">  </span><br><span class="line">    <span class="comment">//存放会话对象  </span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Map&lt;String, Session&gt; sessionMap = <span class="keyword">new</span> <span class="title class_">HashMap</span>();  </span><br><span class="line">  </span><br><span class="line">    <span class="comment">/**  </span></span><br><span class="line"><span class="comment">     * 连接建立成功调用的方法  </span></span><br><span class="line"><span class="comment">     */</span>  </span><br><span class="line">    <span class="meta">@OnOpen</span>  </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">onOpen</span><span class="params">(Session session, <span class="meta">@PathParam(&quot;sid&quot;)</span> String sid)</span> &#123;  </span><br><span class="line">        System.out.println(<span class="string">&quot;客户端：&quot;</span> + sid + <span class="string">&quot;建立连接&quot;</span>);  </span><br><span class="line">        sessionMap.put(sid, session);  </span><br><span class="line">    &#125;  </span><br><span class="line">  </span><br><span class="line">    <span class="comment">/**  </span></span><br><span class="line"><span class="comment">     * 收到客户端消息后调用的方法  </span></span><br><span class="line"><span class="comment">     *  </span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> message 客户端发送过来的消息  </span></span><br><span class="line"><span class="comment">     */</span>  </span><br><span class="line">    <span class="meta">@OnMessage</span>  </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">onMessage</span><span class="params">(String message, <span class="meta">@PathParam(&quot;sid&quot;)</span> String sid)</span> &#123;  </span><br><span class="line">        System.out.println(<span class="string">&quot;收到来自客户端：&quot;</span> + sid + <span class="string">&quot;的信息:&quot;</span> + message);  </span><br><span class="line">    &#125;  </span><br><span class="line">  </span><br><span class="line">    <span class="comment">/**  </span></span><br><span class="line"><span class="comment">     * 连接关闭调用的方法  </span></span><br><span class="line"><span class="comment">     *  </span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> sid  </span></span><br><span class="line"><span class="comment">     */</span>  </span><br><span class="line">    <span class="meta">@OnClose</span>  </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">onClose</span><span class="params">(<span class="meta">@PathParam(&quot;sid&quot;)</span> String sid)</span> &#123;  </span><br><span class="line">        System.out.println(<span class="string">&quot;连接断开:&quot;</span> + sid);  </span><br><span class="line">        sessionMap.remove(sid);  </span><br><span class="line">    &#125;  </span><br><span class="line">  </span><br><span class="line">    <span class="comment">/**  </span></span><br><span class="line"><span class="comment">     * 群发  </span></span><br><span class="line"><span class="comment">     *  </span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> message  </span></span><br><span class="line"><span class="comment">     */</span>  </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">sendToAllClient</span><span class="params">(String message)</span> &#123;  </span><br><span class="line">        Collection&lt;Session&gt; sessions = sessionMap.values();  </span><br><span class="line">        <span class="keyword">for</span> (Session session : sessions) &#123;  </span><br><span class="line">            <span class="keyword">try</span> &#123;  </span><br><span class="line">                <span class="comment">//服务器向客户端发送消息  </span></span><br><span class="line">                session.getBasicRemote().sendText(message);  </span><br><span class="line">            &#125; <span class="keyword">catch</span> (Exception e) &#123;  </span><br><span class="line">                e.printStackTrace();  </span><br><span class="line">            &#125;  </span><br><span class="line">        &#125;  </span><br><span class="line">    &#125;  </span><br><span class="line">  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>客户端实现</strong>：用浏览器或库，前端最简单的：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> ws = <span class="keyword">new</span> <span class="title class_">WebSocket</span>(<span class="string">&quot;ws://localhost:8080/ws&quot;</span>);</span><br><span class="line">ws.<span class="property">onopen</span> = <span class="function">() =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;连接成功&quot;</span>);</span><br><span class="line">ws.<span class="property">onmessage</span> = <span class="function">(<span class="params">msg</span>) =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;收到消息: &quot;</span>, msg.<span class="property">data</span>);</span><br><span class="line">ws.<span class="title function_">send</span>(<span class="string">&quot;Hello WebSocket!&quot;</span>);</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+]]></content>
+      <tags>
+        <tag>Java</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>如何使用properties和properties-dev</title>
+    <url>/2024/12/09/java/20%20%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8properties%E5%92%8Cproperties-dev/</url>
+    <content><![CDATA[<p>[[21 dev-test-prod|dev介绍]]<br>[[23 JDBC URL 配置|JDBC URL 配置]]<br>[[22 环境配置分离|环境配置分离]]</p>
+<ol>
+<li>启用dev配置文件<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">spring:</span>  </span><br><span class="line">  <span class="attr">profiles:</span></span><br><span class="line">	<span class="attr">active:</span> <span class="string">dev</span></span><br></pre></td></tr></table></figure></li>
+<li>使用dev中的配置<br> ${…}<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">spring:</span></span><br><span class="line">	<span class="attr">datasource:</span>  </span><br><span class="line">	  <span class="attr">druid:</span> </span><br><span class="line">		<span class="attr">driver-class-name:</span> <span class="string">$&#123;sky.datasource.driver-class-name&#125;</span>  </span><br><span class="line">	    <span class="attr">url:</span> <span class="string">jdbc:mysql://$&#123;sky.datasource.host&#125;:$&#123;sky.datasource.port&#125;/$&#123;sky.datasource.database&#125;?</span></span><br><span class="line">	    <span class="attr">username:</span> <span class="string">$&#123;sky.datasource.username&#125;</span>  </span><br><span class="line">	    <span class="attr">password:</span> <span class="string">$&#123;sky.datasource.password&#125;</span></span><br></pre></td></tr></table></figure></li>
+</ol>
+]]></content>
+      <tags>
+        <tag>Java</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Druid数据库连接池</title>
+    <url>/2024/12/09/java/13%20Druid%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%9E%E6%8E%A5%E6%B1%A0/</url>
+    <content><![CDATA[<p><strong>Druid</strong> 是阿里巴巴出品的数据库连接池，兼具监控和 SQL 优化功能，专为 Java 应用设计，性能和功能都很强悍。</p>
+<hr>
+<h3 id="核心特点："><a href="#核心特点：" class="headerlink" title="核心特点："></a><strong>核心特点：</strong></h3><ol>
+<li><strong>性能优秀</strong>：连接池管理高效，性能媲美甚至超过 HikariCP。</li>
+<li><strong>多功能</strong>：除了连接池，还支持 SQL 监控、慢查询分析、SQL 防火墙等。</li>
+<li><strong>兼容性强</strong>：支持常见数据库（MySQL、Oracle、PostgreSQL 等）。</li>
+<li><strong>易用性好</strong>：通过 Web 界面实时查看 SQL 执行情况。</li>
+</ol>
+<hr>
+<h3 id="基本用法："><a href="#基本用法：" class="headerlink" title="基本用法："></a><strong>基本用法：</strong></h3><h4 id="1-添加依赖"><a href="#1-添加依赖" class="headerlink" title="1. 添加依赖"></a><strong>1. 添加依赖</strong></h4><p>Maven 项目加依赖，选择SpringBoot项目后会默认引入：</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span>  </span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.alibaba<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span>  </span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>druid-spring-boot-starter<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span>  </span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="2-配置连接池"><a href="#2-配置连接池" class="headerlink" title="2. 配置连接池"></a><strong>2. 配置连接池</strong></h4><p>在 <code>application.properties</code> 中添加配置：</p>
+<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">spring:</span></span><br><span class="line">	<span class="attr">datasource:</span>  </span><br><span class="line">	  <span class="attr">druid:</span>  </span><br><span class="line">	    <span class="attr">driver-class-name:</span> <span class="string">com.mysql.cj.jdbc.Driver</span></span><br><span class="line">	    <span class="attr">url:</span> <span class="string">jdbc:mysql://$&#123;sky.datasource.host&#125;:$&#123;sky.datasource.port&#125;/$&#123;sky.datasource.database&#125;</span></span><br><span class="line">	    <span class="attr">username:</span> <span class="string">...</span></span><br><span class="line">	    <span class="attr">password:</span> <span class="string">...</span></span><br></pre></td></tr></table></figure>
+
+
+
+]]></content>
+      <tags>
+        <tag>Java</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Apache POI</title>
+    <url>/2024/12/09/java/02%20Apache%20POI/</url>
+    <content><![CDATA[<p>Apache POI是处理Office文档的Java库，主要用来读写Excel、Word、PowerPoint文件。以下是个简单示例，用来操作Excel。</p>
+<h3 id="依赖"><a href="#依赖" class="headerlink" title="依赖"></a>依赖</h3><p>先加上Maven依赖：</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.poi<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>poi<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>5.2.3<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.poi<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>poi-ooxml<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>5.2.3<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="type">InputStream</span> <span class="variable">resourceAsStream</span> <span class="operator">=</span> <span class="built_in">this</span>.getClass().getClassLoader().  </span><br><span class="line">        getResourceAsStream(<span class="string">&quot;ExcelTemplate/运营数据报表模板.xlsx&quot;</span>);  </span><br><span class="line"><span class="keyword">try</span> &#123;  </span><br><span class="line">    <span class="type">XSSFWorkbook</span> <span class="variable">excel</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">XSSFWorkbook</span>(resourceAsStream);  </span><br><span class="line">    <span class="type">XSSFSheet</span> <span class="variable">sheet</span> <span class="operator">=</span> excel.getSheetAt(<span class="number">0</span>);  </span><br><span class="line">    <span class="comment">//填入数据    </span></span><br><span class="line">    sheet.getRow(<span class="number">0</span>).getCell(<span class="number">0</span>).setCellValue(<span class="string">&quot;你好&quot;</span>);  </span><br><span class="line">    <span class="comment">//导出文件  </span></span><br><span class="line">    <span class="type">ServletOutputStream</span> <span class="variable">outputStream</span> <span class="operator">=</span> httpServletResponse.getOutputStream();  </span><br><span class="line">    excel.write(outputStream);  </span><br><span class="line">	<span class="comment">//关闭流</span></span><br><span class="line">    outputStream.close();  </span><br><span class="line">    resourceAsStream.close();  </span><br><span class="line">&#125; <span class="keyword">catch</span> (IOException e) &#123;  </span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">RuntimeException</span>(e);  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h3><ol>
+<li><code>.xls</code>文件用<code>HSSFWorkbook</code>，<code>.xlsx</code>用<code>XSSFWorkbook</code>。</li>
+<li>文件操作注意关闭流。</li>
+<li>数据类型处理时，检查<code>CellType</code>，避免类型转换错误。</li>
+</ol>
+]]></content>
+      <tags>
+        <tag>Java</tag>
+        <tag>Java依赖</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>dev-test-prod</title>
+    <url>/2024/12/09/java/21%20dev-test-prod/</url>
+    <content><![CDATA[<p><strong><code>dev</code></strong> 是 <strong>development</strong> 的缩写，意思是<strong>开发环境</strong>。在软件开发中，项目通常会有多个环境配置，<code>dev</code> 专门用来跑开发中的代码，方便调试和测试。</p>
+<hr>
+<h3 id="常见环境分类："><a href="#常见环境分类：" class="headerlink" title="常见环境分类："></a><strong>常见环境分类：</strong></h3><ol>
+<li><p><strong><code>dev</code>（开发环境）</strong>：</p>
+<ul>
+<li>给程序员写代码用的。</li>
+<li>数据库、服务都用测试版本，不怕数据乱搞。</li>
+<li>配置一般是：<ul>
+<li><strong>低安全性</strong>：简单密码、调试模式开。</li>
+<li><strong>日志多</strong>：输出详细信息（debug 级别）。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong><code>test</code>（测试环境）</strong>：</p>
+<ul>
+<li>测试人员用来验证功能。</li>
+<li>更接近上线环境，但数据还是假的。</li>
+<li>配置：和生产环境类似，但数据库是测试库。</li>
+</ul>
+</li>
+<li><p><strong><code>prod</code>（生产环境）</strong>：</p>
+<ul>
+<li>正式发布给用户的环境。</li>
+<li>数据、服务都是真实的。</li>
+<li>配置：<ul>
+<li><strong>高安全性</strong>：密码复杂、调试模式关。</li>
+<li><strong>日志简洁</strong>：只保留必要信息。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+]]></content>
+      <tags>
+        <tag>Java</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>fastJSON的安全性问题及其解决方案</title>
-    <url>/2024/11/19/java/12%20fastJSON%E7%9A%84%E5%AE%89%E5%85%A8%E6%80%A7%E9%97%AE%E9%A2%98%E5%8F%8A%E5%85%B6%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/</url>
+    <url>/2024/12/09/java/12%20fastJSON%E7%9A%84%E5%AE%89%E5%85%A8%E6%80%A7%E9%97%AE%E9%A2%98%E5%8F%8A%E5%85%B6%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/</url>
     <content><![CDATA[<h3 id="1-使用更新版的-FastJSON"><a href="#1-使用更新版的-FastJSON" class="headerlink" title="1. 使用更新版的 FastJSON"></a><strong>1. 使用更新版的 FastJSON</strong></h3><ol>
 <li><p><strong>启用 SafeMode</strong></p>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line">ParserConfig.getGlobalInstance().setSafeMode(<span class="literal">true</span>);</span><br></pre></td></tr></table></figure>
@@ -647,137 +864,13 @@
 <li>如果 FastJSON 已经深度绑定项目，赶紧升级到 <strong>2.x</strong>，开启安全模式，记住要严格限制反序列化。  </li>
 </ul>
 ]]></content>
-  </entry>
-  <entry>
-    <title>dev-test-prod</title>
-    <url>/2024/11/19/java/21%20dev-test-prod/</url>
-    <content><![CDATA[<p><strong><code>dev</code></strong> 是 <strong>development</strong> 的缩写，意思是<strong>开发环境</strong>。在软件开发中，项目通常会有多个环境配置，<code>dev</code> 专门用来跑开发中的代码，方便调试和测试。</p>
-<hr>
-<h3 id="常见环境分类："><a href="#常见环境分类：" class="headerlink" title="常见环境分类："></a><strong>常见环境分类：</strong></h3><ol>
-<li><p><strong><code>dev</code>（开发环境）</strong>：</p>
-<ul>
-<li>给程序员写代码用的。</li>
-<li>数据库、服务都用测试版本，不怕数据乱搞。</li>
-<li>配置一般是：<ul>
-<li><strong>低安全性</strong>：简单密码、调试模式开。</li>
-<li><strong>日志多</strong>：输出详细信息（debug 级别）。</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p><strong><code>test</code>（测试环境）</strong>：</p>
-<ul>
-<li>测试人员用来验证功能。</li>
-<li>更接近上线环境，但数据还是假的。</li>
-<li>配置：和生产环境类似，但数据库是测试库。</li>
-</ul>
-</li>
-<li><p><strong><code>prod</code>（生产环境）</strong>：</p>
-<ul>
-<li>正式发布给用户的环境。</li>
-<li>数据、服务都是真实的。</li>
-<li>配置：<ul>
-<li><strong>高安全性</strong>：密码复杂、调试模式关。</li>
-<li><strong>日志简洁</strong>：只保留必要信息。</li>
-</ul>
-</li>
-</ul>
-</li>
-</ol>
-]]></content>
-  </entry>
-  <entry>
-    <title>Druid数据库连接池</title>
-    <url>/2024/11/19/java/13%20Druid%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%9E%E6%8E%A5%E6%B1%A0/</url>
-    <content><![CDATA[<p><strong>Druid</strong> 是阿里巴巴出品的数据库连接池，兼具监控和 SQL 优化功能，专为 Java 应用设计，性能和功能都很强悍。</p>
-<hr>
-<h3 id="核心特点："><a href="#核心特点：" class="headerlink" title="核心特点："></a><strong>核心特点：</strong></h3><ol>
-<li><strong>性能优秀</strong>：连接池管理高效，性能媲美甚至超过 HikariCP。</li>
-<li><strong>多功能</strong>：除了连接池，还支持 SQL 监控、慢查询分析、SQL 防火墙等。</li>
-<li><strong>兼容性强</strong>：支持常见数据库（MySQL、Oracle、PostgreSQL 等）。</li>
-<li><strong>易用性好</strong>：通过 Web 界面实时查看 SQL 执行情况。</li>
-</ol>
-<hr>
-<h3 id="基本用法："><a href="#基本用法：" class="headerlink" title="基本用法："></a><strong>基本用法：</strong></h3><h4 id="1-添加依赖"><a href="#1-添加依赖" class="headerlink" title="1. 添加依赖"></a><strong>1. 添加依赖</strong></h4><p>Maven 项目加依赖，选择SpringBoot项目后会默认引入：</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span>  </span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.alibaba<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span>  </span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>druid-spring-boot-starter<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span>  </span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="2-配置连接池"><a href="#2-配置连接池" class="headerlink" title="2. 配置连接池"></a><strong>2. 配置连接池</strong></h4><p>在 <code>application.properties</code> 中添加配置：</p>
-<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">spring:</span></span><br><span class="line">	<span class="attr">datasource:</span>  </span><br><span class="line">	  <span class="attr">druid:</span>  </span><br><span class="line">	    <span class="attr">driver-class-name:</span> <span class="string">com.mysql.cj.jdbc.Driver</span></span><br><span class="line">	    <span class="attr">url:</span> <span class="string">jdbc:mysql://$&#123;sky.datasource.host&#125;:$&#123;sky.datasource.port&#125;/$&#123;sky.datasource.database&#125;</span></span><br><span class="line">	    <span class="attr">username:</span> <span class="string">...</span></span><br><span class="line">	    <span class="attr">password:</span> <span class="string">...</span></span><br></pre></td></tr></table></figure>
-
-
-
-]]></content>
-  </entry>
-  <entry>
-    <title>WebSocket</title>
-    <url>/2024/11/19/java/00%20WebSocket/</url>
-    <content><![CDATA[<p>WebSocket 就是个双向通讯协议，只需建立一次链接，<strong>服务端和客户端就可以实时交互</strong>，不像 HTTP 一样只能客户端请求、服务端回应。</p>
-<h3 id="优势"><a href="#优势" class="headerlink" title="优势"></a><strong>优势</strong></h3><ol>
-<li><strong>实时性强</strong>：只要连接一建立，客户端和服务端可以互相推消息，不用来回请求。</li>
-<li><strong>效率高</strong>：省掉了 HTTP 的请求头，数据传输更轻量。</li>
-<li><strong>全双工</strong>：能同时发数据、收数据，比 HTTP 单工爽多了。</li>
-</ol>
-<h3 id="怎么用？"><a href="#怎么用？" class="headerlink" title="怎么用？"></a><strong>怎么用？</strong></h3><ol>
-<li><strong>握手阶段</strong>：客户端发个特殊的 HTTP 请求，服务端同意后升级为 WebSocket。</li>
-<li><strong>建立连接后</strong>：直接互发消息，像发短信一样简单。</li>
-</ol>
-<h3 id="Java-核心流程："><a href="#Java-核心流程：" class="headerlink" title="Java 核心流程："></a><strong>Java 核心流程：</strong></h3><ol>
-<li><p><strong>依赖</strong>：如果是 Spring Boot，用 <code>spring-boot-starter-websocket</code>。</p>
-</li>
-<li><p><strong>服务端实现</strong>：</p>
-</li>
-<li><p>基础实现：演示用，只能用于单个用户</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@ServerEndpoint(&quot;/ws&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">WebSocketServer</span> &#123;</span><br><span class="line">	<span class="meta">@OnOpen</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">onOpen</span><span class="params">(Session session)</span> &#123;</span><br><span class="line">		System.out.println(<span class="string">&quot;连接建立: &quot;</span> + session.getId());</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@OnMessage</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">onMessage</span><span class="params">(String message, Session session)</span> &#123;</span><br><span class="line">		System.out.println(<span class="string">&quot;收到消息: &quot;</span> + message);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@OnClose</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">onClose</span><span class="params">(Session session)</span> &#123;</span><br><span class="line">		System.out.println(<span class="string">&quot;连接关闭: &quot;</span> + session.getId());</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-<li><p>高级实现：可用于多个用户</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**  </span></span><br><span class="line"><span class="comment"> * WebSocket服务  </span></span><br><span class="line"><span class="comment"> */</span>  </span><br><span class="line"><span class="meta">@Component</span>  </span><br><span class="line"><span class="meta">@ServerEndpoint(&quot;/ws/&#123;sid&#125;&quot;)</span>  </span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">WebSocketServer</span> &#123;  </span><br><span class="line">  </span><br><span class="line">    <span class="comment">//存放会话对象  </span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Map&lt;String, Session&gt; sessionMap = <span class="keyword">new</span> <span class="title class_">HashMap</span>();  </span><br><span class="line">  </span><br><span class="line">    <span class="comment">/**  </span></span><br><span class="line"><span class="comment">     * 连接建立成功调用的方法  </span></span><br><span class="line"><span class="comment">     */</span>  </span><br><span class="line">    <span class="meta">@OnOpen</span>  </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">onOpen</span><span class="params">(Session session, <span class="meta">@PathParam(&quot;sid&quot;)</span> String sid)</span> &#123;  </span><br><span class="line">        System.out.println(<span class="string">&quot;客户端：&quot;</span> + sid + <span class="string">&quot;建立连接&quot;</span>);  </span><br><span class="line">        sessionMap.put(sid, session);  </span><br><span class="line">    &#125;  </span><br><span class="line">  </span><br><span class="line">    <span class="comment">/**  </span></span><br><span class="line"><span class="comment">     * 收到客户端消息后调用的方法  </span></span><br><span class="line"><span class="comment">     *  </span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> message 客户端发送过来的消息  </span></span><br><span class="line"><span class="comment">     */</span>  </span><br><span class="line">    <span class="meta">@OnMessage</span>  </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">onMessage</span><span class="params">(String message, <span class="meta">@PathParam(&quot;sid&quot;)</span> String sid)</span> &#123;  </span><br><span class="line">        System.out.println(<span class="string">&quot;收到来自客户端：&quot;</span> + sid + <span class="string">&quot;的信息:&quot;</span> + message);  </span><br><span class="line">    &#125;  </span><br><span class="line">  </span><br><span class="line">    <span class="comment">/**  </span></span><br><span class="line"><span class="comment">     * 连接关闭调用的方法  </span></span><br><span class="line"><span class="comment">     *  </span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> sid  </span></span><br><span class="line"><span class="comment">     */</span>  </span><br><span class="line">    <span class="meta">@OnClose</span>  </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">onClose</span><span class="params">(<span class="meta">@PathParam(&quot;sid&quot;)</span> String sid)</span> &#123;  </span><br><span class="line">        System.out.println(<span class="string">&quot;连接断开:&quot;</span> + sid);  </span><br><span class="line">        sessionMap.remove(sid);  </span><br><span class="line">    &#125;  </span><br><span class="line">  </span><br><span class="line">    <span class="comment">/**  </span></span><br><span class="line"><span class="comment">     * 群发  </span></span><br><span class="line"><span class="comment">     *  </span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> message  </span></span><br><span class="line"><span class="comment">     */</span>  </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">sendToAllClient</span><span class="params">(String message)</span> &#123;  </span><br><span class="line">        Collection&lt;Session&gt; sessions = sessionMap.values();  </span><br><span class="line">        <span class="keyword">for</span> (Session session : sessions) &#123;  </span><br><span class="line">            <span class="keyword">try</span> &#123;  </span><br><span class="line">                <span class="comment">//服务器向客户端发送消息  </span></span><br><span class="line">                session.getBasicRemote().sendText(message);  </span><br><span class="line">            &#125; <span class="keyword">catch</span> (Exception e) &#123;  </span><br><span class="line">                e.printStackTrace();  </span><br><span class="line">            &#125;  </span><br><span class="line">        &#125;  </span><br><span class="line">    &#125;  </span><br><span class="line">  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p><strong>客户端实现</strong>：用浏览器或库，前端最简单的：</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> ws = <span class="keyword">new</span> <span class="title class_">WebSocket</span>(<span class="string">&quot;ws://localhost:8080/ws&quot;</span>);</span><br><span class="line">ws.<span class="property">onopen</span> = <span class="function">() =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;连接成功&quot;</span>);</span><br><span class="line">ws.<span class="property">onmessage</span> = <span class="function">(<span class="params">msg</span>) =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;收到消息: &quot;</span>, msg.<span class="property">data</span>);</span><br><span class="line">ws.<span class="title function_">send</span>(<span class="string">&quot;Hello WebSocket!&quot;</span>);</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-]]></content>
-  </entry>
-  <entry>
-    <title>fastJSON</title>
-    <url>/2024/11/19/java/11%20fastjson/</url>
-    <content><![CDATA[<p><strong>FastJSON</strong> 是阿里巴巴搞的一个 Java JSON 库，用来干啥的？简单说，就是用来<strong>解析和生成 JSON 数据</strong>，速度快得离谱，但也因为一些历史安全问题饱受争议。</p>
-<hr>
-<h3 id="特点："><a href="#特点：" class="headerlink" title="特点："></a><strong>特点：</strong></h3><ol>
-<li><strong>性能贼快</strong>：号称解析速度吊打 Gson 和 Jackson（大多数情况下的确快）。</li>
-<li><strong>使用简单</strong>：API 设计人畜无害，几行代码就能搞定 JSON 操作。</li>
-<li><strong>功能丰富</strong>：支持 JSON 与 Java Bean 的互转、复杂集合结构解析等。</li>
-<li><strong>国产</strong>：贴近中国开发者需求，更新还算勤快。</li>
-</ol>
-<hr>
-<h3 id="常用功能："><a href="#常用功能：" class="headerlink" title="常用功能："></a><strong>常用功能：</strong></h3><h4 id="1-JSON-字符串转-Java-对象"><a href="#1-JSON-字符串转-Java-对象" class="headerlink" title="1. JSON 字符串转 Java 对象"></a><strong>1. JSON 字符串转 Java 对象</strong></h4><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> com.alibaba.fastjson.JSON;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">User</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span> age;</span><br><span class="line">    <span class="comment">// getter、setter</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">String</span> <span class="variable">json</span> <span class="operator">=</span> <span class="string">&quot;&#123;\&quot;name\&quot;:\&quot;张三\&quot;,\&quot;age\&quot;:20&#125;&quot;</span>;</span><br><span class="line">        <span class="type">User</span> <span class="variable">user</span> <span class="operator">=</span> JSON.parseObject(json, User.class);</span><br><span class="line">        System.out.println(user.getName()); <span class="comment">// 张三</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="2-Java-对象转-JSON-字符串"><a href="#2-Java-对象转-JSON-字符串" class="headerlink" title="2. Java 对象转 JSON 字符串"></a><strong>2. Java 对象转 JSON 字符串</strong></h4><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="type">User</span> <span class="variable">user</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">User</span>();</span><br><span class="line">user.setName(<span class="string">&quot;李四&quot;</span>);</span><br><span class="line">user.setAge(<span class="number">25</span>);</span><br><span class="line"><span class="type">String</span> <span class="variable">json</span> <span class="operator">=</span> JSON.toJSONString(user);</span><br><span class="line">System.out.println(json); <span class="comment">// &#123;&quot;age&quot;:25,&quot;name&quot;:&quot;李四&quot;&#125;</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="3-JSON-数组转-List"><a href="#3-JSON-数组转-List" class="headerlink" title="3. JSON 数组转 List"></a><strong>3. JSON 数组转 List</strong></h4><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="type">String</span> <span class="variable">jsonArray</span> <span class="operator">=</span> <span class="string">&quot;[&#123;\&quot;name\&quot;:\&quot;张三\&quot;,\&quot;age\&quot;:20&#125;,&#123;\&quot;name\&quot;:\&quot;李四\&quot;,\&quot;age\&quot;:25&#125;]&quot;</span>;</span><br><span class="line">List&lt;User&gt; users = JSON.parseArray(jsonArray, User.class);</span><br><span class="line">System.out.println(users.size()); <span class="comment">// 2</span></span><br></pre></td></tr></table></figure>
-
-<hr>
-<h3 id="优缺点："><a href="#优缺点：" class="headerlink" title="优缺点："></a><strong>优缺点：</strong></h3><p><strong>优点：</strong></p>
-<ul>
-<li>快，真快，不是吹的。</li>
-<li>API 简单，支持超复杂数据结构。</li>
-<li>文档还算友好，国内支持力度强。</li>
-</ul>
-<p><strong>缺点：</strong></p>
-<ul>
-<li><strong>历史上有安全问题</strong>：比如反序列化漏洞，建议用新版。</li>
-<li>相比 Gson 和 Jackson，社区讨论相对少。</li>
-<li>性能过于追求快，牺牲了一些代码规范性。</li>
-</ul>
-<hr>
-<p><strong>总结：</strong><br>你要是图速度、方便，FastJSON 没毛病；但如果特别看重安全性和社区支持，可能要权衡下。</p>
-]]></content>
       <tags>
-        <tag>java开发工具库</tag>
+        <tag>Java</tag>
       </tags>
   </entry>
   <entry>
-    <title>JDBC URL配置</title>
-    <url>/2024/11/19/java/23%20JDBC%20URL%20%E9%85%8D%E7%BD%AE/</url>
+    <title>JDBC URL 配置</title>
+    <url>/2024/12/09/java/23%20JDBC%20URL%20%E9%85%8D%E7%BD%AE/</url>
     <content><![CDATA[<h1 id="这是啥？"><a href="#这是啥？" class="headerlink" title="这是啥？"></a>这是啥？</h1><figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">datasource:</span></span><br><span class="line">	<span class="attr">durid:</span></span><br><span class="line">		<span class="attr">url:</span> <span class="string">jdbc:mysql://$&#123;sky.datasource.host&#125;:$&#123;sky.datasource.port&#125;/$&#123;sky.datasource.database&#125;</span></span><br><span class="line">		<span class="string">?serverTimezone=Asia/Shanghai</span></span><br><span class="line">		<span class="string">&amp;useUnicode=true</span></span><br><span class="line">		<span class="string">&amp;characterEncoding=utf-8</span></span><br><span class="line">		<span class="string">&amp;zeroDateTimeBehavior=convertToNull</span></span><br><span class="line">		<span class="string">&amp;useSSL=false&amp;allowPublicKeyRetrieval=true</span></span><br></pre></td></tr></table></figure>
 <p>在url:后的?后的部分就是<font color="#ff0000">JDBC URL 配置</font>，它指定了如何通过 JDBC 连接到数据库，并包含了所有连接参数。如果是在 Spring Boot 项目中，它通常被称为 <font color="#ff0000">DataSource 配置</font></p>
 <h1 id="具体配置项说明："><a href="#具体配置项说明：" class="headerlink" title="具体配置项说明："></a>具体配置项说明：</h1><pre><code>serverTimezone=Asia/Shanghai
@@ -800,10 +893,33 @@ allowPublicKeyRetrieval=true
 <h3 id="2-Spring-配置"><a href="#2-Spring-配置" class="headerlink" title="2. Spring 配置"></a><strong>2. Spring 配置</strong></h3><p>这些配置项通常由 <strong>Spring Boot</strong> 配置文件提供。在 <code>application.yml</code> 或 <code>application.properties</code> 文件中，Spring Boot 提供了对 <code>spring.datasource.*</code> 配置项的支持。这些配置项的值（如数据库主机、端口、数据库名等）通常通过 Spring Boot 的环境变量注入来提供。</p>
 <h3 id="3-连接池"><a href="#3-连接池" class="headerlink" title="3. 连接池"></a><strong>3. 连接池</strong></h3><p>如果你使用了连接池（如 <strong>HikariCP</strong> 或 <strong>Druid</strong>），它们可能会通过一些额外的配置选项（比如数据库连接池的最大连接数、连接超时等）影响数据库的连接行为。</p>
 ]]></content>
+      <tags>
+        <tag>Java</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>环境配置分离</title>
+    <url>/2024/12/09/java/22%20%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E5%88%86%E7%A6%BB/</url>
+    <content><![CDATA[<p>这种方法叫做 <strong>“配置文件分离”</strong> 或 <strong>“环境配置分离”**，在 Spring Boot 中通常通过 **<code>profiles</code></strong> 来管理。<br>具体来说，就是通过 <code>spring.profiles.active</code> 来激活不同的配置文件，以适应不同的运行环境。</p>
+<h3 id="这种做法的名字："><a href="#这种做法的名字：" class="headerlink" title="这种做法的名字："></a><strong>这种做法的名字</strong>：</h3><ul>
+<li><strong>Profile-based Configuration</strong>（基于配置文件的环境管理）</li>
+<li><strong>Environment-specific Configuration</strong>（环境特定配置）</li>
+</ul>
+<p>通过这种方式，可以在开发、测试和生产等不同环境下使用不同的配置文件，确保每个环境有独立的设置，而不会混淆。</p>
+<h3 id="工作原理："><a href="#工作原理：" class="headerlink" title="工作原理："></a><strong>工作原理</strong>：</h3><ol>
+<li><strong>基础配置</strong>：在 <code>application.properties</code> 中定义基础配置，适用于所有环境。</li>
+<li><strong>环境特定配置</strong>：比如 <code>application-dev.properties</code>（<font color="#ff0000">开发环境</font>）和 <code>application-prod.properties</code>（<font color="#ff0000">生产环境</font>），专门为不同环境设置不同的参数。</li>
+<li><strong>激活不同环境</strong>：通过设置 <code>spring.profiles.active</code> 来激活不同环境的配置。</li>
+</ol>
+<p>这样能让项目的配置更加清晰、灵活，避免一个配置文件冗长且复杂，特别适合有多个环境需求的项目。</p>
+]]></content>
+      <tags>
+        <tag>Java</tag>
+      </tags>
   </entry>
   <entry>
     <title>MyBatis中的Mapper配置</title>
-    <url>/2024/11/19/java/37%20MyBatis%E4%B8%AD%E7%9A%84Mapper%E9%85%8D%E7%BD%AE/</url>
+    <url>/2024/12/09/java/37%20MyBatis%E4%B8%AD%E7%9A%84Mapper%E9%85%8D%E7%BD%AE/</url>
     <content><![CDATA[<p>这些设置能让 MyBatis 更高效地加载配置文件和映射类，减少手动配置工作量。</p>
 <figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">mybatis:</span>  </span><br><span class="line">  <span class="comment">#mapper配置文件  </span></span><br><span class="line">  <span class="attr">mapper-locations:</span> <span class="string">classpath:mapper/*.xml</span>  </span><br><span class="line">  <span class="attr">type-aliases-package:</span> <span class="string">com.sky.entity</span></span><br></pre></td></tr></table></figure>
 
@@ -830,12 +946,37 @@ allowPublicKeyRetrieval=true
 <figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">mapper</span> <span class="attr">namespace</span>=<span class="string">&quot;com.sky.mapper.UserMapper&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">&quot;selectUser&quot;</span> <span class="attr">resultType</span>=<span class="string">&quot;User&quot;</span>&gt;</span></span><br><span class="line">        SELECT * FROM users WHERE user_id = #&#123;userId&#125;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">mapper</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <p>在resultType处就只写User，而不是com.sky.enity.User</p>
 ]]></content>
+      <tags>
+        <tag>Java</tag>
+        <tag>Java依赖</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>驼峰命名</title>
+    <url>/2024/12/09/java/30%20%E9%A9%BC%E5%B3%B0%E5%91%BD%E5%90%8D/</url>
+    <content><![CDATA[<h3 id="如何开启："><a href="#如何开启：" class="headerlink" title="如何开启："></a><strong>如何开启：</strong></h3><p>在application文件中配置</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">mybatis:</span></span><br><span class="line">  <span class="attr">configuration:</span></span><br><span class="line">    <span class="attr">map-underscore-to-camel-case:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+<p>用于将数据库表中的 <strong>下划线命名法</strong>（snake_case）字段自动转换为 <strong>驼峰命名法</strong>（camelCase）字段。</p>
+<h3 id="应用："><a href="#应用：" class="headerlink" title="应用："></a><strong>应用：</strong></h3><figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">&quot;selectUser&quot;</span> <span class="attr">resultType</span>=<span class="string">&quot;User&quot;</span>&gt;</span></span><br><span class="line">    SELECT user_id, first_name, last_name FROM users WHERE user_id = #&#123;userId&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>此处设置了返回值为User，则<font color="#ff0000">MyBatis</font>会把select取得的值赋给User中对应的字段<br>user_id-&gt;UserId<br>first_name-&gt;firstName</p>
+<h3 id="举例说明："><a href="#举例说明：" class="headerlink" title="举例说明："></a><strong>举例说明：</strong></h3><p>假设你有一个数据库表，字段命名使用下划线风格：</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> user_info (</span><br><span class="line">    user_id <span class="type">INT</span>,</span><br><span class="line">    first_name <span class="type">VARCHAR</span>(<span class="number">255</span>),</span><br><span class="line">    last_name <span class="type">VARCHAR</span>(<span class="number">255</span>)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<p>如果你在 Java 中映射这个表时，使用驼峰命名法类和字段名：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">UserInfo</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span> userId;    <span class="comment">// 对应 user_id</span></span><br><span class="line">    <span class="keyword">private</span> String firstName;  <span class="comment">// 对应 first_name</span></span><br><span class="line">    <span class="keyword">private</span> String lastName;   <span class="comment">// 对应 last_name</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+]]></content>
+      <tags>
+        <tag>Java</tag>
+        <tag>Java依赖</tag>
+      </tags>
   </entry>
   <entry>
     <title>Spring Boot 的日志级别设置</title>
-    <url>/2024/11/20/java/39%20Spring%20Boot%20%E7%9A%84%E6%97%A5%E5%BF%97%E7%BA%A7%E5%88%AB%E8%AE%BE%E7%BD%AE/</url>
+    <url>/2024/12/09/java/39%20Spring%20Boot%20%E7%9A%84%E6%97%A5%E5%BF%97%E7%BA%A7%E5%88%AB%E8%AE%BE%E7%BD%AE/</url>
     <content><![CDATA[<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">logging:</span>  </span><br><span class="line">  <span class="attr">level:</span></span><br><span class="line">	  <span class="attr">com:</span></span><br><span class="line">        <span class="attr">sky:</span>        </span><br><span class="line">	        <span class="attr">mapper:</span> <span class="string">debug</span>  </span><br><span class="line">	        <span class="attr">service:</span> <span class="string">info</span>  </span><br><span class="line">	        <span class="attr">controller:</span> <span class="string">info</span></span><br></pre></td></tr></table></figure>
-
 <p>这段配置是 <strong>Spring Boot 的日志级别设置</strong>，用于控制应用程序中不同包（<code>com.sky.mapper</code>、<code>com.sky.service</code> 和 <code>com.sky.controller</code>）的日志输出级别。<br>通过这种配置，你可以更细粒度地管理日志的输出内容。</p>
 <hr>
 <h3 id="配置项含义："><a href="#配置项含义：" class="headerlink" title="配置项含义："></a><strong>配置项含义：</strong></h3><h4 id="1-logging-level"><a href="#1-logging-level" class="headerlink" title="1. logging.level"></a><strong>1. <code>logging.level</code></strong></h4><ul>
@@ -897,21 +1038,22 @@ allowPublicKeyRetrieval=true
 <p>链接：[[40 LogBack|LogBack]]</p>
 ]]></content>
       <tags>
-        <tag>SpringBoot</tag>
+        <tag>Java</tag>
       </tags>
   </entry>
   <entry>
-    <title>如何使用properties和properties-dev</title>
-    <url>/2024/11/19/java/20%20%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8properties%E5%92%8Cproperties-dev/</url>
-    <content><![CDATA[<ol>
-<li>启用dev配置文件<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">spring:</span>  </span><br><span class="line">  <span class="attr">profiles:</span></span><br><span class="line">	<span class="attr">active:</span> <span class="string">dev</span></span><br></pre></td></tr></table></figure></li>
-<li>使用dev中的配置<br> ${…}<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">spring:</span></span><br><span class="line">	<span class="attr">datasource:</span>  </span><br><span class="line">	  <span class="attr">druid:</span> </span><br><span class="line">		<span class="attr">driver-class-name:</span> <span class="string">$&#123;sky.datasource.driver-class-name&#125;</span>  </span><br><span class="line">	    <span class="attr">url:</span> <span class="string">jdbc:mysql://$&#123;sky.datasource.host&#125;:$&#123;sky.datasource.port&#125;/$&#123;sky.datasource.database&#125;?</span></span><br><span class="line">	    <span class="attr">username:</span> <span class="string">$&#123;sky.datasource.username&#125;</span>  </span><br><span class="line">	    <span class="attr">password:</span> <span class="string">$&#123;sky.datasource.password&#125;</span></span><br></pre></td></tr></table></figure></li>
-</ol>
+    <title>Logback</title>
+    <url>/2024/11/11/java/40%20LogBack/</url>
+    <content><![CDATA[<p>[[10 lombok]]</p>
+<p>Logback 是一个功能强大、灵活且高效的 <strong>日志框架</strong>，是 <strong>Log4j</strong> 的后继者，由 Log4j 的作者 Ceki Gülcü 开发。<br>它是 <strong>SLF4J（Simple Logging Facade for Java）</strong> 的默认实现，广泛用于 Java 应用程序中进行日志记录。</p>
 ]]></content>
+      <tags>
+        <tag>Java</tag>
+      </tags>
   </entry>
   <entry>
     <title>PageHelper基础用法</title>
-    <url>/2024/11/20/java/41%20PageHelper%E5%9F%BA%E7%A1%80%E7%94%A8%E6%B3%95/</url>
+    <url>/2024/11/11/java/41%20PageHelper%E5%9F%BA%E7%A1%80%E7%94%A8%E6%B3%95/</url>
     <content><![CDATA[<p>PageHelper 是 MyBatis 的一个分页插件，用起来很简单，核心步骤如下：  </p>
 <ol>
 <li><p><strong>引入依赖</strong><br>在 <code>pom.xml</code> 中添加 PageHelper 的依赖：  </p>
@@ -936,114 +1078,112 @@ allowPublicKeyRetrieval=true
 </ol>
 ]]></content>
       <tags>
+        <tag>Java</tag>
         <tag>PageHelper</tag>
       </tags>
   </entry>
   <entry>
-    <title>驼峰命名的自动映射</title>
-    <url>/2024/11/19/java/30%20%E9%A9%BC%E5%B3%B0%E5%91%BD%E5%90%8D/</url>
-    <content><![CDATA[<h3 id="如何开启："><a href="#如何开启：" class="headerlink" title="如何开启："></a><strong>如何开启：</strong></h3><p>在application文件中配置</p>
-<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">mybatis:</span></span><br><span class="line">  <span class="attr">configuration:</span></span><br><span class="line">    <span class="attr">map-underscore-to-camel-case:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
-<p>用于将数据库表中的 <strong>下划线命名法</strong>（snake_case）字段自动转换为 <strong>驼峰命名法</strong>（camelCase）字段。</p>
-<h3 id="应用："><a href="#应用：" class="headerlink" title="应用："></a><strong>应用：</strong></h3><figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">&quot;selectUser&quot;</span> <span class="attr">resultType</span>=<span class="string">&quot;User&quot;</span>&gt;</span></span><br><span class="line">    SELECT user_id, first_name, last_name FROM users WHERE user_id = #&#123;userId&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>此处设置了返回值为User，则<font color="#ff0000">MyBatis</font>会把select取得的值赋给User中对应的字段<br>user_id-&gt;UserId<br>first_name-&gt;firstName</p>
-<h3 id="举例说明："><a href="#举例说明：" class="headerlink" title="举例说明："></a><strong>举例说明：</strong></h3><p>假设你有一个数据库表，字段命名使用下划线风格：</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> user_info (</span><br><span class="line">    user_id <span class="type">INT</span>,</span><br><span class="line">    first_name <span class="type">VARCHAR</span>(<span class="number">255</span>),</span><br><span class="line">    last_name <span class="type">VARCHAR</span>(<span class="number">255</span>)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+    <title>循环依赖</title>
+    <url>/2024/12/09/java/35%20%E5%BE%AA%E7%8E%AF%E4%BE%9D%E8%B5%96/</url>
+    <content><![CDATA[<p><code>allow-circular-references: true</code><br>是 <strong>Spring Framework</strong> 中的一个配置选项，用于控制 <strong>循环依赖</strong>（Circular Dependencies）的处理。</p>
+<h3 id="什么是循环依赖？"><a href="#什么是循环依赖？" class="headerlink" title="什么是循环依赖？"></a><strong>什么是循环依赖？</strong></h3><p>循环依赖指的是两个或多个 Bean 互相引用，形成一个闭环，导致容器无法正常实例化它们。例如：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">A</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> B b;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">A</span><span class="params">(B b)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.b = b;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">B</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> A a;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">B</span><span class="params">(A a)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.a = a;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>如果你在 Java 中映射这个表时，使用驼峰命名法类和字段名：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">UserInfo</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span> userId;    <span class="comment">// 对应 user_id</span></span><br><span class="line">    <span class="keyword">private</span> String firstName;  <span class="comment">// 对应 first_name</span></span><br><span class="line">    <span class="keyword">private</span> String lastName;   <span class="comment">// 对应 last_name</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在上面的例子中，<code>A</code> 和 <code>B</code> 互相依赖。如果 Spring 尝试实例化它们时，它就会陷入死循环，因为 Spring 需要先创建 <code>A</code>，但 <code>A</code> 需要 <code>B</code>，而 <code>B</code> 又需要 <code>A</code>。</p>
+<h3 id="allow-circular-references-true-配置的作用"><a href="#allow-circular-references-true-配置的作用" class="headerlink" title="allow-circular-references: true 配置的作用"></a><strong><code>allow-circular-references: true</code> 配置的作用</strong></h3><p>在 <strong>Spring 5</strong> 和以前的版本中，Spring 容器默认允许存在 <strong>单例 Bean 的循环依赖</strong>，即 Spring 会使用 <strong>三级缓存</strong>（两次实例化和一次填充依赖）来解决循环依赖的问题。</p>
+<p>但是在 Spring 6 及更高版本中，<strong>默认不再允许循环依赖</strong>，需要显式地配置 <code>allow-circular-references: true</code> 才能重新启用循环依赖的处理。</p>
+<p>如果启用 <code>allow-circular-references: true</code>，Spring 会尝试通过 <strong>延迟初始化</strong>（延迟装配）和 <strong>代理</strong>（例如使用 JDK 动态代理或 CGLIB 代理）来解决循环依赖。</p>
+<h3 id="配置示例："><a href="#配置示例：" class="headerlink" title="配置示例："></a><strong>配置示例：</strong></h3><h4 id="在-Spring-Boot-中的配置："><a href="#在-Spring-Boot-中的配置：" class="headerlink" title="在 Spring Boot 中的配置："></a><strong>在 Spring Boot 中的配置：</strong></h4><p>可以在 <code>application.yml</code> 或 <code>application.properties</code> 文件中设置：</p>
+<p><strong><code>application.yml</code> 配置：</strong></p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="attr">main:</span></span><br><span class="line">    <span class="attr">allow-circular-references:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
 
+<p><strong><code>application.properties</code> 配置：</strong></p>
+<figure class="highlight properties"><table><tr><td class="code"><pre><span class="line"><span class="attr">spring.main.allow-circular-references</span>=<span class="string">true</span></span><br></pre></td></tr></table></figure>
 
-
-]]></content>
-  </entry>
-  <entry>
-    <title>环境配置分离</title>
-    <url>/2024/11/19/java/22%20%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E5%88%86%E7%A6%BB/</url>
-    <content><![CDATA[<p>这种方法叫做 <strong>“配置文件分离”</strong> 或 <strong>“环境配置分离”**，在 Spring Boot 中通常通过 **<code>profiles</code></strong> 来管理。<br>具体来说，就是通过 <code>spring.profiles.active</code> 来激活不同的配置文件，以适应不同的运行环境。</p>
-<h3 id="这种做法的名字："><a href="#这种做法的名字：" class="headerlink" title="这种做法的名字："></a><strong>这种做法的名字</strong>：</h3><ul>
-<li><strong>Profile-based Configuration</strong>（基于配置文件的环境管理）</li>
-<li><strong>Environment-specific Configuration</strong>（环境特定配置）</li>
-</ul>
-<p>通过这种方式，可以在开发、测试和生产等不同环境下使用不同的配置文件，确保每个环境有独立的设置，而不会混淆。</p>
-<h3 id="工作原理："><a href="#工作原理：" class="headerlink" title="工作原理："></a><strong>工作原理</strong>：</h3><ol>
-<li><strong>基础配置</strong>：在 <code>application.properties</code> 中定义基础配置，适用于所有环境。</li>
-<li><strong>环境特定配置</strong>：比如 <code>application-dev.properties</code>（<font color="#ff0000">开发环境</font>）和 <code>application-prod.properties</code>（<font color="#ff0000">生产环境</font>），专门为不同环境设置不同的参数。</li>
-<li><strong>激活不同环境</strong>：通过设置 <code>spring.profiles.active</code> 来激活不同环境的配置。</li>
-</ol>
-<p>这样能让项目的配置更加清晰、灵活，避免一个配置文件冗长且复杂，特别适合有多个环境需求的项目。</p>
-]]></content>
-  </entry>
-  <entry>
-    <title>Bean Configuration注解详解</title>
-    <url>/2024/11/12/java/@Bean%20@Configuration%E8%AF%A6%E8%A7%A3/</url>
-    <content><![CDATA[<h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p><strong>这个配置类里的<code>@Bean</code>注解方法会在</strong>Spring容器初始化时<strong>自动执行</strong>。</p>
-<p>具体来说：</p>
-<ol>
-<li><p>**<code>@Configuration</code>**：表示这是一个配置类，Spring会在启动时读取这个类并处理其中的<code>@Bean</code>注解的方法。</p>
+<h3 id="什么时候需要使用它？"><a href="#什么时候需要使用它？" class="headerlink" title="什么时候需要使用它？"></a><strong>什么时候需要使用它？</strong></h3><ol>
+<li><p><strong>存在明显的循环依赖时：</strong><br>当你的应用中确实有不可避免的循环依赖时，可以启用此配置来允许 Spring 自动处理这些依赖关系。</p>
 </li>
-<li><p>**<code>@Bean</code>**：告诉Spring这个方法的返回值是一个Spring管理的bean，会被注册到Spring的IOC容器中。</p>
+<li><p><strong>开发阶段，避免重构代码时：</strong><br>如果你正在开发一个较大的项目，临时启用此选项避免代码重构或调整大量 Bean 定义。</p>
 </li>
 </ol>
-<p>因此，在应用启动的时候，Spring会扫描到（用的是”具体细节“内用到的例子）<code>RedisConfiguration</code>类并调用<code>redisTemplate()</code>方法，创建<code>RedisTemplate</code>对象，并将其注册到Spring容器中，供其他地方使用。</p>
-<p>所以，这个方法会在程序启动时自动执行，<strong>不用手动调用</strong>。</p>
-<h1 id="更多细节"><a href="#更多细节" class="headerlink" title="更多细节"></a><span style="background:#ff4d4f">更多细节</span></h1><p>例子</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Configuration</span>  </span><br><span class="line"><span class="meta">@Slf4j</span>  </span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">RedisConfiguration</span> &#123;  </span><br><span class="line">    <span class="meta">@Bean</span>  </span><br><span class="line">    <span class="keyword">public</span> RedisTemplate <span class="title function_">redisTemplate</span><span class="params">(RedisConnectionFactory redisConnectionFactory)</span> &#123;  </span><br><span class="line">        log.info(<span class="string">&quot;开始创建redis模板&quot;</span>);  </span><br><span class="line">        <span class="type">RedisTemplate</span> <span class="variable">redisTemplate</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">RedisTemplate</span>();  </span><br><span class="line">        redisTemplate.setKeySerializer(<span class="keyword">new</span> <span class="title class_">StringRedisSerializer</span>());  </span><br><span class="line">        redisTemplate.setConnectionFactory(redisConnectionFactory);  </span><br><span class="line">        <span class="keyword">return</span> redisTemplate;  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="1-Spring容器的工作原理"><a href="#1-Spring容器的工作原理" class="headerlink" title="1. Spring容器的工作原理"></a>1. <strong>Spring容器的工作原理</strong></h3><p>Spring的<strong>IOC容器</strong>，即控制反转容器，负责管理对象的创建、生命周期、依赖注入等，确保对象之间的关系和依赖性都被正确处理。在Spring中，容器的核心是<code>ApplicationContext</code>，它是<strong>BeanFactory</strong>的超集。</p>
-<h3 id="2-Bean方法的执行流程"><a href="#2-Bean方法的执行流程" class="headerlink" title="2. @Bean方法的执行流程"></a>2. <strong><code>@Bean</code>方法的执行流程</strong></h3><p>当你在配置类中定义了<code>@Bean</code>注解的方法，Spring容器会在<strong>应用启动时</strong>扫描到这个方法，并通过反射调用它。调用这个方法时，Spring并不会立即执行方法体里的内容，而是会执行以下步骤：</p>
-<ul>
-<li><p><strong>创建Bean实例</strong>：Spring调用<code>redisTemplate()</code>方法，并获取它返回的<code>RedisTemplate</code>对象。<strong>这时，<code>RedisTemplate</code>对象被创建出来</strong>。</p>
+<h3 id="注意事项："><a href="#注意事项：" class="headerlink" title="注意事项："></a><strong>注意事项：</strong></h3><ul>
+<li><p><strong>避免滥用：</strong> 启用循环依赖虽然能让 Spring 处理这类情况，但这通常是设计不良的信号。尽量避免在设计中出现循环依赖，因为它会使代码变得复杂和难以维护。</p>
 </li>
-<li><p><strong>管理Bean的生命周期</strong>：Spring会将这个<code>RedisTemplate</code>实例放入IOC容器中，成为一个可管理的<strong>Bean</strong>。容器会管理这个对象的生命周期，比如初始化、依赖注入、销毁等。</p>
+<li><p><strong>使用构造器注入：</strong> 如果你使用构造器注入来管理依赖关系，通常能避免循环依赖，因为构造器注入要求所有依赖在对象创建时就已提供。</p>
 </li>
 </ul>
-<h3 id="3-Bean的依赖注入"><a href="#3-Bean的依赖注入" class="headerlink" title="3. Bean的依赖注入"></a>3. <strong>Bean的依赖注入</strong></h3><ul>
-<li><p><strong>自动注入</strong>：在<code>redisTemplate()</code>方法里，<code>RedisConnectionFactory</code>是作为方法参数传入的。Spring会在容器中查找<strong>合适的<code>RedisConnectionFactory</code> Bean</strong>，并自动注入到<code>redisTemplate()</code>方法中。</p>
-</li>
-<li><p><strong>传递依赖</strong>：Spring会首先实例化<code>RedisConnectionFactory</code>，然后把它作为依赖传递给<code>redisTemplate()</code>，从而完成整个Bean的创建过程。</p>
-</li>
-</ul>
-<h3 id="4-实例化和注册到容器"><a href="#4-实例化和注册到容器" class="headerlink" title="4. 实例化和注册到容器"></a>4. <strong>实例化和注册到容器</strong></h3><ul>
-<li>当<code>redisTemplate()</code>方法被调用时，<code>RedisTemplate</code>对象已经创建并返回给Spring。</li>
-<li><strong>Spring将<code>RedisTemplate</code>实例注册到容器</strong>，这个Bean的名字就是方法名——<code>redisTemplate</code>，你可以在其他地方通过<code>@Autowired</code>或者<code>@Qualifier</code>来注入它。</li>
-</ul>
-<h3 id="5-执行时机"><a href="#5-执行时机" class="headerlink" title="5. 执行时机"></a>5. <strong>执行时机</strong></h3><ul>
-<li><p><strong>容器启动时</strong>，Spring会扫描到标有<code>@Configuration</code>和<code>@Bean</code>的类。此时，Spring容器会调用所有<code>@Bean</code>注解的方法，创建这些Bean并注册到容器中。你不需要手动调用<code>redisTemplate()</code>，Spring自动帮你处理。</p>
-</li>
-<li><p><strong><code>@Bean</code>方法调用顺序</strong>：如果有多个<code>@Bean</code>注解方法，Spring会按照方法定义的顺序来调用它们，保证依赖关系正确。</p>
-</li>
-</ul>
-<h3 id="6-为什么要使用-Bean和-Configuration？"><a href="#6-为什么要使用-Bean和-Configuration？" class="headerlink" title="6. 为什么要使用@Bean和@Configuration？"></a>6. <strong>为什么要使用<code>@Bean</code>和<code>@Configuration</code>？</strong></h3><ul>
-<li><p><strong>解耦和集中管理配置</strong>：使用<code>@Configuration</code>注解的类可以集中管理你的配置，避免把配置散布到代码的各个地方。这样也更容易进行单元测试和修改配置。</p>
-</li>
-<li><p><strong>灵活控制Bean的创建</strong>：使用<code>@Bean</code>方法，你可以对Bean的创建过程进行精确控制。比如你可以在<code>@Bean</code>方法里添加日志、配置条件等，而这些<code>@Bean</code>方法会在容器初始化时执行。</p>
-</li>
-</ul>
-<h3 id="7-容器启动的步骤概览"><a href="#7-容器启动的步骤概览" class="headerlink" title="7. 容器启动的步骤概览"></a>7. <strong>容器启动的步骤概览</strong></h3><ol>
-<li><strong>扫描配置类</strong>：Spring扫描所有带有<code>@Configuration</code>注解的类，找到其中的<code>@Bean</code>方法。</li>
-<li><strong>调用<code>@Bean</code>方法</strong>：Spring通过<font color="#d83931">反射</font>调用<code>@Bean</code>标记的方法，创建这些Bean。</li>
-<li><strong>依赖注入</strong>：Spring会解析<code>@Autowired</code>、<code>@Qualifier</code>等注解，自动注入Bean的依赖。</li>
-<li><strong>注册到容器</strong>：创建好的Bean被注册到容器中，可以通过<code>@Autowired</code>或者其他方式进行注入使用。</li>
-</ol>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>容器在应用启动时会自动识别和调用带有<code>@Bean</code>注解的方法，创建相应的对象，并管理它们的生命周期和依赖注入。你通过<code>@Bean</code>定义的<code>RedisTemplate</code>，Spring会帮你自动创建并注入所需的依赖项（比如<code>RedisConnectionFactory</code>），然后将其注册到IOC容器中供其他组件使用。这种方式使得配置类能更灵活地控制Bean的创建过程，同时保持代码的简洁和模块化。</p>
+<h3 id="总结："><a href="#总结：" class="headerlink" title="总结："></a><strong>总结：</strong></h3><p><code>allow-circular-references: true</code> 配置是让 Spring 容器允许并处理单例 Bean 之间的循环依赖问题。在默认情况下（特别是 Spring 6 以后），如果没有显式配置此选项，Spring 会拒绝循环依赖，因此你需要显式启用该选项来允许其处理循环依赖。</p>
 ]]></content>
       <tags>
-        <tag>java注解</tag>
+        <tag>Java</tag>
       </tags>
   </entry>
   <entry>
-    <title>Logback</title>
-    <url>/2024/11/20/java/40%20LogBack/</url>
-    <content><![CDATA[<p>Logback 是一个功能强大、灵活且高效的 <strong>日志框架</strong>，是 <strong>Log4j</strong> 的后继者，由 Log4j 的作者 Ceki Gülcü 开发。<br>它是 <strong>SLF4J（Simple Logging Facade for Java）</strong> 的默认实现，广泛用于 Java 应用程序中进行日志记录。</p>
+    <title>SpringBoot包继承</title>
+    <url>/2024/12/09/java/46%20SpringBoot%E5%8C%85%E7%BB%A7%E6%89%BF/</url>
+    <content><![CDATA[<p><span style="background:#ff4d4f">标注格式</span></p>
+<h1 id="父"><a href="#父" class="headerlink" title="父"></a>父</h1><figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=<span class="string">&quot;1.0&quot;</span> encoding=<span class="string">&quot;UTF-8&quot;</span>?&gt;</span>  </span><br><span class="line"><span class="tag">&lt;<span class="name">project</span> <span class="attr">xmlns</span>=<span class="string">&quot;http://maven.apache.org/POM/4.0.0&quot;</span>  </span></span><br><span class="line"><span class="tag">         <span class="attr">xmlns:xsi</span>=<span class="string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>  </span></span><br><span class="line"><span class="tag">         <span class="attr">xsi:schemaLocation</span>=<span class="string">&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;</span>&gt;</span>  </span><br><span class="line">    <span class="tag">&lt;<span class="name">modelVersion</span>&gt;</span>4.0.0<span class="tag">&lt;/<span class="name">modelVersion</span>&gt;</span>  </span><br><span class="line">  </span><br><span class="line">    <span class="tag">&lt;<span class="name">parent</span>&gt;</span>  继承于spring-boot-starter-parent</span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span>  </span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-parent<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span>  </span><br><span class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.3.6<span class="tag">&lt;/<span class="name">version</span>&gt;</span>  </span><br><span class="line">    <span class="tag">&lt;/<span class="name">parent</span>&gt;</span>  </span><br><span class="line"></span><br><span class="line">	该包的信息</span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.Flic<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span>  </span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>father<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span>  </span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.0-SNAPSHOT<span class="tag">&lt;/<span class="name">version</span>&gt;</span>  </span><br><span class="line">    </span><br><span class="line">    打包方式</span><br><span class="line">    <span class="tag">&lt;<span class="name">packaging</span>&gt;</span>pom<span class="tag">&lt;/<span class="name">packaging</span>&gt;</span> </span><br><span class="line"></span><br><span class="line">	子包</span><br><span class="line">    <span class="tag">&lt;<span class="name">modules</span>&gt;</span>  </span><br><span class="line">        <span class="tag">&lt;<span class="name">module</span>&gt;</span>child1<span class="tag">&lt;/<span class="name">module</span>&gt;</span>  </span><br><span class="line">    <span class="tag">&lt;/<span class="name">modules</span>&gt;</span>  </span><br><span class="line"></span><br><span class="line">	依赖的版本管理</span><br><span class="line">    <span class="tag">&lt;<span class="name">properties</span>&gt;</span>  </span><br><span class="line">		依赖的版本</span><br><span class="line">		<span class="tag">&lt;<span class="name">lombok</span>&gt;</span>1.18.20<span class="tag">&lt;/<span class="name">lombok</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">properties</span>&gt;</span>  </span><br><span class="line">    <span class="tag">&lt;<span class="name">dependencyManagement</span>&gt;</span>  </span><br><span class="line">        <span class="tag">&lt;<span class="name">dependencies</span>&gt;</span>  </span><br><span class="line">            <span class="tag">&lt;<span class="name">dependency</span>&gt;</span>  </span><br><span class="line">				依赖</span><br><span class="line">				<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.projectlombok<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span>  </span><br><span class="line">				<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>lombok<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span>  </span><br><span class="line">				<span class="tag">&lt;<span class="name">version</span>&gt;</span>$&#123;lombok&#125;<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span>  </span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span>  </span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependencyManagement</span>&gt;</span>  </span><br><span class="line"></span><br><span class="line">	子包中必须加载的依赖</span><br><span class="line">    <span class="tag">&lt;<span class="name">dependencies</span>&gt;</span>  </span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span>  </span><br><span class="line">	        </span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span>  </span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span>  </span><br><span class="line">  </span><br><span class="line"><span class="tag">&lt;/<span class="name">project</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="子"><a href="#子" class="headerlink" title="子"></a>子</h1><figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=<span class="string">&quot;1.0&quot;</span> encoding=<span class="string">&quot;UTF-8&quot;</span>?&gt;</span>  </span><br><span class="line"><span class="tag">&lt;<span class="name">project</span> <span class="attr">xmlns</span>=<span class="string">&quot;http://maven.apache.org/POM/4.0.0&quot;</span>  </span></span><br><span class="line"><span class="tag">         <span class="attr">xmlns:xsi</span>=<span class="string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>  </span></span><br><span class="line"><span class="tag">         <span class="attr">xsi:schemaLocation</span>=<span class="string">&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;</span>&gt;</span>  </span><br><span class="line">    <span class="tag">&lt;<span class="name">modelVersion</span>&gt;</span>4.0.0<span class="tag">&lt;/<span class="name">modelVersion</span>&gt;</span>  </span><br><span class="line"></span><br><span class="line">	继承于父</span><br><span class="line">    <span class="tag">&lt;<span class="name">parent</span>&gt;</span>  </span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.Flic<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span>  </span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>father<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span>  </span><br><span class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.0-SNAPSHOT<span class="tag">&lt;/<span class="name">version</span>&gt;</span>  </span><br><span class="line">    <span class="tag">&lt;/<span class="name">parent</span>&gt;</span>  </span><br><span class="line"></span><br><span class="line">	当前子包的信息</span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>child1<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span>  </span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>0.0.1-SNAPSHOT<span class="tag">&lt;/<span class="name">version</span>&gt;</span>  </span><br><span class="line">  </span><br><span class="line">    <span class="tag">&lt;<span class="name">dependencies</span>&gt;</span>  </span><br><span class="line">         <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">		    </span><br><span class="line">         <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span>  </span><br><span class="line">  </span><br><span class="line">    <span class="tag">&lt;<span class="name">build</span>&gt;</span>  </span><br><span class="line">        <span class="tag">&lt;<span class="name">plugins</span>&gt;</span>  </span><br><span class="line">            <span class="tag">&lt;<span class="name">plugin</span>&gt;</span>  </span><br><span class="line">                <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span>  </span><br><span class="line">                <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-maven-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span>  </span><br><span class="line">            <span class="tag">&lt;/<span class="name">plugin</span>&gt;</span>  </span><br><span class="line">        <span class="tag">&lt;/<span class="name">plugins</span>&gt;</span>  </span><br><span class="line">    <span class="tag">&lt;/<span class="name">build</span>&gt;</span>  </span><br><span class="line">  </span><br><span class="line"><span class="tag">&lt;/<span class="name">project</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="其他说明"><a href="#其他说明" class="headerlink" title="其他说明"></a>其他说明</h1><p>父包里就一个xml文件，其余就是子包</p>
 ]]></content>
       <tags>
-        <tag>日志</tag>
+        <tag>Java</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>implements Serializable</title>
+    <url>/2024/12/09/java/44%20implements%20Serializable/</url>
+    <content><![CDATA[<h1 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h1><p><code>implements Serializable</code> 是 Java 里一个接口，用于表示一个类的对象可以被序列化，也就是转化为字节流从而保存到文件或通过网络传输。</p>
+<h3 id="要点："><a href="#要点：" class="headerlink" title="要点："></a>要点：</h3><ol>
+<li><strong>标记接口</strong>：<code>Serializable</code> 是个空接口，没有方法。</li>
+<li><strong>用途</strong>：对象可以通过 <code>ObjectOutputStream</code> 写出，用 <code>ObjectInputStream</code> 读回。</li>
+<li><strong>实现方式</strong>：<ul>
+<li>实现 <code>Serializable</code>。</li>
+<li>使用 <code>ObjectOutputStream</code> 和 <code>ObjectInputStream</code> 处理序列化和反序列化。</li>
+</ul>
+</li>
+</ol>
+<h3 id="简单代码："><a href="#简单代码：" class="headerlink" title="简单代码："></a>简单代码：</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Person</span> <span class="keyword">implements</span> <span class="title class_">Serializable</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">long</span> <span class="variable">serialVersionUID</span> <span class="operator">=</span> <span class="number">1L</span>; <span class="comment">// 推荐定义版本ID,由于该字段是静态字段，故不会被序列化</span></span><br><span class="line">    String name;</span><br><span class="line">    <span class="type">int</span> age;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Person</span><span class="params">(String name, <span class="type">int</span> age)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.name = name;</span><br><span class="line">        <span class="built_in">this</span>.age = age;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">toString</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;Person&#123;name=&#x27;&quot;</span> + name + <span class="string">&quot;&#x27;, age=&quot;</span> + age + <span class="string">&#x27;&#125;&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        <span class="type">Person</span> <span class="variable">person</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Person</span>(<span class="string">&quot;John&quot;</span>, <span class="number">25</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 序列化</span></span><br><span class="line">        <span class="type">ObjectOutputStream</span> <span class="variable">oos</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ObjectOutputStream</span>(<span class="keyword">new</span> <span class="title class_">FileOutputStream</span>(<span class="string">&quot;person.ser&quot;</span>));</span><br><span class="line">        oos.writeObject(person);</span><br><span class="line">        oos.close();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 反序列化</span></span><br><span class="line">        <span class="type">ObjectInputStream</span> <span class="variable">ois</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ObjectInputStream</span>(<span class="keyword">new</span> <span class="title class_">FileInputStream</span>(<span class="string">&quot;person.ser&quot;</span>));</span><br><span class="line">        <span class="type">Person</span> <span class="variable">deserializedPerson</span> <span class="operator">=</span> (Person) ois.readObject();</span><br><span class="line">        ois.close();</span><br><span class="line"></span><br><span class="line">        System.out.println(deserializedPerson);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="注意："><a href="#注意：" class="headerlink" title="注意："></a>注意：</h3><ul>
+<li><code>serialVersionUID</code> 用于版本控制。</li>
+<li>对象中引用的其他对象也必须实现 <code>Serializable</code>。</li>
+<li>静态字段不会被序列化。</li>
+</ul>
+<h1 id="private-static-final-long-serialVersionUID-1L"><a href="#private-static-final-long-serialVersionUID-1L" class="headerlink" title="private static final long serialVersionUID = 1L;"></a>private static final long serialVersionUID = 1L;</h1><p>这个 <code>serialVersionUID</code> 是序列化机制中的一个<strong>版本控制标识</strong>，用来确保序列化的对象和反序列化的类是兼容的。</p>
+<h3 id="解释："><a href="#解释：" class="headerlink" title="解释："></a>解释：</h3><ol>
+<li><strong>定义作用</strong>：<ul>
+<li>每个实现 <code>Serializable</code> 接口的类都有一个隐含的或显式的 <code>serialVersionUID</code>。</li>
+<li>在序列化（存储）和反序列化（恢复）过程中，JVM 会用这个 ID 来判断序列化的对象和当前类是否匹配。</li>
+<li>如果 <code>serialVersionUID</code> 不匹配，会抛出 <code>InvalidClassException</code>，表示版本不兼容。</li>
+</ul>
+</li>
+<li><strong>显式定义的好处</strong>：<ul>
+<li>避免类结构发生改变（比如新增字段、修改方法）时，自动生成的 <code>serialVersionUID</code> 不一致导致反序列化失败。</li>
+<li>明确版本控制，不随代码变化而改变。</li>
+</ul>
+</li>
+<li><strong>自动生成 ID</strong>：<ul>
+<li>如果不定义，Java 会根据类的结构自动生成一个 <code>serialVersionUID</code>，但这种方式容易因为代码改动导致 ID 变化。</li>
+</ul>
+</li>
+</ol>
+<h3 id="示例：不显式定义时的坑"><a href="#示例：不显式定义时的坑" class="headerlink" title="示例：不显式定义时的坑"></a>示例：不显式定义时的坑</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Person</span> <span class="keyword">implements</span> <span class="title class_">Serializable</span> &#123;</span><br><span class="line">    String name; <span class="comment">// 原始字段</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 保存时</span></span><br><span class="line"><span class="type">ObjectOutputStream</span> <span class="variable">oos</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ObjectOutputStream</span>(<span class="keyword">new</span> <span class="title class_">FileOutputStream</span>(<span class="string">&quot;person.ser&quot;</span>));</span><br><span class="line">oos.writeObject(<span class="keyword">new</span> <span class="title class_">Person</span>()); <span class="comment">// 保存原始 Person 类的对象</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 修改 Person 类</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Person</span> <span class="keyword">implements</span> <span class="title class_">Serializable</span> &#123;</span><br><span class="line">    String name; </span><br><span class="line">    <span class="type">int</span> age; <span class="comment">// 新增字段</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 读取时</span></span><br><span class="line"><span class="type">ObjectInputStream</span> <span class="variable">ois</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ObjectInputStream</span>(<span class="keyword">new</span> <span class="title class_">FileInputStream</span>(<span class="string">&quot;person.ser&quot;</span>));</span><br><span class="line">ois.readObject(); <span class="comment">// 抛出 InvalidClassException</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="定义-serialVersionUID-的正确方式："><a href="#定义-serialVersionUID-的正确方式：" class="headerlink" title="定义 serialVersionUID 的正确方式："></a>定义 <code>serialVersionUID</code> 的正确方式：</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">long</span> <span class="variable">serialVersionUID</span> <span class="operator">=</span> <span class="number">1L</span>; <span class="comment">// 明确指定版本号</span></span><br></pre></td></tr></table></figure>
+
+<p>这样，即使类的结构稍作调整，仍然可以兼容旧版本的数据（前提是改动不影响序列化逻辑）。</p>
+<h3 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h3><p><code>serialVersionUID</code> 就是个版本号，用来保证序列化和反序列化的兼容性。<strong>定义了它，才能自己掌控版本变化；否则 JVM 自动生成，随时翻车！</strong></p>
+]]></content>
+      <tags>
+        <tag>Java</tag>
       </tags>
   </entry>
   <entry>
     <title>PageHelper包装类详解</title>
-    <url>/2024/11/20/java/42%20PageHelper%E5%8C%85%E8%A3%85%E7%B1%BB%E8%AF%A6%E8%A7%A3/</url>
+    <url>/2024/11/11/java/42%20PageHelper%E5%8C%85%E8%A3%85%E7%B1%BB%E8%AF%A6%E8%A7%A3/</url>
     <content><![CDATA[<ol>
 <li>List：<br>一个普通的集合</li>
 <li>Page：<br>在List基础上增加了分页信息<br>getTotal() / getPages() / getPageNum() / getPageSize() / getResult()</li>
@@ -1053,168 +1193,18 @@ allowPublicKeyRetrieval=true
 <p>我可以获取一个List集合，再用Page对他进行封装，再用PageInfo或PageResult对page进行封装</p>
 ]]></content>
       <tags>
+        <tag>Java</tag>
         <tag>PageHelper</tag>
       </tags>
   </entry>
   <entry>
-    <title>各种概念之间的联系</title>
-    <url>/2024/11/17/java/%E5%90%84%E7%A7%8D%E6%A6%82%E5%BF%B5%E4%B9%8B%E9%97%B4%E7%9A%84%E8%81%94%E7%B3%BB/</url>
-    <content><![CDATA[<p>这些技术和工具大致可以分为 <strong>框架</strong>、<strong>工具</strong> 和 <strong>服务</strong>，它们在功能上有不同侧重，也可以相互配合使用。下面简单梳理它们的区别和联系。</p>
-<hr>
-<h3 id="1-Spring-Boot"><a href="#1-Spring-Boot" class="headerlink" title="1. Spring Boot"></a><strong>1. Spring Boot</strong></h3><ul>
-<li><strong>类型</strong>：框架。</li>
-<li><strong>用途</strong>：快速构建基于 Spring 的独立应用。</li>
-<li><strong>特点</strong>：简化配置，通过自动化配置减少开发复杂度。支持微服务架构，内置 Tomcat。</li>
-<li><strong>联系</strong>：<ul>
-<li><strong>Tomcat</strong>：Spring Boot 默认内嵌 Tomcat 作为应用容器。</li>
-<li><strong>MyBatis/MyBatis-Plus</strong>：可作为持久层框架，与 Spring Boot 无缝集成。</li>
-<li><strong>Redis</strong>：可通过 Spring Data Redis 轻松整合 Redis。</li>
-<li><strong>Maven</strong>：管理 Spring Boot 项目依赖和构建。</li>
-</ul>
-</li>
-</ul>
-<hr>
-<h3 id="2-Tomcat"><a href="#2-Tomcat" class="headerlink" title="2. Tomcat"></a><strong>2. Tomcat</strong></h3><ul>
-<li><strong>类型</strong>：Web 服务器/Servlet 容器。</li>
-<li><strong>用途</strong>：运行 Java Web 应用，提供 Servlet 和 JSP 支持。</li>
-<li><strong>特点</strong>：轻量级，运行 Java EE 的部分功能（主要是 Web 层）。</li>
-<li><strong>联系</strong>：<ul>
-<li><strong>Spring Boot</strong>：Tomcat 是 Spring Boot 默认的内置 Web 容器。</li>
-<li><strong>Servlet</strong>：Tomcat 运行的核心是 Servlet。</li>
-</ul>
-</li>
-</ul>
-<hr>
-<h3 id="3-Nginx"><a href="#3-Nginx" class="headerlink" title="3. Nginx"></a><strong>3. Nginx</strong></h3><ul>
-<li><strong>类型</strong>：反向代理服务器/Web 服务器。</li>
-<li><strong>用途</strong>：处理高并发请求，负载均衡，反向代理，静态资源服务。</li>
-<li><strong>特点</strong>：轻量、高效，适用于高并发场景。</li>
-<li><strong>联系</strong>：<ul>
-<li>通常将 <strong>Nginx</strong> 放在前端处理静态资源、请求分发，Spring Boot 后端处理业务逻辑。</li>
-<li>可以与 <strong>Tomcat</strong> 配合，Nginx 作为反向代理，Tomcat 处理 Java Web 请求。</li>
-</ul>
-</li>
-</ul>
-<hr>
-<h3 id="4-MyBatis"><a href="#4-MyBatis" class="headerlink" title="4. MyBatis"></a><strong>4. MyBatis</strong></h3><ul>
-<li><strong>类型</strong>：持久层框架。</li>
-<li><strong>用途</strong>：简化数据库操作，提供 SQL 映射和动态 SQL 支持。</li>
-<li><strong>特点</strong>：轻量灵活，注重 SQL 的可控性。</li>
-<li><strong>联系</strong>：<ul>
-<li>常与 <strong>Spring Boot</strong> 整合，用于操作数据库。</li>
-<li><strong>MyBatis</strong> 的 XML 映射文件和注解配置让开发者能直接书写 SQL，方便复杂查询。</li>
-</ul>
-</li>
-</ul>
-<hr>
-<h3 id="5-MyBatis-Plus"><a href="#5-MyBatis-Plus" class="headerlink" title="5. MyBatis-Plus"></a><strong>5. MyBatis-Plus</strong></h3><ul>
-<li><strong>类型</strong>：MyBatis 的增强版。</li>
-<li><strong>用途</strong>：简化 MyBatis 开发，提供更丰富的功能，如 CRUD 快速开发。</li>
-<li><strong>特点</strong>：开箱即用，内置大量工具方法（如分页、自动生成代码）。</li>
-<li><strong>联系</strong>：<ul>
-<li>基于 <strong>MyBatis</strong> 开发，与 Spring Boot 配合非常常见。</li>
-<li>在 MyBatis 基础上减少重复代码，提升开发效率。</li>
-</ul>
-</li>
-</ul>
-<hr>
-<h3 id="6-Redis"><a href="#6-Redis" class="headerlink" title="6. Redis"></a><strong>6. Redis</strong></h3><ul>
-<li><strong>类型</strong>：缓存数据库。</li>
-<li><strong>用途</strong>：存储数据（键值对），用于缓存、高速数据访问、分布式锁等。</li>
-<li><strong>特点</strong>：基于内存，读写速度快，支持丰富的数据类型（如字符串、哈希、列表等）。</li>
-<li><strong>联系</strong>：<ul>
-<li><strong>Spring Boot</strong> 提供对 Redis 的集成（通过 Spring Data Redis）。</li>
-<li>可以与 MyBatis/MyBatis-Plus 结合，缓存查询结果，提高性能。</li>
-</ul>
-</li>
-</ul>
-<hr>
-<h3 id="7-Maven"><a href="#7-Maven" class="headerlink" title="7. Maven"></a><strong>7. Maven</strong></h3><ul>
-<li><strong>类型</strong>：构建工具。</li>
-<li><strong>用途</strong>：管理项目依赖、构建和打包，简化项目配置和发布。</li>
-<li><strong>特点</strong>：基于 POM 文件的依赖管理，支持生命周期。</li>
-<li><strong>联系</strong>：<ul>
-<li><strong>Spring Boot</strong>：通过 Maven 管理依赖和构建项目。</li>
-<li>其他工具（如 MyBatis、MyBatis-Plus）大多通过 Maven 引入。</li>
-</ul>
-</li>
-</ul>
-<hr>
-<h3 id="8-Servlet"><a href="#8-Servlet" class="headerlink" title="8. Servlet"></a><strong>8. Servlet</strong></h3><ul>
-<li><strong>类型</strong>：Java EE 核心组件。</li>
-<li><strong>用途</strong>：处理 HTTP 请求和响应，是 Web 应用的核心基础。</li>
-<li><strong>特点</strong>：低级 API，直接处理请求和响应。</li>
-<li><strong>联系</strong>：<ul>
-<li><strong>Tomcat</strong>：Servlet 容器，运行 Servlet 应用。</li>
-<li><strong>Spring Boot</strong>：基于 Servlet 封装和扩展，提供更高级的功能。</li>
-</ul>
-</li>
-</ul>
-<hr>
-<h3 id="总结：它们的关系"><a href="#总结：它们的关系" class="headerlink" title="总结：它们的关系"></a><strong>总结：它们的关系</strong></h3><ul>
-<li><strong>分工明确</strong>：每个工具和技术都有其专注的领域。</li>
-<li><strong>相互配合</strong>：<ul>
-<li>Nginx（前端代理）→ Tomcat（后端容器）→ Spring Boot（逻辑层）。</li>
-<li>Spring Boot 整合 MyBatis 或 MyBatis-Plus 操作数据库。</li>
-<li>Redis 提供缓存支持，加速数据访问。</li>
-<li>Maven 负责统一管理项目依赖，打包和发布。</li>
-<li>Servlet 是底层支撑技术，Spring Boot 和 Tomcat 基于它构建。</li>
-</ul>
-</li>
-</ul>
+    <title>enmu枚举</title>
+    <url>/2024/12/09/java/43%20enmu%E6%9E%9A%E4%B8%BE/</url>
+    <content><![CDATA[<h1 id="1"><a href="#1" class="headerlink" title="1"></a>1</h1><p>![[../attachments/Pasted image 20241122204231.png]]</p>
+<h1 id="2"><a href="#2" class="headerlink" title="2"></a>2</h1><p>![[../attachments/Pasted image 20241122204243.png]]</p>
 ]]></content>
       <tags>
-        <tag>概念</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>lombok</title>
-    <url>/2024/11/17/java/lombok/</url>
-    <content><![CDATA[<p>它通过注解帮你自动生成 getter、setter、toString、构造器之类的常用代码，省得你手动敲半天。</p>
-<h1 id="常用注解："><a href="#常用注解：" class="headerlink" title="常用注解："></a>常用注解：</h1><ul>
-<li><code>@Getter</code> / <code>@Setter</code>：生成 getter 和 setter 方法。</li>
-<li><code>@ToString</code>：生成 <code>toString</code> 方法。</li>
-<li><code>@NoArgsConstructor</code> / <code>@AllArgsConstructor</code>：生成无参和全参构造器。</li>
-<li><code>@Builder</code>：比如说User user = User.<font color="#ff0000">builder()</font>.id(75).name(“shit”).build;</li>
-<li><code>@Data</code>：包含 <code>@Getter</code>、<code>@Setter</code>、<code>@ToString</code>、<code>@EqualsAndHashCode</code>、<code>@RequiredArgsConstructor</code>。</li>
-<li><code>@Slf4j</code>：省去声明日志 <code>Logger</code> 对象的步骤。</li>
-</ul>
-<h1 id="用法："><a href="#用法：" class="headerlink" title="用法："></a>用法：</h1><ol>
-<li>在项目的 <code>pom.xml</code> 里加上 Lombok 依赖（Maven 项目）：<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.projectlombok<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>lombok<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.18.30<span class="tag">&lt;/<span class="name">version</span>&gt;</span> <span class="comment">&lt;!-- 根据需要换版本 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">scope</span>&gt;</span>provided<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
-<li>IDEA 里装个 Lombok 插件，记得打开 <strong>Enable Annotation Processing</strong>（设置 -&gt; Build, Execution, Deployment -&gt; Compiler -&gt; Annotation Processors）。</li>
-</ol>
-<h1 id="RequiredArgsConstructor"><a href="#RequiredArgsConstructor" class="headerlink" title="@RequiredArgsConstructor"></a>@RequiredArgsConstructor</h1><p>这个似乎不常用<br><code>@RequiredArgsConstructor</code> 是用来自动生成<strong>包含 <code>final</code> 修饰符字段</strong>和**<code>@NonNull</code> 注解字段<strong>的</strong>构造方法**。  </p>
-<p><strong>具体意思：</strong>  </p>
-<ul>
-<li>只对 <strong><code>final</code> 和 <code>@NonNull</code> 字段</strong>生成构造参数。  </li>
-<li>非 <code>final</code> 和无 <code>@NonNull</code> 的字段直接无视，不会加入构造器。  </li>
-</ul>
-<p> <strong>举个栗子：</strong></p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> lombok.RequiredArgsConstructor;</span><br><span class="line"></span><br><span class="line"><span class="meta">@RequiredArgsConstructor</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Demo</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> String name; <span class="comment">// 构造方法会有这个</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="type">int</span> age;     <span class="comment">// 构造方法会有这个</span></span><br><span class="line">    <span class="keyword">private</span> String nickname;   <span class="comment">// 构造方法没有这个</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>编译后自动生成：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Demo</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> String name;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="type">int</span> age;</span><br><span class="line">    <span class="keyword">private</span> String nickname;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Demo</span><span class="params">(String name, <span class="type">int</span> age)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.name = name;</span><br><span class="line">        <span class="built_in">this</span>.age = age;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
-      <tags>
-        <tag>Java开发工具库</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Apache POI</title>
-    <url>/2024/11/17/java/Apache-POI/</url>
-    <content><![CDATA[<p>Apache POI是处理Office文档的Java库，主要用来读写Excel、Word、PowerPoint文件。以下是个简单示例，用来操作Excel。</p>
-<h3 id="依赖"><a href="#依赖" class="headerlink" title="依赖"></a>依赖</h3><p>先加上Maven依赖：</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.poi<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>poi<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>5.2.3<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.poi<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>poi-ooxml<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>5.2.3<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="type">InputStream</span> <span class="variable">resourceAsStream</span> <span class="operator">=</span> <span class="built_in">this</span>.getClass().getClassLoader().  </span><br><span class="line">        getResourceAsStream(<span class="string">&quot;ExcelTemplate/运营数据报表模板.xlsx&quot;</span>);  </span><br><span class="line"><span class="keyword">try</span> &#123;  </span><br><span class="line">    <span class="type">XSSFWorkbook</span> <span class="variable">excel</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">XSSFWorkbook</span>(resourceAsStream);  </span><br><span class="line">    <span class="type">XSSFSheet</span> <span class="variable">sheet</span> <span class="operator">=</span> excel.getSheetAt(<span class="number">0</span>);  </span><br><span class="line">    <span class="comment">//填入数据    </span></span><br><span class="line">    sheet.getRow(<span class="number">0</span>).getCell(<span class="number">0</span>).setCellValue(<span class="string">&quot;你好&quot;</span>);  </span><br><span class="line">    <span class="comment">//导出文件  </span></span><br><span class="line">    <span class="type">ServletOutputStream</span> <span class="variable">outputStream</span> <span class="operator">=</span> httpServletResponse.getOutputStream();  </span><br><span class="line">    excel.write(outputStream);  </span><br><span class="line">	<span class="comment">//关闭流</span></span><br><span class="line">    outputStream.close();  </span><br><span class="line">    resourceAsStream.close();  </span><br><span class="line">&#125; <span class="keyword">catch</span> (IOException e) &#123;  </span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">RuntimeException</span>(e);  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h3><ol>
-<li><code>.xls</code>文件用<code>HSSFWorkbook</code>，<code>.xlsx</code>用<code>XSSFWorkbook</code>。</li>
-<li>文件操作注意关闭流。</li>
-<li>数据类型处理时，检查<code>CellType</code>，避免类型转换错误。</li>
-</ol>
-]]></content>
-      <tags>
-        <tag>java</tag>
+        <tag>Java</tag>
       </tags>
   </entry>
 </search>
